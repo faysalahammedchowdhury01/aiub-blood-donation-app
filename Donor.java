@@ -1,4 +1,5 @@
 import java.lang.*;
+import java.util.*;
 
 public class Donor extends User {
     private String status;
@@ -42,5 +43,16 @@ public class Donor extends User {
             }
         }
         return false;
+    }
+
+    // login (return object if success)
+    public static Donor Login(String aiubId, String password) {
+        for (Donor i : Donors) {
+            if (i.getAiubId().equals(aiubId) && i.getPassword().equals(password)) {
+                return i;
+            }
+        }
+
+        return null;
     }
 }

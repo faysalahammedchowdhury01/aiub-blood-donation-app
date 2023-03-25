@@ -22,4 +22,15 @@ public class Recipient extends User {
         postsId.add(postId);
         return true;
     }
+
+    // login (return object if success)
+    public static Recipient Login(String aiubId, String password) {
+        for (Recipient i : Recipients) {
+            if (i.getAiubId().equals(aiubId) && i.getPassword().equals(password)) {
+                return i;
+            }
+        }
+
+        return null;
+    }
 }

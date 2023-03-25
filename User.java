@@ -114,13 +114,13 @@ public class User {
 
     // login (return true if success)
     public static boolean login(String aiubId, String password) {
-        for (User i : Donors) {
+        for (Donor i : Donors) {
             if (i.getAiubId().equals(aiubId) && i.getPassword().equals(password)) {
                 return true;
             }
         }
 
-        for (User i : Recipients) {
+        for (Recipient i : Recipients) {
             if (i.getAiubId().equals(aiubId) && i.getPassword().equals(password)) {
                 return true;
             }

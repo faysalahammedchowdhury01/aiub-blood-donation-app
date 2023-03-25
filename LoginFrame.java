@@ -7,15 +7,15 @@ public class LoginFrame {
     public LoginFrame() {
         JFrame f = new JFrame("Login");
 
-        JLabel usernameLabel, passwordLabel;
-        JTextField usernameField;
+        JLabel aiubIdLabel, passwordLabel;
+        JTextField aiubIdField;
         JPasswordField passwordField;
         JButton loginButton, signupButton;
 
-        usernameLabel = new JLabel("AIUB ID:");
-        usernameLabel.setBounds(100, 100, 90, 30);
-        usernameField = new JTextField("");
-        usernameField.setBounds(200, 100, 180, 30);
+        aiubIdLabel = new JLabel("AIUB ID:");
+        aiubIdLabel.setBounds(100, 100, 90, 30);
+        aiubIdField = new JTextField("");
+        aiubIdField.setBounds(200, 100, 180, 30);
 
         passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(100, 150, 90, 30);
@@ -30,36 +30,39 @@ public class LoginFrame {
         // login event
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String aiubId = usernameField.getText();
+                String aiubId = aiubIdField.getText();
                 String password = new String(passwordField.getPassword());
 
-                if (User.login(aiubId, password)) {
+                Donor d = Donor.Login(aiubId, password);
+                Recipient r = Recipient.Login(aiubId, password);
+                if (d != null) {
+                    // new DonorDashboard(d);
+                } else if (r != null) {
+                    // new RecipientDashboard(r);
                 } else {
+                    // login failed
                 }
             }
         });
 
+        // signup button event
         signupButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // new SignupFrame();
+                new SignupFrame();
+                f.setVisible(false);
             }
         });
 
-        f.add(usernameLabel);
+        f.add(aiubIdLabel);
         f.add(passwordLabel);
-        f.add(usernameField);
+        f.add(aiubIdField);
         f.add(passwordField);
         f.add(loginButton);
         f.add(signupButton);
+
         f.setSize(500, 900);
         f.setLayout(null);
         f.setVisible(true);
-        f.pack();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null); // center window on screen
-        f.setResizable(false);
-        f.setVisible(true);
-
     }
 
     public static void main(String[] args) {
