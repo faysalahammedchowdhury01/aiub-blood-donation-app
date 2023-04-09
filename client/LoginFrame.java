@@ -1,70 +1,57 @@
 package client;
-import server.*;
 import java.lang.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import javax.swing.*;  
+import java.awt.event.*;  
+import static javax.swing.JOptionPane.showMessageDialog;
+import server.*;
 
 public class LoginFrame {
-    public LoginFrame() {
-        JFrame f = new JFrame("Login");
-
         JLabel aiubIdLabel, passwordLabel;
         JTextField aiubIdField;
         JPasswordField passwordField;
         JButton loginButton, signupButton;
+        JFrame frame;
+    
+    public LoginFrame() {
+        // create frame
+        frame = new JFrame ("Login");
 
+        //construct components
         aiubIdLabel = new JLabel("AIUB ID:");
-        aiubIdLabel.setBounds(100, 100, 90, 30);
         aiubIdField = new JTextField("");
-        aiubIdField.setBounds(200, 100, 180, 30);
-
         passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(100, 150, 90, 30);
         passwordField = new JPasswordField("");
-        passwordField.setBounds(200, 150, 180, 30);
-
         loginButton = new JButton("Login");
-        loginButton.setBounds(130, 200, 90, 30);
         signupButton = new JButton("Sign Up");
+
+        //set component bounds (only needed by Absolute Positioning)
+        aiubIdLabel.setBounds(100, 100, 90, 30);
+        aiubIdField.setBounds(200, 100, 180, 30);
+        passwordLabel.setBounds(100, 150, 90, 30);
+        passwordField.setBounds(200, 150, 180, 30);
+        loginButton.setBounds(130, 200, 90, 30);
         signupButton.setBounds(230, 200, 90, 30);
 
-        // login event
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String aiubId = aiubIdField.getText();
-                String password = new String(passwordField.getPassword());
+        //addActionListener
+		// loginButton.addActionListener(this);
 
-                Donor d = Donor.Login(aiubId, password);
-                Recipient r = Recipient.Login(aiubId, password);
-                if (d != null) {
-                    // new DonorDashboard(d);
-                } else if (r != null) {
-                    // new RecipientDashboard(r);
-                } else {
-                    // login failed
-                }
-            }
-        });
 
-        // signup button event
-        signupButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new SignupFrame();
-                f.setVisible(false);
-            }
-        });
+        //add components
+        frame.add(aiubIdLabel);
+        frame.add(passwordLabel);
+        frame.add(aiubIdField);
+        frame.add(passwordField);
+        frame.add(loginButton);
+        frame.add(signupButton);
 
-        f.add(aiubIdLabel);
-        f.add(passwordLabel);
-        f.add(aiubIdField);
-        f.add(passwordField);
-        f.add(loginButton);
-        f.add(signupButton);
-
-        f.setSize(500, 900);
-        f.setLayout(null);
-        f.setVisible(true);
+        //frame properties
+		//adjust size and set layout
+        frame.setSize (624, 400);
+		frame.setLocationRelativeTo(null);//to center screen gui
+        frame.setLayout (null);
+		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane();
+        frame.setVisible (true); 
     }
 
     public static void main(String[] args) {
