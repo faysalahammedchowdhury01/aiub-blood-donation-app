@@ -1,3 +1,4 @@
+package server;
 import java.lang.*;
 import java.util.*;
 
@@ -119,15 +120,6 @@ public class Post {
             }
         }
 
-        return false;
-    }
-
-    // code for close a post (return true if successful)
-    public boolean closePost(String aiubId) {
-        if (this.authorsAiubId == aiubId) {
-            this.status = "Closed";
-            return true;
-        }
         return false;
     }
 

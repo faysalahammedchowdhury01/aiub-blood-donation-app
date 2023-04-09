@@ -1,7 +1,8 @@
+package server;
 import java.lang.*;
 import java.util.*;
 
-public class User {
+public abstract class User {
     public static List<Donor> Donors;
     public static List<Recipient> Recipients;
     private String aiubId;
