@@ -1,18 +1,18 @@
-package server;
-import java.lang.*;
+package server.classes;
+
 import java.util.*;
 
 public class Post {
     public static List<Post> posts;
     private String postId;
-    private String authorsAiubId;
+    private Recipient author;
     private String status;
     private String time;
     private String date;
     private String location;
     private String requiredBloodGroup;
     private String description;
-    String donorsAiubId;
+    private Donor donor;
 
     static {
         posts = new ArrayList<>();
@@ -23,10 +23,10 @@ public class Post {
 
     }
 
-    public Post(String postId, String authorsAiubId, String status, String time, String date, String location,
+    public Post(String postId, Recipient author, String status, String time, String date, String location,
             String requiredBloodGroup, String description) {
         this.postId = postId;
-        this.authorsAiubId = authorsAiubId;
+        this.author = author;
         this.status = status;
         this.time = time;
         this.date = date;
@@ -41,8 +41,8 @@ public class Post {
         return postId;
     }
 
-    public String getAuthorsAiubId() {
-        return authorsAiubId;
+    public Recipient getAuthor() {
+        return author;
     }
 
     public String getStatus() {
@@ -69,16 +69,16 @@ public class Post {
         return description;
     }
 
-    public String getdonorsAiubId() {
-        return donorsAiubId;
+    public Donor getDonor() {
+        return donor;
     }
 
     public void setPostId(String postId) {
         this.postId = postId;
     }
 
-    public void setAuthorsAiubId(String authorsAiubId) {
-        this.authorsAiubId = authorsAiubId;
+    public void setAuthor(Recipient author) {
+        this.author = author;
     }
 
     public void setStatus(String status) {
@@ -105,27 +105,23 @@ public class Post {
         this.description = description;
     }
 
-    public void setdonorsAiubId(String donorsAiubId) {
-        this.donorsAiubId = donorsAiubId;
+    public void setDonor(Donor donor) {
+        this.donor = donor;
     }
 
     // add donor (return true if successful)
-    public boolean addDonor(String donorsAiubId) {
-        if (status.equals("Opens") && this.donorsAiubId == null && User.doesUserExist(donorsAiubId)) {
-            for (Donor i : User.Donors) {
-                if (i.getAiubId().equals(donorsAiubId) && i.getBloodGroup().equals(requiredBloodGroup)) {
-                    this.donorsAiubId = donorsAiubId;
-                    return true;
-                }
-            }
+    public boolean addDonor(Donor donor) {
+        if (this.donor == null && this.requiredBloodGroup == donor.getBloodGroup()) {
+            this.donor = donor;
+            this.status = "close";
+            return true;
         }
-
         return false;
     }
 
     // edit post (return true if successful)
     public boolean editPost(String aiubId, String date, String time, String location, String description) {
-        if (this.authorsAiubId == aiubId) {
+        if (this.author.getAiubId().equals(aiubId) && this.status.equals("open")) {
             this.date = date;
             this.time = time;
             this.location = location;
