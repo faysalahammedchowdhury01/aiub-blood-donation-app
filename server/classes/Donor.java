@@ -1,10 +1,12 @@
 package server.classes;
 
 import server.interfaces.*;
+import java.util.*;
 
 public class Donor extends User implements DonorOperations {
     private String status;
     private String lastDonateDate;
+    private List<Post> history;
 
     // constructors
     public Donor() {
@@ -14,6 +16,7 @@ public class Donor extends User implements DonorOperations {
         super(aiubId, name, email, contact, password, bloodGroup, true);
         this.status = "Available";
         this.lastDonateDate = "N/A";
+        history = new ArrayList<>();
         donors.add(this);
     }
 
@@ -24,6 +27,10 @@ public class Donor extends User implements DonorOperations {
 
     public String getLastDonateDate() {
         return lastDonateDate;
+    }
+
+    public List<Post> getHistory() {
+        return history;
     }
 
     public void setStatus(String status) {
@@ -37,9 +44,9 @@ public class Donor extends User implements DonorOperations {
     // donate blood (return true if success)
     public boolean donateBlood(String postId) {
         Post post = null;
-        for (Post i : Post.posts) {
-            if (i.getPostId().equals(postId)) {
-                post = i;
+        for (int i = 0; i < Post.posts.size(); i++) {
+            if (Post.posts.get(i).getPostId().equals(postId)) {
+                post = Post.posts.get(i);
                 break;
             }
         }
@@ -59,9 +66,9 @@ public class Donor extends User implements DonorOperations {
 
     // login (return object if success)
     public static Donor login(String aiubId, String password) {
-        for (Donor donor : donors) {
-            if (donor.getAiubId().equals(aiubId) && donor.getPassword().equals(password)) {
-                return donor;
+        for (int i = 0; i < donors.size(); i++) {
+            if (donors.get(i).getAiubId().equals(aiubId) && donors.get(i).getPassword().equals(password)) {
+                return donors.get(i);
             }
         }
 

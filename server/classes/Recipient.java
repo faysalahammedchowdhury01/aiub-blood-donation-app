@@ -3,7 +3,7 @@ package server.classes;
 import java.util.*;
 
 public class Recipient extends User {
-    protected List<Post> posts;
+    private List<Post> posts;
 
     // constructors
     public Recipient() {
@@ -11,7 +11,13 @@ public class Recipient extends User {
 
     public Recipient(String aiubId, String name, String email, String contact, String password, String bloodGroup) {
         super(aiubId, name, email, contact, password, bloodGroup, false);
+        posts = new ArrayList<>();
         recipients.add(this);
+    }
+
+    // getters and setters
+    public List<Post> getPosts() {
+        return posts;
     }
 
     // create post
@@ -29,9 +35,9 @@ public class Recipient extends User {
 
     // login (return object if success)
     public static Recipient login(String aiubId, String password) {
-        for (Recipient i : recipients) {
-            if (i.getAiubId().equals(aiubId) && i.getPassword().equals(password)) {
-                return i;
+        for (int i = 0; i < recipients.size(); i++) {
+            if (recipients.get(i).getAiubId().equals(aiubId) && recipients.get(i).getPassword().equals(password)) {
+                return recipients.get(i);
             }
         }
 
