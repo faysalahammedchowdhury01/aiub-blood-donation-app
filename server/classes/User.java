@@ -13,6 +13,11 @@ public abstract class User {
     private String bloodGroup;
     private boolean isDonor;
 
+    static {
+        donors = new ArrayList<>();
+        recipients = new ArrayList<>();
+    }
+
     // constructors
     public User() {
     }
@@ -26,8 +31,6 @@ public abstract class User {
         this.password = password;
         this.bloodGroup = bloodGroup;
         this.isDonor = isDonor;
-        donors = new ArrayList<>();
-        recipients = new ArrayList<>();
     }
 
     // getters and setters for all attributes

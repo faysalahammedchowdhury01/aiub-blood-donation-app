@@ -15,13 +15,15 @@ public class Recipient extends User {
     }
 
     // create post
-    public void createPost(String time, String date, String location, String requiredBloodGroup, String description) {
+    public boolean createPost(String time, String date, String location, String requiredBloodGroup,
+            String description) {
         try {
-            String postId = "hello";
+            String postId = this.getAiubId() + time + date + location + requiredBloodGroup;
             Post post = new Post(postId, this, "open", time, date, location, requiredBloodGroup, description);
             posts.add(post);
-        } catch (Exception ex) {
-            System.out.println("Failed post");
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -39,19 +41,18 @@ public class Recipient extends User {
     // signup (return object if success)
     public static Recipient signup(String aiubId, String name, String email, String contact, String password,
             String bloodGroup) {
-        boolean userExist = false;
-        for (Recipient recipient : recipients) {
-            if (recipient.getAiubId().equals(aiubId)) {
-                userExist = true;
-                break;
+        for (int i = 0; i < recipients.size(); i++) {
+            if (recipients.get(i).getAiubId().equals(aiubId)) {
+                if (recipients.get(i).getPassword().equals(password)) {
+                    return recipients.get(i);
+                } else {
+                    return null;
+                }
             }
         }
-        if (userExist) {
-            Recipient recipient = new Recipient(aiubId, name, email, contact, password, bloodGroup);
-            recipients.add(recipient);
-            return recipient;
-        }
 
-        return null;
+        Recipient recipient = new Recipient(aiubId, name, email, contact, password, bloodGroup);
+        recipients.add(recipient);
+        return recipient;
     }
 }

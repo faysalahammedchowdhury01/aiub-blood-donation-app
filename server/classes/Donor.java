@@ -23,7 +23,7 @@ public class Donor extends User implements DonorOperations {
     }
 
     public String getLastDonateDate() {
-        return status;
+        return lastDonateDate;
     }
 
     public void setStatus(String status) {
@@ -44,10 +44,14 @@ public class Donor extends User implements DonorOperations {
             }
         }
 
-        if (post.addDonor(this)) {
-            this.lastDonateDate = post.getDate();
-            this.setStatus("Unavailable");
-            return true;
+        try {
+            if (post.addDonor(this)) {
+                this.lastDonateDate = post.getDate();
+                this.setStatus("Unavailable");
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
         }
 
         return false;
@@ -55,9 +59,9 @@ public class Donor extends User implements DonorOperations {
 
     // login (return object if success)
     public static Donor login(String aiubId, String password) {
-        for (Donor i : donors) {
-            if (i.getAiubId().equals(aiubId) && i.getPassword().equals(password)) {
-                return i;
+        for (Donor donor : donors) {
+            if (donor.getAiubId().equals(aiubId) && donor.getPassword().equals(password)) {
+                return donor;
             }
         }
 
@@ -67,20 +71,18 @@ public class Donor extends User implements DonorOperations {
     // signup (return object if success)
     public static Donor signup(String aiubId, String name, String email, String contact, String password,
             String bloodGroup) {
-        boolean userExist = false;
-        for (Donor donor : donors) {
-            if (donor.getAiubId().equals(aiubId)) {
-                userExist = true;
-                break;
+        for (int i = 0; i < donors.size(); i++) {
+            if (donors.get(i).getAiubId().equals(aiubId)) {
+                if (donors.get(i).getPassword().equals(password)) {
+                    return donors.get(i);
+                } else {
+                    return null;
+                }
             }
         }
 
-        if (userExist) {
-            Donor donor = new Donor(aiubId, name, email, contact, password, bloodGroup);
-            donors.add(donor);
-            return donor;
-        }
-
-        return null;
+        Donor donor = new Donor(aiubId, name, email, contact, password, bloodGroup);
+        donors.add(donor);
+        return donor;
     }
 }

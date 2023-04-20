@@ -111,7 +111,7 @@ public class Post {
 
     // add donor (return true if successful)
     public boolean addDonor(Donor donor) {
-        if (this.donor == null && this.requiredBloodGroup == donor.getBloodGroup()) {
+        if (this.donor == null && this.requiredBloodGroup.equals(donor.getBloodGroup())) {
             this.donor = donor;
             this.status = "close";
             return true;
@@ -131,5 +131,4 @@ public class Post {
 
         return false;
     }
-
 }
