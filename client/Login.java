@@ -1,15 +1,14 @@
 package client;
 
+import server.classes.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
-public class Login implements ActionListener {
+public class Login {
     JFrame frame;
     private ImageIcon favIcon;
     private JLabel bgColor;
@@ -64,7 +63,7 @@ public class Login implements ActionListener {
         aiubText = new JLabel("AIUB BLOOD DONATION CLUB");
         aiubText.setBounds(90, 320, 500, 300);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
-        aiubText.setForeground(Color.BLACK);
+        aiubText.setForeground(new Color(45, 39, 39));
 
         // tagline text
         taglineText = new JLabel("Donate Blood, Save Life.");
@@ -76,9 +75,9 @@ public class Login implements ActionListener {
         loginContainerBg = new JLabel("");
         loginContainerBg.setOpaque(true);
         loginContainerBg.setBounds(680, 0, 770, 768);
-        loginContainerBg.setBackground(new Color(210, 39, 25));
+        loginContainerBg.setBackground(new Color(169, 29, 20));
 
-        // login taglineText
+        // login text
         loginText = new JLabel("Login");
         loginText.setBounds(800, 80, 500, 50);
         loginText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
@@ -126,21 +125,21 @@ public class Login implements ActionListener {
         // forgot password button
         forgotPasswordButton = new JButton("Forgot Password?");
         forgotPasswordButton.setBounds(880, 490, 300, 30);
-        forgotPasswordButton.setForeground(new Color(240, 240, 240));
+        forgotPasswordButton.setForeground(new Color(247, 208, 96));
         forgotPasswordButton.setBackground(new Color(255, 109, 96));
         forgotPasswordButton.setOpaque(false);
         forgotPasswordButton.setContentAreaFilled(false);
         forgotPasswordButton.setBorderPainted(false);
         forgotPasswordButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // sign up taglineText and button
+        // sign up text and button
         signupText = new JLabel("Don't have an account?");
         signupText.setBounds(915, 520, 200, 30);
         signupText.setForeground(Color.WHITE);
 
         signupButton = new JButton("Sign up");
         signupButton.setBounds(1060, 520, 100, 30);
-        signupButton.setForeground(new Color(240, 240, 240));
+        signupButton.setForeground(new Color(247, 208, 96));
         signupButton.setOpaque(false);
         signupButton.setContentAreaFilled(false);
         signupButton.setBorderPainted(false);
@@ -172,9 +171,57 @@ public class Login implements ActionListener {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }
 
-    public void actionPerformed(ActionEvent e) {
+        // action listeners
 
+        // login action
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // take data
+                String aiubId = aiubIdField.getText().trim();
+                char[] password = passwordField.getPassword();
+                String passwordString = new String(password);
+                boolean isDonor = isDonorLogin.isSelected();
+
+                // validation
+                if (aiubId.isEmpty() || passwordString.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // go for login process
+                if (isDonor) {
+                    Donor d = Donor.login(aiubId, passwordString);
+                    if (d != null) {
+                        frame.setVisible(false);
+                        new DonorDashboard(d);
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "<html><center><font color='red'><b>Oops!</b> Invalid login credentials. Please check your AIUB ID and password and try again!</font></center></html>",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    Recipient r = Recipient.login(aiubId, passwordString);
+                    if (r != null) {
+                        frame.setVisible(false);
+                        new RecipientDashboard(r);
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "<html><center><font color='red'><b>Oops!</b> Invalid login credentials. Please check your email and password and try again!</font></center></html>",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
+        // sign up action
+        signupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new Signup();
+            }
+        });
     }
 }

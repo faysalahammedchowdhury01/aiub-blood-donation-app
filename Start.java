@@ -12,12 +12,10 @@ import client.*;
 
 public class Start {
     public static void main(String[] args) {
-        // Donor d = Donor.signup("22-49044-3", "Fahim", "fahim@gmail.com",
-        // "01819183345", "1234", "A+");
-        // Donor d2 = Donor.signup("22-49054-3", "Fahim", "fahim@gmail.com",
-        // "01819183395", "1233", "A+");
-        // Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
-        // "01610137675", "1233", "A+");
+        Donor d = Donor.signup("22-49044-3", "Fahim", "fahim@gmail.com",
+                "01819183345", "1234", "A+");
+        Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
+                "01610137675", "1233", "A+");
 
         // System.out.println("Donors: ");
         // System.out.println(d);
@@ -81,5 +79,6 @@ public class Start {
 
         // Client
         new Login();
+        // new Signup();
     }
 }
