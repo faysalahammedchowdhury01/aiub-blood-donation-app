@@ -253,7 +253,7 @@ public class Signup {
                         || confirmPasswordString.isEmpty() || bloodGroup.isEmpty()) {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -261,7 +261,7 @@ public class Signup {
                 if (!passwordString.equals(confirmPasswordString)) {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font color='red'><b>Oops!</b> Password and confirm password do not match. Please try again.</font></center></html>",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -274,7 +274,7 @@ public class Signup {
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font color='red'><b>Oops!</b> User already exist but password isn't matched!</font></center></html>",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                                "", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     Recipient r = Recipient.signup(aiubId, name, email, passwordString, confirmPasswordString,
@@ -285,7 +285,7 @@ public class Signup {
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font color='red'><b>Oops!</b> User already exist but password isn't matched!</font></center></html>",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                                "", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }

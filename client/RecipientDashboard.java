@@ -184,6 +184,8 @@ public class RecipientDashboard {
         descriptionTextArea.setBounds(80, 420, 1200, 100);
         descriptionTextArea.setForeground(Color.BLACK);
         descriptionTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
+        descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setLineWrap(true);
 
         // request blood button
         requestBloodButton = new JButton("Request Blood");
@@ -244,6 +246,36 @@ public class RecipientDashboard {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new Login();
+            }
+        });
+
+        // request blood action
+        requestBloodButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // get data
+                String time = timeField.getText().trim();
+                String date = dateField.getText().trim();
+                String location = locationField.getText().trim();
+                String bloodGroup = (String) bloodGroupBox.getSelectedItem();
+                String description = descriptionTextArea.getText().trim();
+
+                if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                            "", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // go for create post
+                if (r.createPost(time, date, location, bloodGroup, description)) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font color='green'><b>Congratulations!</b> Request posted, wait for Donors.</font></center></html>",
+                            "", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font color='red'><b>Oops!</b> Failed to post. Try again!</font></center></html>",
+                            "", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

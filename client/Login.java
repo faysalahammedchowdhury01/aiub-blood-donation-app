@@ -187,7 +187,7 @@ public class Login {
                 if (aiubId.isEmpty() || passwordString.isEmpty()) {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -200,7 +200,7 @@ public class Login {
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font color='red'><b>Oops!</b> Invalid login credentials. Please check your AIUB ID and password and try again!</font></center></html>",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                                "", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     Recipient r = Recipient.login(aiubId, passwordString);
@@ -210,7 +210,7 @@ public class Login {
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font color='red'><b>Oops!</b> Invalid login credentials. Please check your email and password and try again!</font></center></html>",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                                "", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
