@@ -12,10 +12,10 @@ import client.*;
 
 public class Start {
     public static void main(String[] args) {
-        Donor d = Donor.signup("22-49044-3", "Fahim", "fahim@gmail.com",
+        Donor d = Donor.signup("22-49045-3", "Fahim", "fahim@gmail.com",
                 "01819183345", "1234", "A+");
         Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
-                "01610137675", "1233", "A+");
+                "01610137675", "1111", "A+");
 
         // System.out.println("Donors: ");
         // System.out.println(d);
@@ -78,7 +78,8 @@ public class Start {
         // System.out.println("Last:" + d.getLastDonateDate());
 
         // Client
-        new Login();
+        // new Login();
         // new Signup();
+        new RecipientDashboard(r);
     }
 }
