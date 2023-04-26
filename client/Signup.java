@@ -10,11 +10,11 @@ import java.io.*;
 
 public class Signup {
     JFrame frame;
+    private BufferedImage image;
     private ImageIcon favIcon;
     private JLabel bgColor;
     private JLabel aiubLogo;
     private JLabel logo;
-    private BufferedImage image;
     private JLabel taglineText;
     private JLabel aiubText;
     private JLabel signupText;
@@ -39,7 +39,7 @@ public class Signup {
     private JButton loginButton;
 
     public Signup() {
-        frame = new JFrame("Sign Up - AIUB BLOOD DONATIIN CLUB");
+        frame = new JFrame("Sign Up - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -260,7 +260,7 @@ public class Signup {
                 // password and confirm password matching
                 if (!passwordString.equals(confirmPasswordString)) {
                     JOptionPane.showMessageDialog(null,
-                            "<html><center><font color='red'><b>Oops!</b> Password and confirm password do not match. Please try again.</font></center></html>",
+                            "<html><center><font color='red'><b>Oops!</b> Password and confirm password don't match. Please try again.</font></center></html>",
                             "", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -273,7 +273,7 @@ public class Signup {
                         new DonorDashboard(d);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> User already exist but password isn't matched!</font></center></html>",
+                                "<html><center><font color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
                                 "", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
@@ -284,7 +284,7 @@ public class Signup {
                         new RecipientDashboard(r);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> User already exist but password isn't matched!</font></center></html>",
+                                "<html><center><font color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
                                 "", JOptionPane.ERROR_MESSAGE);
                     }
                 }

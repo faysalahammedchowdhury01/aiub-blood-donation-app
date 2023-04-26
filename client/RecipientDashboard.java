@@ -40,7 +40,7 @@ public class RecipientDashboard {
     private JButton requestBloodButton;
 
     public RecipientDashboard(Recipient r) {
-        frame = new JFrame("Dashboard - AIUB BLOOD DONATIIN CLUB");
+        frame = new JFrame("Dashboard - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -293,11 +293,18 @@ public class RecipientDashboard {
                 // go for create post
                 if (r.createPost(time, date, location, bloodGroup, description)) {
                     JOptionPane.showMessageDialog(null,
-                            "<html><center><font color='green'><b>Congratulations!</b> Request posted, wait for Donors.</font></center></html>",
+                            "<html><center><font color='green'>Your blood request has been posted! We'll do our best to find a match and notify you as soon as possible. Thank you for your life-saving request and patience!</font></center></html>",
                             "", JOptionPane.INFORMATION_MESSAGE);
+
+                    // clear
+                    dateField.setText("");
+                    timeField.setText("");
+                    locationField.setText("");
+                    bloodGroupBox.setSelectedIndex(-1);
+                    descriptionTextArea.setText("");
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "<html><center><font color='red'><b>Oops!</b> Failed to post. Try again!</font></center></html>",
+                            "<html><center><font color='red'><b>Oops!</b> It seems like we had trouble posting your request. Please try again in a few moments. Thank you for your life-saving efforts!</font></center></html>",
                             "", JOptionPane.ERROR_MESSAGE);
                 }
             }

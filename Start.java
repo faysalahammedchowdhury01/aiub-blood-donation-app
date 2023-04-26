@@ -25,18 +25,18 @@ public class Start {
         // System.out.println(r);
 
         if (r != null) {
-            System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("2:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("3:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("4:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+",
-                    "UrgentAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUB"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
-            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
+                    "AB+",
+                    "Urgent for me"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                    "A+",
+                    "Acciedent patient"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                    "A+",
+                    "Acciedent patient"));
+            System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
+                    "A+",
+                    "Urgent"));
         }
 
         // System.out.println("\n Avaiable Posts:");
@@ -58,13 +58,6 @@ public class Start {
         // System.out.println("Donor:");
         // System.out.println("Status:" + d.getStatus());
         // System.out.println("Last:" + d.getLastDonateDate());
-
-        // String postId = "22-49046-312:00 PM12-04-2023Dhaka PG HospitalA+";
-        // if (d.donateBlood(postId)) {
-        // System.out.println("Donated");
-        // } else {
-        // System.out.println("Failed Donate");
-        // }
 
         // System.out.println("\n Avaiable Posts:");
         // cnt = 1;

@@ -10,11 +10,11 @@ import java.io.*;
 
 public class Login {
     JFrame frame;
+    private BufferedImage image;
     private ImageIcon favIcon;
     private JLabel bgColor;
     private JLabel aiubLogo;
     private JLabel logo;
-    private BufferedImage image;
     private JLabel taglineText;
     private JLabel aiubText;
     private JLabel loginText;
@@ -30,7 +30,7 @@ public class Login {
     private JCheckBox isDonorLogin;
 
     public Login() {
-        frame = new JFrame("Login - AIUB BLOOD DONATIIN CLUB");
+        frame = new JFrame("Login - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -199,7 +199,7 @@ public class Login {
                         new DonorDashboard(d);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> Invalid login credentials. Please check your AIUB ID and password and try again!</font></center></html>",
+                                "<html><center><font color='red'><b>Oops!</b> Invalid login attempt. Please check your AIUB ID and password and try again!</font></center></html>",
                                 "", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
@@ -209,7 +209,7 @@ public class Login {
                         new RecipientDashboard(r);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> Invalid login credentials. Please check your email and password and try again!</font></center></html>",
+                                "<html><center><font color='red'><b>Oops!</b> Invalid login attempt. Please check your AIUB ID and password and try again!</font></center></html>",
                                 "", JOptionPane.ERROR_MESSAGE);
                     }
                 }
