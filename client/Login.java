@@ -30,7 +30,7 @@ public class Login {
     private JCheckBox isDonorLogin;
 
     public Login() {
-        frame = new JFrame("Login - AIUB Blood Donation Club");
+        frame = new JFrame("Login - AIUB BLOOD DONATIIN CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");

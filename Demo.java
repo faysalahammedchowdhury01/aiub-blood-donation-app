@@ -63,10 +63,13 @@ public class Demo {
 
     private static class PostPanel extends JPanel {
         public PostPanel(Post post) {
-            setLayout(new GridLayout(2, 3));
+            setLayout(null); // set null layout to enable manual positioning of components
             JLabel dateLabel = new JLabel("Date: " + post.getDate());
             JLabel locationLabel = new JLabel("Location: " + post.getLocation());
             JLabel descriptionLabel = new JLabel("Description: " + post.getDescription());
+            dateLabel.setBounds(10, 10, 100, 20); // set bounds for dateLabel
+            locationLabel.setBounds(10, 30, 100, 20); // set bounds for locationLabel
+            descriptionLabel.setBounds(10, 50, 180, 40); // set bounds for descriptionLabel
             add(dateLabel);
             add(locationLabel);
             add(descriptionLabel);
@@ -74,4 +77,5 @@ public class Demo {
             setPreferredSize(new Dimension(200, 100));
         }
     }
+
 }

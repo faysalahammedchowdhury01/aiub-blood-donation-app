@@ -39,7 +39,7 @@ public class Signup {
     private JButton loginButton;
 
     public Signup() {
-        frame = new JFrame("Sign Up - AIUB Blood Donation Club");
+        frame = new JFrame("Sign Up - AIUB BLOOD DONATIIN CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");

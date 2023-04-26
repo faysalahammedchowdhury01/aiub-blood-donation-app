@@ -22,6 +22,8 @@ public class RecipientDashboard {
     private JButton name;
     private JLabel dropdownBox;
     private JButton seeProfile;
+    private JButton myRequestsButton;
+    private JButton donorsListButton;
     private JButton logoutButton;
     private JLabel postContainerBg;
     private JLabel requestBloodText;
@@ -38,7 +40,7 @@ public class RecipientDashboard {
     private JButton requestBloodButton;
 
     public RecipientDashboard(Recipient r) {
-        frame = new JFrame("Dashboard - AIUB Blood Donation Club");
+        frame = new JFrame("Dashboard - AIUB BLOOD DONATIIN CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -92,13 +94,13 @@ public class RecipientDashboard {
 
         // dropdown box
         dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 170);
+        dropdownBox.setBounds(1366 - 300, 70, 250, 340);
         dropdownBox.setBackground(Color.GRAY);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
 
-        // see profile
+        // see profile button
         seeProfile = new JButton("See Profile");
         seeProfile.setBounds(1366 - 280, 80, 210, 65);
         seeProfile.setBackground(Color.WHITE);
@@ -108,9 +110,29 @@ public class RecipientDashboard {
         seeProfile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         seeProfile.setVisible(false);
 
-        // see profile
+        // my requests button
+        myRequestsButton = new JButton("My Requests");
+        myRequestsButton.setBounds(1366 - 280, 160, 210, 65);
+        myRequestsButton.setBackground(Color.WHITE);
+        myRequestsButton.setForeground(Color.BLACK);
+        myRequestsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        myRequestsButton.setBorderPainted(false);
+        myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        myRequestsButton.setVisible(false);
+
+        // donors list button
+        donorsListButton = new JButton("Donors List");
+        donorsListButton.setBounds(1366 - 280, 240, 210, 65);
+        donorsListButton.setBackground(Color.WHITE);
+        donorsListButton.setForeground(Color.BLACK);
+        donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        donorsListButton.setBorderPainted(false);
+        donorsListButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        donorsListButton.setVisible(false);
+
+        // logout button
         logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 160, 210, 65);
+        logoutButton.setBounds(1366 - 280, 320, 210, 65);
         logoutButton.setBackground(Color.WHITE);
         logoutButton.setForeground(Color.BLACK);
         logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
@@ -201,6 +223,8 @@ public class RecipientDashboard {
         frame.add(aiubText);
         frame.add(name);
         frame.add(seeProfile);
+        frame.add(myRequestsButton);
+        frame.add(donorsListButton);
         frame.add(logoutButton);
         frame.add(dropdownBox);
         frame.add(requestBloodText);
@@ -285,6 +309,8 @@ public class RecipientDashboard {
         isShowDropdown = true;
         dropdownBox.setVisible(true);
         seeProfile.setVisible(true);
+        myRequestsButton.setVisible(true);
+        donorsListButton.setVisible(true);
         logoutButton.setVisible(true);
     }
 
@@ -293,6 +319,8 @@ public class RecipientDashboard {
         isShowDropdown = false;
         dropdownBox.setVisible(false);
         seeProfile.setVisible(false);
+        myRequestsButton.setVisible(false);
+        donorsListButton.setVisible(false);
         logoutButton.setVisible(false);
     }
 }

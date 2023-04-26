@@ -24,10 +24,20 @@ public class Start {
         // System.out.println("Recipients: ");
         // System.out.println(r);
 
-        // if (r != null) {
-        // System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka PG
-        // Hospital", "A+", "Urgent"));
-        // }
+        if (r != null) {
+            System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("2:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("3:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("4:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+",
+                    "UrgentAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUBAIUB BLOOD DONATIIN CLUB"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+            System.out.println(r.createPost("1:00 PM", "12-04-2023", "Dhaka", "A+", "Urgent"));
+        }
 
         // System.out.println("\n Avaiable Posts:");
         // int cnt = 1;
@@ -80,6 +90,7 @@ public class Start {
         // Client
         // new Login();
         // new Signup();
-        new RecipientDashboard(r);
+        // new RecipientDashboard(r);
+        new DonorDashboard(d);
     }
 }
