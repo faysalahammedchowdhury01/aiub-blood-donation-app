@@ -17,16 +17,28 @@ public class Demo {
                 new Post("2022-05-10", "Washington DC", "Post 10 description")
         };
 
-        // Create a JPanel to hold the posts
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        // Create a JPanel for the navigation bar
+        JPanel navBar = new JPanel();
+        navBar.setPreferredSize(new Dimension(400, 50));
+        navBar.setBackground(Color.BLUE);
+        JLabel navLabel = new JLabel("Navigation Bar");
+        navBar.add(navLabel);
+
+        // Create a JPanel for the posts
+        JPanel postPanel = new JPanel();
+        postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         for (Post post : posts) {
-            PostPanel postPanel = new PostPanel(post);
-            panel.add(postPanel);
+            PostPanel panelPost = new PostPanel(post);
+            postPanel.add(panelPost);
         }
 
-        // Create a JScrollPane and add the JPanel to it
-        JScrollPane scrollPane = new JScrollPane(panel);
+        // Create a main panel to hold the navigation bar and post panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(navBar, BorderLayout.NORTH);
+        mainPanel.add(postPanel, BorderLayout.CENTER);
+
+        // Create a JScrollPane and add the main panel to it
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
 
         // Create a JFrame and add the JScrollPane to it
         JFrame frame = new JFrame("Post Scroll Pane Example");
@@ -63,13 +75,10 @@ public class Demo {
 
     private static class PostPanel extends JPanel {
         public PostPanel(Post post) {
-            setLayout(null); // set null layout to enable manual positioning of components
+            setLayout(new GridLayout(2, 3));
             JLabel dateLabel = new JLabel("Date: " + post.getDate());
             JLabel locationLabel = new JLabel("Location: " + post.getLocation());
             JLabel descriptionLabel = new JLabel("Description: " + post.getDescription());
-            dateLabel.setBounds(10, 10, 100, 20); // set bounds for dateLabel
-            locationLabel.setBounds(10, 30, 100, 20); // set bounds for locationLabel
-            descriptionLabel.setBounds(10, 50, 180, 40); // set bounds for descriptionLabel
             add(dateLabel);
             add(locationLabel);
             add(descriptionLabel);
@@ -77,5 +86,4 @@ public class Demo {
             setPreferredSize(new Dimension(200, 100));
         }
     }
-
 }

@@ -7,35 +7,42 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
+import javax.swing.*;
+import java.awt.*;
+import server.classes.*;
 
 public class DonorDashboard {
-    JFrame frame;
-    private JPanel panelTopNav, postPanel;
-    private JScrollPane scrollpanelTopNav, scrollPostPanel;
+    private JPanel mainPanel, navbarPanel, postPanel;
 
     public DonorDashboard(Donor d) {
-        frame = new JFrame("Dashboard - AIUB BLOOD DONATIIN CLUB");
+        // Create a JPanel for the navigation bar
+        navbarPanel = new JPanel();
+        // navbarPanel.setPreferredSize(new Dimension(400, 50));
+        navbarPanel.setBackground(Color.BLUE);
+        JLabel navLabel = new JLabel("Navigation Bar");
+        navbarPanel.add(navLabel);
+
+        // Create a JPanel for the posts
         postPanel = new JPanel();
-        panelTopNav = new JPanel();
-
-        // panels layout
-        panelTopNav.setLayout(null);
-        panelTopNav.setLayout(new BoxLayout(panelTopNav, BoxLayout.Y_AXIS));
-
-        // posts
+        postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         for (Post post : Post.posts) {
-            PostPanel postPanel = new PostPanel(post);
-            panelTopNav.add(postPanel);
+            PostPanel panelPost = new PostPanel(post);
+            postPanel.add(panelPost);
         }
 
-        // scroll panels
-        scrollpanelTopNav = new JScrollPane(panelTopNav);
-        scrollPostPanel = new JScrollPane(postPanel);
+        // Create a main panel to hold the navigation bar and post panel
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(navbarPanel, BorderLayout.NORTH);
+        mainPanel.add(postPanel, BorderLayout.CENTER);
 
-        // panel adding
-        frame.add(scrollpanelTopNav);
+        // Create a JScrollPane and add the main panel to it
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
 
-        // Set the size of the JFrame and make it visible
+        // Create a JFrame and add the JScrollPane to it
+        JFrame frame = new JFrame("Post Scroll Pane Example");
+        frame.add(scrollPane);
+
+        // frame
         frame.setSize(1366, 768);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -43,22 +50,17 @@ public class DonorDashboard {
         frame.setVisible(true);
     }
 
-    // post panel
     private static class PostPanel extends JPanel {
         public PostPanel(Post post) {
-            setLayout(null); // set null layout to enable manual positioning of components
+            setLayout(new GridLayout(2, 3));
             JLabel dateLabel = new JLabel("Date: " + post.getDate());
             JLabel locationLabel = new JLabel("Location: " + post.getLocation());
             JLabel descriptionLabel = new JLabel("Description: " + post.getDescription());
-            dateLabel.setBounds(100, 20, 100, 20); // set bounds for dateLabel
-            locationLabel.setBounds(10, 40, 100, 20); // set bounds for locationLabel
-            descriptionLabel.setBounds(10, 100, 180, 40); // set bounds for descriptionLabel
             add(dateLabel);
             add(locationLabel);
             add(descriptionLabel);
             setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            setPreferredSize(new Dimension(1366, 600));
+            setPreferredSize(new Dimension(200, 100));
         }
     }
-
 }
