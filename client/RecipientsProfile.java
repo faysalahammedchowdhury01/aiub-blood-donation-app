@@ -39,7 +39,7 @@ public class RecipientsProfile {
     private JLabel pendingRequest;
 
     public RecipientsProfile(Recipient r, User u) {
-        frame = new JFrame("Profile - " + d.getName() + " [" + d.getAiubId() + "]" + " - AIUB BLOOD DONATION CLUB");
+        frame = new JFrame("Profile - " + r.getName() + " [" + r.getAiubId() + "]" + " - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
