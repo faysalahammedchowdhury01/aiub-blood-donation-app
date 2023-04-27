@@ -213,7 +213,7 @@ public class RecipientDashboard {
         requestBloodButton = new JButton("Request Blood");
         requestBloodButton.setBounds(580, 550, 200, 50);
         requestBloodButton.setForeground(Color.WHITE);
-        requestBloodButton.setBackground(new Color(248, 100, 100));
+        requestBloodButton.setBackground(new Color(169, 29, 20));
         requestBloodButton.setFont(new Font("Arial", Font.BOLD, 18));
         requestBloodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -262,6 +262,14 @@ public class RecipientDashboard {
                 } else {
                     showDropdown();
                 }
+            }
+        });
+
+        // my requests action
+        myRequestsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new MyRequests(r);
             }
         });
 
