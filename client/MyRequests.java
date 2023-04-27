@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.sql.JDBCType;
 
 public class MyRequests {
     private boolean isShowDropdown;
@@ -255,6 +256,7 @@ public class MyRequests {
     private class PostGUI extends JPanel {
         private JLabel statusText;
         private JLabel statusNowText;
+        private JButton editButton;
         private JLabel dateLabel;
         private JTextField dateField;
         private JLabel timeLabel;
@@ -288,6 +290,16 @@ public class MyRequests {
                 statusNowText.setForeground(Color.RED);
             } else {
                 statusNowText.setForeground(new Color(55, 146, 55));
+            }
+
+            // edit button for "open" post
+            editButton = new JButton("Edit");
+            editButton.setBounds(1165, 60, 120, 50);
+            editButton.setBackground(Color.WHITE);
+            editButton.setFont(new Font("Arial", Font.BOLD, 22));
+            editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            if (post.getStatus().equals("closed")) {
+                editButton.setVisible(false);
             }
 
             // date label and field
@@ -371,6 +383,7 @@ public class MyRequests {
             // adding
             add(statusText);
             add(statusNowText);
+            add(editButton);
             add(dateLabel);
             add(dateField);
             add(timeLabel);
