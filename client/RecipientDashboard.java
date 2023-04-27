@@ -21,7 +21,7 @@ public class RecipientDashboard {
     private JLabel aiubText;
     private JButton name;
     private JLabel dropdownBox;
-    private JButton seeProfile;
+    private JButton viewProfileButton;
     private JButton myRequestsButton;
     private JButton donorsListButton;
     private JButton logoutButton;
@@ -94,21 +94,21 @@ public class RecipientDashboard {
 
         // dropdown box
         dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 340);
+        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
         dropdownBox.setBackground(Color.GRAY);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
 
-        // see profile button
-        seeProfile = new JButton("See Profile");
-        seeProfile.setBounds(1366 - 280, 80, 210, 65);
-        seeProfile.setBackground(Color.WHITE);
-        seeProfile.setForeground(Color.BLACK);
-        seeProfile.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        seeProfile.setBorderPainted(false);
-        seeProfile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        seeProfile.setVisible(false);
+        // view profile button
+        viewProfileButton = new JButton("View Profile");
+        viewProfileButton.setBounds(1366 - 280, 80, 210, 65);
+        viewProfileButton.setBackground(Color.WHITE);
+        viewProfileButton.setForeground(Color.BLACK);
+        viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        viewProfileButton.setBorderPainted(false);
+        viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        viewProfileButton.setVisible(false);
 
         // my requests button
         myRequestsButton = new JButton("My Requests");
@@ -222,7 +222,7 @@ public class RecipientDashboard {
         frame.add(logo);
         frame.add(aiubText);
         frame.add(name);
-        frame.add(seeProfile);
+        frame.add(viewProfileButton);
         frame.add(myRequestsButton);
         frame.add(donorsListButton);
         frame.add(logoutButton);
@@ -262,6 +262,14 @@ public class RecipientDashboard {
                 } else {
                     showDropdown();
                 }
+            }
+        });
+
+        // view profile action
+        viewProfileButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new RecipientsProfile(r, r);
             }
         });
 
@@ -323,7 +331,7 @@ public class RecipientDashboard {
     private void showDropdown() {
         isShowDropdown = true;
         dropdownBox.setVisible(true);
-        seeProfile.setVisible(true);
+        viewProfileButton.setVisible(true);
         myRequestsButton.setVisible(true);
         donorsListButton.setVisible(true);
         logoutButton.setVisible(true);
@@ -333,7 +341,7 @@ public class RecipientDashboard {
     private void hideDropdown() {
         isShowDropdown = false;
         dropdownBox.setVisible(false);
-        seeProfile.setVisible(false);
+        viewProfileButton.setVisible(false);
         myRequestsButton.setVisible(false);
         donorsListButton.setVisible(false);
         logoutButton.setVisible(false);

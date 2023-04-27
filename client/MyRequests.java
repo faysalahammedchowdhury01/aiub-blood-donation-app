@@ -22,8 +22,8 @@ public class MyRequests {
     private JLabel aiubText;
     private JButton name;
     private JLabel dropdownBox;
-    private JButton seeProfile;
-    private JButton myRequestsButton;
+    private JButton goHomeButton;
+    private JButton viewProfileButton;
     private JButton donorsListButton;
     private JButton logoutButton;
 
@@ -80,31 +80,31 @@ public class MyRequests {
 
         // dropdown box
         dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 340);
+        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
         dropdownBox.setBackground(Color.GRAY);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
 
-        // see profile button
-        seeProfile = new JButton("See Profile");
-        seeProfile.setBounds(1366 - 280, 80, 210, 65);
-        seeProfile.setBackground(Color.WHITE);
-        seeProfile.setForeground(Color.BLACK);
-        seeProfile.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        seeProfile.setBorderPainted(false);
-        seeProfile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        seeProfile.setVisible(false);
+        // go home button
+        goHomeButton = new JButton("Home");
+        goHomeButton.setBounds(1366 - 280, 80, 210, 65);
+        goHomeButton.setBackground(Color.WHITE);
+        goHomeButton.setForeground(Color.BLACK);
+        goHomeButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        goHomeButton.setBorderPainted(false);
+        goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        goHomeButton.setVisible(false);
 
-        // my requests button
-        myRequestsButton = new JButton("My Requests");
-        myRequestsButton.setBounds(1366 - 280, 160, 210, 65);
-        myRequestsButton.setBackground(Color.WHITE);
-        myRequestsButton.setForeground(Color.BLACK);
-        myRequestsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        myRequestsButton.setBorderPainted(false);
-        myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        myRequestsButton.setVisible(false);
+        // view profile button
+        viewProfileButton = new JButton("View Profile");
+        viewProfileButton.setBounds(1366 - 280, 160, 210, 65);
+        viewProfileButton.setBackground(Color.WHITE);
+        viewProfileButton.setForeground(Color.BLACK);
+        viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        viewProfileButton.setBorderPainted(false);
+        viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        viewProfileButton.setVisible(false);
 
         // donors list button
         donorsListButton = new JButton("Donors List");
@@ -131,8 +131,8 @@ public class MyRequests {
         navbarPanel.add(logo);
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
-        frame.add(seeProfile);
-        frame.add(myRequestsButton);
+        frame.add(goHomeButton);
+        frame.add(viewProfileButton);
         frame.add(donorsListButton);
         frame.add(logoutButton);
         frame.add(dropdownBox);
@@ -189,6 +189,8 @@ public class MyRequests {
         // scroll pane
         scrollPane = new JScrollPane(mainPanel);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        scrollPane.getVerticalScrollBar().setBlockIncrement(200);
 
         // adding to frame
         frame.setIconImage(favIcon.getImage());
@@ -214,6 +216,22 @@ public class MyRequests {
             }
         });
 
+        // go home action
+        goHomeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new RecipientDashboard(r);
+            }
+        });
+
+        // view profile action
+        viewProfileButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new RecipientsProfile(r, r);
+            }
+        });
+
         // logout action
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -235,8 +253,8 @@ public class MyRequests {
     private void showDropdown() {
         isShowDropdown = true;
         dropdownBox.setVisible(true);
-        seeProfile.setVisible(true);
-        myRequestsButton.setVisible(true);
+        goHomeButton.setVisible(true);
+        viewProfileButton.setVisible(true);
         donorsListButton.setVisible(true);
         logoutButton.setVisible(true);
     }
@@ -245,8 +263,8 @@ public class MyRequests {
     private void hideDropdown() {
         isShowDropdown = false;
         dropdownBox.setVisible(false);
-        seeProfile.setVisible(false);
-        myRequestsButton.setVisible(false);
+        goHomeButton.setVisible(false);
+        viewProfileButton.setVisible(false);
         donorsListButton.setVisible(false);
         logoutButton.setVisible(false);
     }
@@ -401,6 +419,14 @@ public class MyRequests {
             setPreferredSize(new Dimension(1366, 610));
 
             // action listeners
+
+            // contact donor action
+            contactDonorButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    frame.setVisible(false);
+                    new DonorsProfile(post.getDonor(), r);
+                }
+            });
         }
     }
 }

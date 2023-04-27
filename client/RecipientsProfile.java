@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import java.io.*;
 
 public class RecipientsProfile {
+    User u;
     private boolean isShowDropdown;
 
     JFrame frame;
@@ -23,6 +24,8 @@ public class RecipientsProfile {
     private JButton name;
     private JLabel dropdownBox;
     private JButton goHomeButton;
+    private JButton myDonationsButton;
+    private JButton myRequestsButton;
     private JButton donorsListButton;
     private JButton logoutButton;
 
@@ -39,6 +42,7 @@ public class RecipientsProfile {
     private JLabel pendingRequest;
 
     public RecipientsProfile(Recipient r, User u) {
+        this.u = u;
         frame = new JFrame("Profile - " + r.getName() + " [" + r.getAiubId() + "]" + " - AIUB BLOOD DONATION CLUB");
 
         // favIcon
@@ -87,7 +91,7 @@ public class RecipientsProfile {
 
         // dropdown box
         dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 250);
+        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
         dropdownBox.setBackground(Color.GRAY);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
@@ -103,9 +107,29 @@ public class RecipientsProfile {
         goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         goHomeButton.setVisible(false);
 
+        // my donations button
+        myDonationsButton = new JButton("My Donations");
+        myDonationsButton.setBounds(1366 - 280, 160, 210, 65);
+        myDonationsButton.setBackground(Color.WHITE);
+        myDonationsButton.setForeground(Color.BLACK);
+        myDonationsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        myDonationsButton.setBorderPainted(false);
+        myDonationsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        myDonationsButton.setVisible(false);
+
+        // my requests button
+        myRequestsButton = new JButton("My Requests");
+        myRequestsButton.setBounds(1366 - 280, 160, 210, 65);
+        myRequestsButton.setBackground(Color.WHITE);
+        myRequestsButton.setForeground(Color.BLACK);
+        myRequestsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        myRequestsButton.setBorderPainted(false);
+        myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        myRequestsButton.setVisible(false);
+
         // donors list button
         donorsListButton = new JButton("Donors List");
-        donorsListButton.setBounds(1366 - 280, 160, 210, 65);
+        donorsListButton.setBounds(1366 - 280, 240, 210, 65);
         donorsListButton.setBackground(Color.WHITE);
         donorsListButton.setForeground(Color.BLACK);
         donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
@@ -115,7 +139,7 @@ public class RecipientsProfile {
 
         // logout button
         logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 240, 210, 65);
+        logoutButton.setBounds(1366 - 280, 320, 210, 65);
         logoutButton.setBackground(Color.WHITE);
         logoutButton.setForeground(Color.BLACK);
         logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
@@ -129,6 +153,8 @@ public class RecipientsProfile {
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
         frame.add(goHomeButton);
+        frame.add(myDonationsButton);
+        frame.add(myRequestsButton);
         frame.add(donorsListButton);
         frame.add(logoutButton);
         frame.add(dropdownBox);
@@ -266,6 +292,14 @@ public class RecipientsProfile {
             }
         });
 
+        // my requests action
+        myRequestsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new MyRequests(Recipient.login(u.getAiubId(), u.getPassword()));
+            }
+        });
+
         // logout action
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -282,6 +316,11 @@ public class RecipientsProfile {
         goHomeButton.setVisible(true);
         donorsListButton.setVisible(true);
         logoutButton.setVisible(true);
+        if (u.getIsDonor()) {
+            myDonationsButton.setVisible(true);
+        } else {
+            myRequestsButton.setVisible(true);
+        }
     }
 
     // hide dropdown
@@ -291,5 +330,7 @@ public class RecipientsProfile {
         goHomeButton.setVisible(false);
         donorsListButton.setVisible(false);
         logoutButton.setVisible(false);
+        myDonationsButton.setVisible(false);
+        myRequestsButton.setVisible(false);
     }
 }
