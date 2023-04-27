@@ -300,6 +300,14 @@ public class RecipientsProfile {
             }
         });
 
+        // my donations action
+        myDonationsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new MyDonations(Donor.login(u.getAiubId(), u.getPassword()));
+            }
+        });
+
         // logout action
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

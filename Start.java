@@ -93,8 +93,9 @@ public class Start {
                 // new Login();
                 // new Signup();
                 // new RecipientDashboard(r);
-                // new DonorDashboard(d);
-                new MyRequests(r);
+                new DonorDashboard(d);
+                // new MyRequests(r);
+                // new MyDonations(d);
                 // new DonorsProfile(d, r);
                 // new DonorsProfile(d, d);
                 // new RecipientsProfile(r, d);
