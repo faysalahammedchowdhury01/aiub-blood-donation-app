@@ -311,9 +311,9 @@ public class MyRequests {
 
             // edit button for "open" post
             editButton = new JButton("Edit");
-            editButton.setBounds(1165, 60, 120, 50);
-            editButton.setBackground(Color.WHITE);
-            editButton.setFont(new Font("Arial", Font.BOLD, 22));
+            editButton.setBounds(1200, 70, 80, 40);
+            editButton.setBackground(Color.YELLOW);
+            editButton.setFont(new Font("Arial", Font.BOLD, 18));
             editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             if (post.getStatus().equals("closed")) {
                 editButton.setVisible(false);
@@ -414,7 +414,7 @@ public class MyRequests {
             add(contactDonorButton);
 
             // panel
-            setBackground(new Color(26, 127, 100));
+            setBackground(new Color(4, 78, 161));
             setBorder(BorderFactory.createLineBorder(Color.WHITE));
             setPreferredSize(new Dimension(1366, 610));
 

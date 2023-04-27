@@ -144,7 +144,7 @@ public class RecipientDashboard {
         postContainerBg = new JLabel();
         postContainerBg.setBounds(50, 120, 1260, 520);
         postContainerBg.setOpaque(true);
-        postContainerBg.setBackground(new Color(26, 127, 100));
+        postContainerBg.setBackground(new Color(4, 78, 161));
 
         // request blood text
         requestBloodText = new JLabel("REQUEST FOR BLOOD");

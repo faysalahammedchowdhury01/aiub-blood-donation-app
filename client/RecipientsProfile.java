@@ -163,7 +163,7 @@ public class RecipientsProfile {
         profileBg = new JLabel();
         profileBg.setBounds(50, 120, 1260, 520);
         profileBg.setOpaque(true);
-        profileBg.setBackground(new Color(169, 29, 20));
+        profileBg.setBackground(new Color(4, 78, 161));
 
         // name label
         nameLabel = new JLabel(

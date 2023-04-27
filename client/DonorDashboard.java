@@ -292,6 +292,7 @@ public class DonorDashboard {
         private JTextField bloodGroupField;
         private JLabel descriptionLabel;
         private JTextArea descriptionTextArea;
+        private JButton viewRecipientButton;
         private JButton donateBloodButton;
 
         public PostGUI(Post post, Donor d) {
@@ -372,9 +373,17 @@ public class DonorDashboard {
             descriptionTextArea.setText(post.getDescription());
             descriptionTextArea.setEditable(false);
 
+            // view recipient button
+            viewRecipientButton = new JButton("View Recipient");
+            viewRecipientButton.setBounds(480, 490, 200, 50);
+            viewRecipientButton.setForeground(Color.WHITE);
+            viewRecipientButton.setBackground(new Color(169, 29, 20));
+            viewRecipientButton.setFont(new Font("Arial", Font.BOLD, 18));
+            viewRecipientButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
             // donate blood button
             donateBloodButton = new JButton("Donate Blood");
-            donateBloodButton.setBounds(580, 490, 200, 50);
+            donateBloodButton.setBounds(690, 490, 200, 50);
             donateBloodButton.setForeground(Color.WHITE);
             donateBloodButton.setBackground(new Color(169, 29, 20));
             donateBloodButton.setFont(new Font("Arial", Font.BOLD, 18));
@@ -392,14 +401,23 @@ public class DonorDashboard {
             add(bloodGroupField);
             add(descriptionLabel);
             add(descriptionTextArea);
+            add(viewRecipientButton);
             add(donateBloodButton);
 
             // panel
-            setBackground(new Color(26, 127, 100));
+            setBackground(new Color(4, 78, 161));
             setBorder(BorderFactory.createLineBorder(Color.WHITE));
             setPreferredSize(new Dimension(1366, 610));
 
             // action listeners
+
+            // view recipient action
+            viewRecipientButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    frame.setVisible(false);
+                    new RecipientsProfile(post.getAuthor(), d);
+                }
+            });
 
             // donate blood action
             donateBloodButton.addActionListener(new ActionListener() {
