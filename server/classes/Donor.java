@@ -6,6 +6,7 @@ import java.util.*;
 public class Donor extends User implements DonorOperations {
     private String status;
     private String lastDonateDate;
+    private int totalDonation;
     private List<Post> history;
 
     // constructors
@@ -17,6 +18,7 @@ public class Donor extends User implements DonorOperations {
         this.status = "Available";
         this.lastDonateDate = "N/A";
         history = new ArrayList<>();
+        totalDonation = 0;
         donors.add(this);
     }
 
@@ -29,6 +31,10 @@ public class Donor extends User implements DonorOperations {
         return lastDonateDate;
     }
 
+    public int getTotalDonation() {
+        return totalDonation;
+    }
+
     public List<Post> getHistory() {
         return history;
     }
@@ -39,6 +45,10 @@ public class Donor extends User implements DonorOperations {
 
     public void setLastDonateDate(String lastDonateDate) {
         this.lastDonateDate = lastDonateDate;
+    }
+
+    public void setTotalDonation(int totalDonation) {
+        this.totalDonation = totalDonation;
     }
 
     // donate blood (return true if success)
@@ -55,6 +65,8 @@ public class Donor extends User implements DonorOperations {
             if (post.addDonor(this)) {
                 this.lastDonateDate = post.getDate();
                 this.setStatus("Unavailable");
+                history.add(post);
+                totalDonation++;
                 return true;
             }
         } catch (Exception e) {

@@ -1,5 +1,5 @@
 /* 
- * Title: AIUB Blood Donation Society App
+ * Title: AIUB BLOOD DONATION CLUB
  * Authors:
  * 1. Faysal Ahammed Chowdhury [22-49046-3]
  * 2. Faysal Ahammed Chowdhury [22-49046-3]
@@ -94,6 +94,8 @@ public class Start {
         // new Signup();
         // new RecipientDashboard(r);
         // new DonorDashboard(d);
-        new MyRequests(r);
+        // new MyRequests(r);
+        // new DonorsProfile(d, r);
+        new RecipientsProfile(r, r);
     }
 }

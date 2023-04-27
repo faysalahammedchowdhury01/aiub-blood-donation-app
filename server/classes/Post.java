@@ -115,6 +115,7 @@ public class Post implements PostOperations {
         if (this.donor == null && this.requiredBloodGroup.equals(donor.getBloodGroup())) {
             this.donor = donor;
             this.status = "closed";
+            author.setTotalReceived(author.getTotalReceived() + 1);
             return true;
         }
         return false;
