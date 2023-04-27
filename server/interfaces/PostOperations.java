@@ -1,5 +1,9 @@
 package server.interfaces;
 
-public class PostOperations {
+import server.classes.*;
 
+public interface PostOperations {
+    public boolean addDonor(Donor donor);
+
+    public boolean editPost(String aiubId, String date, String time, String location, String description);
 }

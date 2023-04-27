@@ -1,8 +1,9 @@
 package server.classes;
 
 import java.util.*;
+import server.interfaces.*;
 
-public class Post {
+public class Post implements PostOperations {
     public static List<Post> posts;
     private String postId;
     private Recipient author;

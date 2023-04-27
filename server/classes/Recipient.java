@@ -2,7 +2,9 @@ package server.classes;
 
 import java.util.*;
 
-public class Recipient extends User {
+import server.interfaces.*;
+
+public class Recipient extends User implements RecipientOperations {
     private List<Post> posts;
 
     // constructors
