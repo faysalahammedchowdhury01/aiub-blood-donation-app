@@ -267,7 +267,7 @@ public class Signup {
 
                 // go for sign up process
                 if (isDonor) {
-                    Donor d = Donor.signup(aiubId, name, email, passwordString, confirmPasswordString, bloodGroup);
+                    Donor d = Donor.signup(aiubId, name, email, phone, confirmPasswordString, bloodGroup);
                     if (d != null) {
                         frame.setVisible(false);
                         new DonorDashboard(d);
@@ -277,7 +277,7 @@ public class Signup {
                                 "", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    Recipient r = Recipient.signup(aiubId, name, email, passwordString, confirmPasswordString,
+                    Recipient r = Recipient.signup(aiubId, name, email, phone, confirmPasswordString,
                             bloodGroup);
                     if (r != null) {
                         frame.setVisible(false);
