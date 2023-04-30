@@ -13,7 +13,7 @@ public class DonorsList {
     private boolean isShowDropdown;
 
     JFrame frame;
-    private JPanel mainPanel, navbarPanel, donorsPanel;
+    private JPanel mainPanel, navbarPanel, donorsPanel, bloodGroupPanel;
     private JScrollPane scrollPane;
     private ImageIcon favIcon, icon;
     // navbar
@@ -26,14 +26,14 @@ public class DonorsList {
     private JButton goHomeButton;
     private JButton myDonationsButton;
     private JButton myRequestsButton;
-    private JButton donorsListButton;
     private JButton logoutButton;
 
     // donor panel
-    private JLabel availableDonorText;
+    private JLabel selectBloodText;
+    private JComboBox<String> bloodGroupBox;
     private JLabel noDonorText;
 
-    public DonorsList(User u) {
+    public DonorsList(User u, String donorBloodGroup) {
         this.u = u;
         frame = new JFrame("Donors List - AIUB BLOOD DONATION CLUB");
 
@@ -83,7 +83,7 @@ public class DonorsList {
 
         // dropdown box
         dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
+        dropdownBox.setBounds(1366 - 300, 70, 250, 250);
         dropdownBox.setBackground(Color.GRAY);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
@@ -119,19 +119,9 @@ public class DonorsList {
         myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         myRequestsButton.setVisible(false);
 
-        // donors list button
-        donorsListButton = new JButton("Donors List");
-        donorsListButton.setBounds(1366 - 280, 240, 210, 65);
-        donorsListButton.setBackground(Color.WHITE);
-        donorsListButton.setForeground(Color.BLACK);
-        donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        donorsListButton.setBorderPainted(false);
-        donorsListButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        donorsListButton.setVisible(false);
-
         // logout button
         logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 320, 210, 65);
+        logoutButton.setBounds(1366 - 280, 240, 210, 65);
         logoutButton.setBackground(Color.WHITE);
         logoutButton.setForeground(Color.BLACK);
         logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
@@ -147,7 +137,6 @@ public class DonorsList {
         frame.add(goHomeButton);
         frame.add(myDonationsButton);
         frame.add(myRequestsButton);
-        frame.add(donorsListButton);
         frame.add(logoutButton);
         frame.add(dropdownBox);
 
@@ -156,24 +145,39 @@ public class DonorsList {
         donorsPanel.setLayout(new BoxLayout(donorsPanel, BoxLayout.Y_AXIS));
         donorsPanel.setBackground(Color.WHITE);
 
-        // available donor text
-        availableDonorText = new JLabel(
-                "<html><br><p style=\"margin-left: 65px;\">Your Life-Saving Requests:</p><br></html>");
-        availableDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-        availableDonorText.setForeground(new Color(45, 39, 39));
+        // blood group panel
+        bloodGroupPanel = new JPanel();
+        bloodGroupPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        bloodGroupPanel.setPreferredSize(new Dimension(1366, 110));
+        donorsPanel.add(bloodGroupPanel);
 
-        donorsPanel.add(availableDonorText);
+        // select blood text
+        selectBloodText = new JLabel(
+                "<html><br><center style=\"margin-left: 65px;\">Select Blood Group:</center><br></html>");
+        selectBloodText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
+        selectBloodText.setForeground(new Color(45, 39, 39));
 
-        // add posts
+        String[] bloodGroups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
+        bloodGroupBox = new JComboBox<>(bloodGroups);
+        bloodGroupBox.setSelectedItem(donorBloodGroup);
+
+        bloodGroupPanel.add(selectBloodText);
+        bloodGroupPanel.add(bloodGroupBox);
+
+        // add donor
+        String selectedBlood = donorBloodGroup;
         boolean hasDonor = false;
+        for (Donor d : User.donors) {
+            if (selectedBlood == null || selectedBlood.equals(d.getBloodGroup())) {
+                SingleDonorGUI singleDonor = new SingleDonorGUI(d, u);
+                donorsPanel.add(singleDonor);
+                hasDonor = true;
+            }
+        }
 
         if (!hasDonor) {
-            donorsPanel.setLayout(null);
-
-            // should change text
             noDonorText = new JLabel(
-                    "<html><center>NO DONOR</center></html>");
-            noDonorText.setForeground(Color.BLACK);
+                    "<html><br><center color=\"red\" style=\"margin-left: 230px;\">Sorry, no donor is available at this moment. Please try again later.</center><br></html>");
             noDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             noDonorText.setForeground(new Color(45, 39, 39));
 
@@ -257,7 +261,6 @@ public class DonorsList {
         isShowDropdown = true;
         dropdownBox.setVisible(true);
         goHomeButton.setVisible(true);
-        donorsListButton.setVisible(true);
         logoutButton.setVisible(true);
         if (u.getIsDonor()) {
             myDonationsButton.setVisible(true);
@@ -271,9 +274,68 @@ public class DonorsList {
         isShowDropdown = false;
         dropdownBox.setVisible(false);
         goHomeButton.setVisible(false);
-        donorsListButton.setVisible(false);
         logoutButton.setVisible(false);
         myDonationsButton.setVisible(false);
         myRequestsButton.setVisible(false);
+    }
+
+    // post gui component
+    private class SingleDonorGUI extends JPanel {
+        private JLabel name;
+        private JLabel bloodGroup;
+        private JButton viewProfileButton;
+
+        public SingleDonorGUI(Donor d, User u) {
+            setLayout(null);
+
+            // name
+            name = new JLabel("Name: " + d.getName());
+            name.setForeground(Color.WHITE);
+            name.setFont(new Font("Arial", Font.BOLD, 22));
+            name.setBounds(80, 30, 1000, 50);
+
+            // blood group
+            bloodGroup = new JLabel("Blood Group: " + d.getBloodGroup());
+            bloodGroup.setForeground(Color.WHITE);
+            bloodGroup.setFont(new Font("Arial", Font.BOLD, 22));
+            bloodGroup.setBounds(80, 80, 1000, 50);
+
+            // view profile button
+            viewProfileButton = new JButton("View Profile");
+            viewProfileButton.setForeground(Color.BLACK);
+            viewProfileButton.setBackground(Color.WHITE);
+            viewProfileButton.setFont(new Font("Arial", Font.BOLD, 22));
+            viewProfileButton.setBounds(1050, 50, 200, 50);
+            viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            // adding
+            add(name);
+            add(bloodGroup);
+            add(viewProfileButton);
+
+            // panel
+            setBackground(new Color(4, 78, 161));
+            setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            setPreferredSize(new Dimension(1366, 160));
+
+            // action listeners
+
+            // view peofile action
+            bloodGroupBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String bloodGroup = (String) bloodGroupBox.getSelectedItem();
+                    frame.setVisible(false);
+                    new DonorsList(u, bloodGroup);
+                }
+            });
+
+            // view peofile action
+            viewProfileButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    frame.setVisible(false);
+                    new DonorsProfile(d, u);
+                }
+            });
+        }
     }
 }

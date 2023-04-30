@@ -93,7 +93,6 @@ public class Donor extends User implements DonorOperations {
         }
 
         Donor donor = new Donor(aiubId, name, email, contact, password, bloodGroup);
-        donors.add(donor);
         return donor;
     }
 }

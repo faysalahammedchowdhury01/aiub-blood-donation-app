@@ -76,7 +76,6 @@ public class Recipient extends User implements RecipientOperations {
         }
 
         Recipient recipient = new Recipient(aiubId, name, email, contact, password, bloodGroup);
-        recipients.add(recipient);
         return recipient;
     }
 }

@@ -3,8 +3,8 @@ package server.classes;
 import java.util.*;
 
 public abstract class User {
-    protected static List<Donor> donors;
-    protected static List<Recipient> recipients;
+    public static List<Donor> donors;
+    public static List<Recipient> recipients;
     private String aiubId;
     private String name;
     private String email;
