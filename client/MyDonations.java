@@ -162,11 +162,11 @@ public class MyDonations {
         if (!hasPost) {
             postPanel.setLayout(null);
 
-            // should change text
             noDonationText = new JLabel(
-                    "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our website and help save lives. Thank you for your support!</center></html>");
+                    "<html><center>Hey there, you haven't started donating blood yet.<br> Consider donating today and help save lives!</center></html>");
+            noDonationText.setBounds(350, -50, 800, 300);
             noDonationText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            noDonationText.setForeground(new Color(45, 39, 39));
+            noDonationText.setForeground(Color.RED);
 
             postPanel.add(noDonationText);
         }

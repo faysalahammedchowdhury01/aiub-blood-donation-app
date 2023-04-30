@@ -169,9 +169,8 @@ public class MyRequests {
             noRequestText = new JLabel(
                     "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our website and help save lives. Thank you for your support!</center></html>");
             noRequestText.setBounds(0, -20, 1366, 200);
-            noRequestText.setForeground(Color.BLACK);
+            noRequestText.setForeground(Color.RED);
             noRequestText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            noRequestText.setForeground(new Color(45, 39, 39));
 
             // request blood button
             requestBloodButton = new JButton("Request Blood");
@@ -456,7 +455,7 @@ public class MyRequests {
             deleteButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     int flag = 0;
-                    int result = JOptionPane.showConfirmDialog(frame, " Are you sure you want to delete this post?",
+                    int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this post?",
                             "Delete",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);

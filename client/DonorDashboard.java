@@ -173,7 +173,7 @@ public class DonorDashboard {
                         "<html><center>No blood request available at the moment.<br> Please check again later.</center></html>");
                 noRequestText.setBounds(430, -50, 1366, 200);
                 noRequestText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-                noRequestText.setForeground(new Color(45, 39, 39));
+                noRequestText.setForeground(Color.RED);
 
                 postPanel.add(noRequestText);
             }
@@ -185,7 +185,7 @@ public class DonorDashboard {
             unavailableText.setBounds(320, -50, 1366, 200);
             unavailableText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             unavailableText.setForeground(new Color(45, 39, 39));
-            unavailableText.setBackground(Color.red);
+            unavailableText.setBackground(Color.RED);
 
             unavailableButton = new JButton("Be Available");
             unavailableButton.setBounds(530, 100, 300, 50);

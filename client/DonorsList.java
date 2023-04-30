@@ -35,7 +35,8 @@ public class DonorsList {
 
     public DonorsList(User u, String searchingBlood) {
         this.u = u;
-        frame = new JFrame(searchingBlood + " Donors List - AIUB BLOOD DONATION CLUB");
+        frame = new JFrame(
+                (searchingBlood == null ? "" : searchingBlood) + (" Donors List - AIUB BLOOD DONATION CLUB"));
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -168,7 +169,7 @@ public class DonorsList {
         String selectedBlood = searchingBlood;
         boolean hasDonor = false;
         for (Donor d : User.donors) {
-            if (selectedBlood == null || selectedBlood.equals(d.getBloodGroup())) {
+            if (d.getStatus().equals("Available") && selectedBlood == null || selectedBlood.equals(d.getBloodGroup())) {
                 SingleDonorGUI singleDonor = new SingleDonorGUI(d, u);
                 donorsPanel.add(singleDonor);
                 hasDonor = true;
@@ -183,7 +184,8 @@ public class DonorsList {
 
         if (!hasDonor) {
             noDonorText = new JLabel(
-                    "Sorry, no donor is available at this moment. Please try again later.");
+                    "Sorry, no " + "\"" + searchingBlood + "\""
+                            + " donor is available at this moment. Please try again later.");
             noDonorText.setBounds(280, -140, 1000, 300);
             noDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             noDonorText.setForeground(Color.red);

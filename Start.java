@@ -14,10 +14,10 @@ public class Start {
         public static void main(String[] args) {
                 Donor d = Donor.signup("22-49045-3", "Fahim Ahammed Chowdhury Fahim", "fahim@gmail.com",
                                 "01819183345", "1234", "A+");
-                Donor d1 = Donor.signup("22-490415-3", "Fahim", "fahim@gmail.com",
-                                "01819183345", "1234", "A-");
-                Donor d2 = Donor.signup("22-419045-3", "Fahim", "fahim@gmail.com",
-                                "01819183345", "1234", "B+");
+                // Donor d1 = Donor.signup("22-490415-3", "Fahim", "fahim@gmail.com",
+                // "01819183345", "1234", "A-");
+                // Donor d2 = Donor.signup("22-419045-3", "Fahim", "fahim@gmail.com",
+                // "01819183345", "1234", "B+");
                 // Donor d3 = Donor.signup("22-149045-3", "Fahim", "fahim@gmail.com",
                 // "01819183345", "1234", "A+");
                 // Donor d4 = Donor.signup("22-14904a5-3", "Fahim", "fahim@gmail.com",
@@ -26,7 +26,7 @@ public class Start {
                 // "01819183345", "1234", "A+");
                 // Donor d6 = Donor.signup("22-14d9045-3", "Fahim", "fahim@gmail.com",
                 // "01819183345", "1234", "A+");
-                Recipient r = Recipient.signup("22-49041g6-3", "Faysal", "faysal@gmail.com",
+                Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
                                 "01610137675", "1111", "A-");
 
                 // System.out.println("Donors: ");
@@ -36,23 +36,23 @@ public class Start {
                 // System.out.println("Recipients: ");
                 // System.out.println(r);
 
-                if (r != null) {
-                        // System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
-                        // "AB+",
-                        // "Urgent for me"));
-                        // System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                        // "A+",
-                        // "Acciedent patient"));
-                        // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                        // "A+",
-                        // "Acciedent patient"));
-                        // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                        // "A+",
-                        // "Acciedent patient"));
-                        // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
-                        // "A+",
-                        // "Urgent"));
-                }
+                // if (r != null) {
+                // System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
+                // "AB+",
+                // "Urgent for me"));
+                // System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                // "A+",
+                // "Acciedent patient"));
+                // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                // "A+",
+                // "Acciedent patient"));
+                // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                // "A+",
+                // "Acciedent patient"));
+                // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
+                // "A+",
+                // "Urgent"));
+                // }
 
                 // System.out.println("\n Avaiable Posts:");
                 // int cnt = 1;
@@ -101,12 +101,12 @@ public class Start {
                 // new RecipientDashboard(r);
                 // new DonorDashboard(d);
                 // new MyRequests(r);
-                // new MyDonations(d); // bug
+                // new MyDonations(d);
                 // new DonorsProfile(d, r);
                 // new DonorsProfile(d, d);
                 // new RecipientsProfile(r, d);
                 // new RecipientsProfile(r, r);
                 // new EditPost(Post.posts.get(0), r);
-                new DonorsList(r, "O+");
+                new DonorsList(d, "O+");
         }
 }
