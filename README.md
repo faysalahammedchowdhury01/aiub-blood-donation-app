@@ -109,14 +109,12 @@ Once you are done using the application, you can log out by clicking on the "Log
     - Methods
         - Getter()
         - Setters()
-        - Edit Profile()
-        - Delete Profile()
 - **Recipient(User):**
     - Data
     - Methods
         - Create Post()
         - Login()
-        - Sign Up()
+        - Signup()
 - **Donor(User):**
     - Data
         - Status
@@ -124,6 +122,8 @@ Once you are done using the application, you can log out by clicking on the "Log
     - Methods
         - Getters()
         - Setters()
+        - Login()
+        - Signup()
         - Donate Blood()
 - **Post:**
     - Data
@@ -134,14 +134,14 @@ Once you are done using the application, you can log out by clicking on the "Log
         - Time
         - Location
         - Required Blood Group
-        - Donors AIUB ID
+        - Donor
         - Description
     - Methods
         - Getters()
         - Setters()
-        - Create Post()
         - Add Donor()
-        - Close Post()
+        - Edit Post()
+        - Delete Post()
         
 <br>
 <br>
@@ -154,7 +154,7 @@ Once you are done using the application, you can log out by clicking on the "Log
 - RecipientDashboard
 - MyRequests
 - MyDonations
-- DonorsList —-
+- DonorsList
 - DonorsProfile
 - RecipientsProfile
 - EditPost
