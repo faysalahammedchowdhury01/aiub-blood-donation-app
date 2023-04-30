@@ -454,38 +454,25 @@ public class MyRequests {
             // delete post action
             deleteButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    int flag = 0;
                     int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this post?",
                             "Delete",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);
                     if (result == JOptionPane.YES_OPTION) {
                         // selected
-                        int idx = -1;
-                        for (int i = 0; i < Post.posts.size(); i++) {
-                            if (Post.posts.get(i).getPostId().equals(post.getPostId())) {
-                                idx = i;
-                                break;
-                            }
+                        if (post.deletePost(r.getAiubId())) {
+                            JOptionPane.showMessageDialog(null,
+                                    "<html><center><font color='green'>The post has been successfully deleted.</font></center></html>",
+                                    "", JOptionPane.INFORMATION_MESSAGE);
+                            frame.setVisible(false);
+                            new MyRequests(r);
                         }
 
-                        if (idx != -1) {
-                            Post.posts.remove(idx);
-                            flag = 1;
+                        else if (result != JOptionPane.NO_OPTION) {
+                            JOptionPane.showMessageDialog(null,
+                                    "<html><center><font color='red'><b>Oops!</b> The post was not deleted.</font></center></html>",
+                                    "", JOptionPane.ERROR_MESSAGE);
                         }
-                    }
-
-                    // post state
-                    if (flag == 1) {
-                        JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='green'>The post has been successfully deleted.</font></center></html>",
-                                "", JOptionPane.INFORMATION_MESSAGE);
-                        frame.setVisible(false);
-                        new MyRequests(r);
-                    } else if (result != JOptionPane.NO_OPTION) {
-                        JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> The post was not deleted.</font></center></html>",
-                                "", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });

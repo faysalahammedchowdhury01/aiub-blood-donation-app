@@ -1,6 +1,8 @@
 # AIUB-BLOOD-DONATION-CLUB
 
-## Table of Contents
+<br>
+
+# Table of Contents
 
 - [How to run](#how-to-run)
 - [Features💡](#features💡)
@@ -109,15 +111,12 @@ Once you are done using the application, you can log out by clicking on the "Log
         - Setters()
         - Edit Profile()
         - Delete Profile()
-        - Login()
-        - Sign Up()
 - **Recipient(User):**
     - Data
-        
-        posts
-        
     - Methods
         - Create Post()
+        - Login()
+        - Sign Up()
 - **Donor(User):**
     - Data
         - Status

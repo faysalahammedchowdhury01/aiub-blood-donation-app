@@ -135,4 +135,25 @@ public class Post implements PostOperations {
 
         return false;
     }
+
+    // delete post (return true if successful)
+    public boolean deletePost(String aiubId) {
+        if (this.author.getAiubId().equals(aiubId) && this.status.equals("open")) {
+            for (int i = 0; i < Post.posts.size(); i++) {
+                if (Post.posts.get(i).getPostId().equals(this.getPostId())) {
+                    Post.posts.remove(i);
+                    // decrease total request of "Recipient"
+                    for (int j = 0; j < User.recipients.size(); j++) {
+                        User.recipients.get(j).setTotalRequest(User.recipients.get(j).getTotalRequest() - 1);
+                        break;
+                    }
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return false;
+    }
 }
