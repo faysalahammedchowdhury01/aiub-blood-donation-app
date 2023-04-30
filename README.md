@@ -111,6 +111,8 @@ Once you are done using the application, you can log out by clicking on the "Log
         - Setters()
 - **Recipient(User):**
     - Data
+        - Total Request
+        - Total Received
     - Methods
         - Create Post()
         - Login()
@@ -119,6 +121,7 @@ Once you are done using the application, you can log out by clicking on the "Log
     - Data
         - Status
         - Last Donate Date
+        - Total Donation
     - Methods
         - Getters()
         - Setters()
