@@ -122,11 +122,13 @@ public class Post implements PostOperations {
     }
 
     // edit post (return true if successful)
-    public boolean editPost(String aiubId, String date, String time, String location, String description) {
+    public boolean editPost(String aiubId, String date, String time, String location, String bloodGroup,
+            String description) {
         if (this.author.getAiubId().equals(aiubId) && this.status.equals("open")) {
             this.date = date;
             this.time = time;
             this.location = location;
+            this.requiredBloodGroup = bloodGroup;
             this.description = description;
             return true;
         }

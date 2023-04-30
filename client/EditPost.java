@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
 
-public class MyRequests {
+public class EditPost {
     private boolean isShowDropdown;
 
     JFrame frame;
@@ -27,12 +27,8 @@ public class MyRequests {
     private JButton donorsListButton;
     private JButton logoutButton;
 
-    private JLabel availablePostText;
-    private JLabel noRequestText;
-    private JButton requestBloodButton;
-
-    public MyRequests(Recipient r) {
-        frame = new JFrame("My Requests - AIUB BLOOD DONATION CLUB");
+    public EditPost(Post post, Recipient r) {
+        frame = new JFrame("Edit Post - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -142,47 +138,9 @@ public class MyRequests {
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         postPanel.setBackground(Color.WHITE);
 
-        // available post text
-        availablePostText = new JLabel(
-                "<html><br><p style=\"margin-left: 65px;\">Your Life-Saving Requests:</p><br></html>");
-        availablePostText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-        availablePostText.setForeground(new Color(45, 39, 39));
-
-        postPanel.add(availablePostText);
-
         // add posts
-        boolean hasPost = false;
-        for (Post post : Post.posts) {
-            if (post.getAuthor().getAiubId().equals(r.getAiubId())) {
-                PostGUI singlePost = new PostGUI(post, r);
-                postPanel.add(singlePost);
-                hasPost = true;
-            }
-        }
-
-        // request blood button here to handle exception
-        requestBloodButton = new JButton("Request Blood");
-
-        if (!hasPost) {
-            postPanel.setLayout(null);
-
-            noRequestText = new JLabel(
-                    "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our website and help save lives. Thank you for your support!</center></html>");
-            noRequestText.setForeground(Color.BLACK);
-            noRequestText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            noRequestText.setForeground(new Color(45, 39, 39));
-
-            // request blood button
-            requestBloodButton = new JButton("Request Blood");
-            requestBloodButton.setBounds(580, 150, 200, 50);
-            requestBloodButton.setForeground(Color.WHITE);
-            requestBloodButton.setBackground(new Color(169, 29, 20));
-            requestBloodButton.setFont(new Font("Arial", Font.BOLD, 18));
-            requestBloodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-            postPanel.add(noRequestText);
-            postPanel.add(requestBloodButton);
-        }
+        PostGUI singlePost = new PostGUI(post, r);
+        postPanel.add(singlePost);
 
         // main panel
         mainPanel = new JPanel(new BorderLayout());
@@ -242,14 +200,6 @@ public class MyRequests {
                 new Login();
             }
         });
-
-        // request blood button action
-        requestBloodButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new RecipientDashboard(r);
-            }
-        });
     }
 
     // show dropwdown
@@ -276,8 +226,6 @@ public class MyRequests {
     private class PostGUI extends JPanel {
         private JLabel statusText;
         private JLabel statusNowText;
-        private JButton editButton;
-        private JButton deleteButton;
         private JLabel dateLabel;
         private JTextField dateField;
         private JLabel timeLabel;
@@ -285,10 +233,10 @@ public class MyRequests {
         private JLabel locationLabel;
         private JTextField locationField;
         private JLabel bloodGroupLabel;
-        private JTextField bloodGroupField;
+        private JComboBox<String> bloodGroupBox;
         private JLabel descriptionLabel;
         private JTextArea descriptionTextArea;
-        private JButton contactDonorButton;
+        private JButton saveButton;
 
         public PostGUI(Post post, Recipient r) {
             setLayout(null);
@@ -313,26 +261,6 @@ public class MyRequests {
                 statusNowText.setForeground(new Color(55, 146, 55));
             }
 
-            // edit button for "open" post
-            editButton = new JButton("Edit");
-            editButton.setBounds(1050, 70, 80, 40);
-            editButton.setBackground(Color.YELLOW);
-            editButton.setFont(new Font("Arial", Font.BOLD, 18));
-            editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            if (post.getStatus().equals("closed")) {
-                editButton.setVisible(false);
-            }
-
-            // delete button for "open" post
-            deleteButton = new JButton("Delete");
-            deleteButton.setBounds(1150, 70, 130, 40);
-            deleteButton.setBackground(Color.RED);
-            deleteButton.setFont(new Font("Arial", Font.BOLD, 18));
-            deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            if (post.getStatus().equals("closed")) {
-                deleteButton.setVisible(false);
-            }
-
             // date label and field
             dateLabel = new JLabel("Date: ");
             dateLabel.setBounds(80, 130, 100, 50);
@@ -344,7 +272,6 @@ public class MyRequests {
             dateField.setForeground(Color.BLACK);
             dateField.setFont(new Font("Arial", Font.PLAIN, 18));
             dateField.setText(post.getDate());
-            dateField.setEditable(false);
 
             // time label and field
             timeLabel = new JLabel("Time: ");
@@ -357,7 +284,6 @@ public class MyRequests {
             timeField.setForeground(Color.BLACK);
             timeField.setFont(new Font("Arial", Font.PLAIN, 18));
             timeField.setText(post.getTime());
-            timeField.setEditable(false);
 
             // location label and field
             locationLabel = new JLabel("Location: ");
@@ -370,7 +296,6 @@ public class MyRequests {
             locationField.setForeground(Color.BLACK);
             locationField.setFont(new Font("Arial", Font.PLAIN, 18));
             locationField.setText(post.getLocation());
-            locationField.setEditable(false);
 
             // time label and field
             bloodGroupLabel = new JLabel("Blood Group: ");
@@ -378,12 +303,10 @@ public class MyRequests {
             bloodGroupLabel.setForeground(Color.WHITE);
             bloodGroupLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
-            bloodGroupField = new JTextField("");
-            bloodGroupField.setBounds(695, 260, 590, 50);
-            bloodGroupField.setForeground(Color.BLACK);
-            bloodGroupField.setFont(new Font("Arial", Font.PLAIN, 18));
-            bloodGroupField.setText(post.getRequiredBloodGroup());
-            bloodGroupField.setEditable(false);
+            String[] bloodGroups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
+            bloodGroupBox = new JComboBox<>(bloodGroups);
+            bloodGroupBox.setSelectedItem(post.getRequiredBloodGroup());
+            bloodGroupBox.setBounds(695, 260, 590, 50);
 
             // description label and text area
             descriptionLabel = new JLabel("Description:");
@@ -398,24 +321,18 @@ public class MyRequests {
             descriptionTextArea.setWrapStyleWord(true);
             descriptionTextArea.setLineWrap(true);
             descriptionTextArea.setText(post.getDescription());
-            descriptionTextArea.setEditable(false);
 
-            // contact donor button
-            contactDonorButton = new JButton("Contact Donor");
-            contactDonorButton.setBounds(570, 490, 200, 50);
-            contactDonorButton.setForeground(Color.WHITE);
-            contactDonorButton.setBackground(new Color(169, 29, 20));
-            contactDonorButton.setFont(new Font("Arial", Font.BOLD, 18));
-            contactDonorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            if (post.getStatus().equals("open")) {
-                contactDonorButton.setVisible(false);
-            }
+            // save button
+            saveButton = new JButton("Save");
+            saveButton.setBounds(570, 490, 200, 50);
+            saveButton.setForeground(Color.WHITE);
+            saveButton.setBackground(new Color(24, 165, 88));
+            saveButton.setFont(new Font("Arial", Font.BOLD, 18));
+            saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             // adding
             add(statusText);
             add(statusNowText);
-            add(editButton);
-            add(deleteButton);
             add(dateLabel);
             add(dateField);
             add(timeLabel);
@@ -423,10 +340,10 @@ public class MyRequests {
             add(locationLabel);
             add(locationField);
             add(bloodGroupLabel);
-            add(bloodGroupField);
+            add(bloodGroupBox);
             add(descriptionLabel);
             add(descriptionTextArea);
-            add(contactDonorButton);
+            add(saveButton);
 
             // panel
             setBackground(new Color(4, 78, 161));
@@ -435,58 +352,37 @@ public class MyRequests {
 
             // action listeners
 
-            // edit post action
-            editButton.addActionListener(new ActionListener() {
+            // save button action
+            saveButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    frame.setVisible(false);
-                    new EditPost(post, r);
-                }
-            });
+                    // get data
+                    String time = timeField.getText().trim();
+                    String date = dateField.getText().trim();
+                    String location = locationField.getText().trim();
+                    String bloodGroup = (String) bloodGroupBox.getSelectedItem();
+                    String description = descriptionTextArea.getText().trim();
 
-            // delete post action
-            deleteButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    int flag = 0;
-                    int result = JOptionPane.showConfirmDialog(frame, " Are you sure you want to delete this post?",
-                            "Delete",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE);
-                    if (result == JOptionPane.YES_OPTION) {
-                        // selected
-                        int idx = -1;
-                        for (int i = 0; i < Post.posts.size(); i++) {
-                            if (Post.posts.get(i).getPostId().equals(post.getPostId())) {
-                                idx = i;
-                                break;
-                            }
-                        }
-
-                        if (idx != -1) {
-                            Post.posts.remove(idx);
-                            flag = 1;
-                        }
+                    if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup.isEmpty()) {
+                        JOptionPane.showMessageDialog(null,
+                                "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                                "", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
 
-                    // post state
-                    if (flag == 1) {
+                    // go for edit post
+                    if (post.editPost(r.getAiubId(), date, time, location, bloodGroup, description)) {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='green'>The post has been successfully deleted.</font></center></html>",
+                                "<html><center><font color='green'>Your changes have been saved successfully!</font></center></html>",
                                 "", JOptionPane.INFORMATION_MESSAGE);
                         frame.setVisible(false);
                         new MyRequests(r);
-                    } else if (result != JOptionPane.NO_OPTION) {
+                    } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> The post was not deleted.</font></center></html>",
+                                "<html><center><font color='red'><b>Oops!</b> Sorry, we could not update your post at this time. Please try again later!</font></center></html>",
                                 "", JOptionPane.ERROR_MESSAGE);
+                        frame.setVisible(false);
+                        new MyRequests(r);
                     }
-                }
-            });
-
-            // contact donor action
-            contactDonorButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    frame.setVisible(false);
-                    new DonorsProfile(post.getDonor(), r);
                 }
             });
         }

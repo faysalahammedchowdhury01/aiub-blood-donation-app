@@ -185,7 +185,7 @@ public class RecipientDashboard {
         locationField.setForeground(Color.BLACK);
         locationField.setFont(new Font("Arial", Font.PLAIN, 18));
 
-        // time label and field
+        // blood group label and field
         bloodGroupLabel = new JLabel("Blood Group: ");
         bloodGroupLabel.setBounds(695, 290, 300, 50);
         bloodGroupLabel.setForeground(Color.WHITE);

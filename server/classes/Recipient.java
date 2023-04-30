@@ -1,6 +1,7 @@
 package server.classes;
 
 import server.interfaces.*;
+import java.util.*;
 
 public class Recipient extends User implements RecipientOperations {
     private int totalRequest;
@@ -34,11 +35,14 @@ public class Recipient extends User implements RecipientOperations {
         this.totalReceived = totalReceived;
     }
 
-    // create post
+    // create post (return true if success)
     public boolean createPost(String time, String date, String location, String requiredBloodGroup,
             String description) {
         try {
-            String postId = this.getAiubId() + time + date + location + requiredBloodGroup;
+            UUID uuid = UUID.randomUUID();
+            String uniqueId = uuid.toString();
+
+            String postId = this.getAiubId() + time + date + location + requiredBloodGroup + uniqueId;
             new Post(postId, this, "open", time, date, location, requiredBloodGroup, description);
             totalRequest++;
             return true;

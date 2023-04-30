@@ -100,5 +100,6 @@ public class Start {
                 // new DonorsProfile(d, d);
                 // new RecipientsProfile(r, d);
                 // new RecipientsProfile(r, r);
+                new EditPost(Post.posts.get(0), r);
         }
 }
