@@ -25,27 +25,21 @@ public class Start {
                 // System.out.println(r);
 
                 if (r != null) {
-                        System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
-                                        "AB+",
-                                        "Urgent for me"));
-                        System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                                        "A+",
-                                        "Acciedent patient"));
-                        System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                                        "A+",
-                                        "Acciedent patient"));
-                        System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                                        "A+",
-                                        "Acciedent patient"));
-                        System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
-                                        "A+",
-                                        "Urgent"));
-                }
-
-                if (d.donateBlood("22-49046-31:00 PM12-04-2023Labaid DhanmondiA+")) {
-                        System.out.println("Donated");
-                } else {
-                        System.out.println("Failed");
+                        // System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
+                        // "AB+",
+                        // "Urgent for me"));
+                        // System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                        // "A+",
+                        // "Acciedent patient"));
+                        // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                        // "A+",
+                        // "Acciedent patient"));
+                        // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                        // "A+",
+                        // "Acciedent patient"));
+                        // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
+                        // "A+",
+                        // "Urgent"));
                 }
 
                 // System.out.println("\n Avaiable Posts:");
@@ -94,12 +88,13 @@ public class Start {
                 // new Signup();
                 // new RecipientDashboard(r);
                 // new DonorDashboard(d);
-                // new MyRequests(r);
+                new MyRequests(r); // error
                 // new MyDonations(d);
                 // new DonorsProfile(d, r);
                 // new DonorsProfile(d, d);
                 // new RecipientsProfile(r, d);
                 // new RecipientsProfile(r, r);
-                new EditPost(Post.posts.get(0), r);
+                // new EditPost(Post.posts.get(0), r);
+                // new DonorsList(r);
         }
 }
