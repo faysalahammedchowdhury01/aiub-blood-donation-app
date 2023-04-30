@@ -1,13 +1,10 @@
 package server.classes;
 
-import java.util.*;
-
 import server.interfaces.*;
 
 public class Recipient extends User implements RecipientOperations {
     private int totalRequest;
     private int totalReceived;
-    private List<Post> posts;
 
     // constructors
     public Recipient() {
@@ -15,7 +12,6 @@ public class Recipient extends User implements RecipientOperations {
 
     public Recipient(String aiubId, String name, String email, String contact, String password, String bloodGroup) {
         super(aiubId, name, email, contact, password, bloodGroup, false);
-        posts = new ArrayList<>();
         totalRequest = 0;
         totalReceived = 0;
         recipients.add(this);
@@ -28,10 +24,6 @@ public class Recipient extends User implements RecipientOperations {
 
     public int getTotalReceived() {
         return totalReceived;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
     }
 
     public void setTotalRequest(int totalRequest) {
@@ -47,8 +39,7 @@ public class Recipient extends User implements RecipientOperations {
             String description) {
         try {
             String postId = this.getAiubId() + time + date + location + requiredBloodGroup;
-            Post post = new Post(postId, this, "open", time, date, location, requiredBloodGroup, description);
-            posts.add(post);
+            new Post(postId, this, "open", time, date, location, requiredBloodGroup, description);
             totalRequest++;
             return true;
         } catch (Exception e) {

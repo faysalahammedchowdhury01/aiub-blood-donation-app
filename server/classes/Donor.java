@@ -1,13 +1,11 @@
 package server.classes;
 
 import server.interfaces.*;
-import java.util.*;
 
 public class Donor extends User implements DonorOperations {
     private String status;
     private String lastDonateDate;
     private int totalDonation;
-    private List<Post> history;
 
     // constructors
     public Donor() {
@@ -17,7 +15,6 @@ public class Donor extends User implements DonorOperations {
         super(aiubId, name, email, contact, password, bloodGroup, true);
         this.status = "Available";
         this.lastDonateDate = "N/A";
-        history = new ArrayList<>();
         totalDonation = 0;
         donors.add(this);
     }
@@ -33,10 +30,6 @@ public class Donor extends User implements DonorOperations {
 
     public int getTotalDonation() {
         return totalDonation;
-    }
-
-    public List<Post> getHistory() {
-        return history;
     }
 
     public void setStatus(String status) {
@@ -65,7 +58,6 @@ public class Donor extends User implements DonorOperations {
             if (post.addDonor(this)) {
                 this.lastDonateDate = post.getDate();
                 this.setStatus("Unavailable");
-                history.add(post);
                 totalDonation++;
                 return true;
             }

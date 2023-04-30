@@ -152,10 +152,12 @@ public class MyRequests {
 
         // add posts
         boolean hasPost = false;
-        for (Post post : r.getPosts()) {
-            PostGUI singlePost = new PostGUI(post, r);
-            postPanel.add(singlePost);
-            hasPost = true;
+        for (Post post : Post.posts) {
+            if (post.getAuthor().getAiubId().equals(r.getAiubId())) {
+                PostGUI singlePost = new PostGUI(post, r);
+                postPanel.add(singlePost);
+                hasPost = true;
+            }
         }
 
         // request blood button here to handle exception
@@ -166,6 +168,7 @@ public class MyRequests {
 
             noRequestText = new JLabel(
                     "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our website and help save lives. Thank you for your support!</center></html>");
+            noRequestText.setForeground(Color.BLACK);
             noRequestText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             noRequestText.setForeground(new Color(45, 39, 39));
 
@@ -274,6 +277,7 @@ public class MyRequests {
         private JLabel statusText;
         private JLabel statusNowText;
         private JButton editButton;
+        private JButton deleteButton;
         private JLabel dateLabel;
         private JTextField dateField;
         private JLabel timeLabel;
@@ -311,12 +315,22 @@ public class MyRequests {
 
             // edit button for "open" post
             editButton = new JButton("Edit");
-            editButton.setBounds(1200, 70, 80, 40);
+            editButton.setBounds(1050, 70, 80, 40);
             editButton.setBackground(Color.YELLOW);
             editButton.setFont(new Font("Arial", Font.BOLD, 18));
             editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             if (post.getStatus().equals("closed")) {
                 editButton.setVisible(false);
+            }
+
+            // delete button for "open" post
+            deleteButton = new JButton("Delete");
+            deleteButton.setBounds(1150, 70, 130, 40);
+            deleteButton.setBackground(Color.RED);
+            deleteButton.setFont(new Font("Arial", Font.BOLD, 18));
+            deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            if (post.getStatus().equals("closed")) {
+                deleteButton.setVisible(false);
             }
 
             // date label and field
@@ -401,6 +415,7 @@ public class MyRequests {
             add(statusText);
             add(statusNowText);
             add(editButton);
+            add(deleteButton);
             add(dateLabel);
             add(dateField);
             add(timeLabel);
@@ -419,6 +434,52 @@ public class MyRequests {
             setPreferredSize(new Dimension(1366, 610));
 
             // action listeners
+
+            // edit post action
+            editButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+
+            // delete post action
+            deleteButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    int flag = 0;
+                    int result = JOptionPane.showConfirmDialog(frame, " Are you sure you want to delete this post?",
+                            "Delete",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (result == JOptionPane.YES_OPTION) {
+                        // selected
+                        int idx = -1;
+                        for (int i = 0; i < Post.posts.size(); i++) {
+                            if (Post.posts.get(i).getPostId().equals(post.getPostId())) {
+                                idx = i;
+                                break;
+                            }
+                        }
+
+                        if (idx != -1) {
+                            Post.posts.remove(idx);
+                            flag = 1;
+                        }
+                    }
+
+                    // post state
+                    if (flag == 1) {
+                        JOptionPane.showMessageDialog(null,
+                                "<html><center><font color='green'>The post has been successfully deleted.</font></center></html>",
+                                "", JOptionPane.INFORMATION_MESSAGE);
+                        frame.setVisible(false);
+                        new MyRequests(r);
+                    } else if (result != JOptionPane.NO_OPTION) {
+                        JOptionPane.showMessageDialog(null,
+                                "<html><center><font color='red'><b>Oops!</b> The post was not deleted.</font></center></html>",
+                                "", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
 
             // contact donor action
             contactDonorButton.addActionListener(new ActionListener() {

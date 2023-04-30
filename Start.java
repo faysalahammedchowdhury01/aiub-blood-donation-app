@@ -12,8 +12,8 @@ import client.*;
 
 public class Start {
         public static void main(String[] args) {
-                // Donor d = Donor.signup("22-49045-3", "Fahim", "fahim@gmail.com",
-                // "01819183345", "1234", "A+");
+                Donor d = Donor.signup("22-49045-3", "Fahim", "fahim@gmail.com",
+                                "01819183345", "1234", "A+");
                 Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
                                 "01610137675", "1111", "A+");
 
@@ -24,29 +24,29 @@ public class Start {
                 // System.out.println("Recipients: ");
                 // System.out.println(r);
 
-                // if (r != null) {
-                // System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
-                // "AB+",
-                // "Urgent for me"));
-                // System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                // "A+",
-                // "Acciedent patient"));
-                // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                // "A+",
-                // "Acciedent patient"));
-                // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
-                // "A+",
-                // "Acciedent patient"));
-                // System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
-                // "A+",
-                // "Urgent"));
-                // }
+                if (r != null) {
+                        System.out.println(r.createPost("12:00 PM", "12-04-2023", "Dhaka Hospital",
+                                        "AB+",
+                                        "Urgent for me"));
+                        System.out.println(r.createPost("1:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                                        "A+",
+                                        "Acciedent patient"));
+                        System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                                        "A+",
+                                        "Acciedent patient"));
+                        System.out.println(r.createPost("2:00 PM", "12-04-2023", "Labaid Dhanmondi",
+                                        "A+",
+                                        "Acciedent patient"));
+                        System.out.println(r.createPost("2:00 PM", "12-04-2023", "Ibn Sina Uttara",
+                                        "A+",
+                                        "Urgent"));
+                }
 
-                // if (d.donateBlood("22-49046-31:00 PM12-04-2023Labaid DhanmondiA+")) {
-                // System.out.println("Donated");
-                // } else {
-                // System.out.println("Failed");
-                // }
+                if (d.donateBlood("22-49046-31:00 PM12-04-2023Labaid DhanmondiA+")) {
+                        System.out.println("Donated");
+                } else {
+                        System.out.println("Failed");
+                }
 
                 // System.out.println("\n Avaiable Posts:");
                 // int cnt = 1;
@@ -91,7 +91,7 @@ public class Start {
 
                 // Client
                 // new Login();
-                new Signup();
+                // new Signup();
                 // new RecipientDashboard(r);
                 // new DonorDashboard(d);
                 // new MyRequests(r);

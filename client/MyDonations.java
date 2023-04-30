@@ -151,10 +151,12 @@ public class MyDonations {
 
         // add posts
         boolean hasPost = false;
-        for (Post post : d.getHistory()) {
-            PostGUI singlePost = new PostGUI(post, d);
-            postPanel.add(singlePost);
-            hasPost = true;
+        for (Post post : Post.posts) {
+            if (post.getDonor() == d) {
+                PostGUI singlePost = new PostGUI(post, d);
+                postPanel.add(singlePost);
+                hasPost = true;
+            }
         }
 
         if (!hasPost) {
