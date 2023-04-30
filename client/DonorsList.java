@@ -13,7 +13,7 @@ public class DonorsList {
     private boolean isShowDropdown;
 
     JFrame frame;
-    private JPanel mainPanel, navbarPanel, donorsPanel, bloodGroupPanel;
+    private JPanel mainPanel, navbarPanel, donorsPanel, bloodGroupPanel, noDonorPanel;
     private JScrollPane scrollPane;
     private ImageIcon favIcon, icon;
     // navbar
@@ -33,9 +33,9 @@ public class DonorsList {
     private JComboBox<String> bloodGroupBox;
     private JLabel noDonorText;
 
-    public DonorsList(User u, String donorBloodGroup) {
+    public DonorsList(User u, String searchingBlood) {
         this.u = u;
-        frame = new JFrame("Donors List - AIUB BLOOD DONATION CLUB");
+        frame = new JFrame(searchingBlood + " Donors List - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -159,13 +159,13 @@ public class DonorsList {
 
         String[] bloodGroups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
         bloodGroupBox = new JComboBox<>(bloodGroups);
-        bloodGroupBox.setSelectedItem(donorBloodGroup);
+        bloodGroupBox.setSelectedItem(searchingBlood);
 
         bloodGroupPanel.add(selectBloodText);
         bloodGroupPanel.add(bloodGroupBox);
 
         // add donor
-        String selectedBlood = donorBloodGroup;
+        String selectedBlood = searchingBlood;
         boolean hasDonor = false;
         for (Donor d : User.donors) {
             if (selectedBlood == null || selectedBlood.equals(d.getBloodGroup())) {
@@ -175,13 +175,20 @@ public class DonorsList {
             }
         }
 
+        // no donor panel
+        noDonorPanel = new JPanel();
+        noDonorPanel.setLayout(null);
+        noDonorPanel.setPreferredSize(new Dimension(1366, 110));
+        donorsPanel.add(noDonorPanel);
+
         if (!hasDonor) {
             noDonorText = new JLabel(
-                    "<html><br><center color=\"red\" style=\"margin-left: 230px;\">Sorry, no donor is available at this moment. Please try again later.</center><br></html>");
+                    "Sorry, no donor is available at this moment. Please try again later.");
+            noDonorText.setBounds(280, -140, 1000, 300);
             noDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            noDonorText.setForeground(new Color(45, 39, 39));
+            noDonorText.setForeground(Color.red);
 
-            donorsPanel.add(noDonorText);
+            noDonorPanel.add(noDonorText);
         }
 
         // main panel
@@ -254,6 +261,15 @@ public class DonorsList {
                 new Login();
             }
         });
+
+        // search action
+        bloodGroupBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String bloodGroup = (String) bloodGroupBox.getSelectedItem();
+                frame.setVisible(false);
+                new DonorsList(u, bloodGroup);
+            }
+        });
     }
 
     // show dropwdown
@@ -319,15 +335,6 @@ public class DonorsList {
             setPreferredSize(new Dimension(1366, 160));
 
             // action listeners
-
-            // view peofile action
-            bloodGroupBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    String bloodGroup = (String) bloodGroupBox.getSelectedItem();
-                    frame.setVisible(false);
-                    new DonorsList(u, bloodGroup);
-                }
-            });
 
             // view peofile action
             viewProfileButton.addActionListener(new ActionListener() {

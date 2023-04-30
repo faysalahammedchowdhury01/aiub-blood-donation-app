@@ -222,6 +222,14 @@ public class MyDonations {
             }
         });
 
+        // donors list action
+        donorsListButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new DonorsList(d, null);
+            }
+        });
+
         // logout action
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

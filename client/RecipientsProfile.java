@@ -308,6 +308,14 @@ public class RecipientsProfile {
             }
         });
 
+        // donors list action
+        donorsListButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new DonorsList(r, null);
+            }
+        });
+
         // logout action
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
