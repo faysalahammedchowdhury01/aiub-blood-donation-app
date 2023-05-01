@@ -466,9 +466,7 @@ public class MyRequests {
                                     "", JOptionPane.INFORMATION_MESSAGE);
                             frame.setVisible(false);
                             new MyRequests(r);
-                        }
-
-                        else if (result != JOptionPane.NO_OPTION) {
+                        } else {
                             JOptionPane.showMessageDialog(null,
                                     "<html><center><font color='red'><b>Oops!</b> The post was not deleted.</font></center></html>",
                                     "", JOptionPane.ERROR_MESSAGE);
