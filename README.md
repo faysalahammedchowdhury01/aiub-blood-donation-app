@@ -114,6 +114,8 @@ Once you are done using the application, you can log out by clicking on the "Log
         - Total Request
         - Total Received
     - Methods
+        - Getters()
+        - Setters()
         - Create Post()
         - Login()
         - Signup()
