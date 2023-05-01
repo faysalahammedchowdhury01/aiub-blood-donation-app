@@ -312,7 +312,7 @@ public class RecipientsProfile {
         donorsListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new DonorsList(r, null);
+                new DonorsList(u, null);
             }
         });
 

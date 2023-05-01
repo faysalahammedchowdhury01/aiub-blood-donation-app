@@ -310,7 +310,7 @@ public class DonorsProfile {
         donorsListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new DonorsList(d, null);
+                new DonorsList(u, null);
             }
         });
 
