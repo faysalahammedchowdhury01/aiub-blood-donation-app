@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
+import javax.swing.table.*;
 
 public class RecipientsProfile {
     User u;
@@ -30,16 +31,9 @@ public class RecipientsProfile {
     private JButton logoutButton;
 
     // profile
-    private JLabel profileBg;
-    private JLabel nameLabel;
-    private JLabel userTypeLabel;
-    private JLabel bloodLabel;
-    private JLabel aiubIdLabel;
-    private JLabel emailLabel;
-    private JLabel phoneLabel;
-    private JLabel totalRequestLabel;
-    private JLabel totalReceivedLabel;
-    private JLabel pendingRequest;
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JLabel tableHeaderLabel;
 
     public RecipientsProfile(Recipient r, User u) {
         this.u = u;
@@ -159,94 +153,45 @@ public class RecipientsProfile {
         frame.add(logoutButton);
         frame.add(dropdownBox);
 
-        // profile bg
-        profileBg = new JLabel();
-        profileBg.setBounds(50, 120, 1260, 520);
-        profileBg.setOpaque(true);
-        profileBg.setBackground(new Color(4, 78, 161));
+        // profile info in table view
 
-        // name label
-        nameLabel = new JLabel(
-                "<html><b>Name: </b><span color=\"black\" style=\"background:white\">" + r.getName()
-                        + "</span></html>");
-        nameLabel.setBounds(100, 150, 1000, 50);
-        nameLabel.setForeground(Color.WHITE);
-        nameLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // table header
+        boolean isProfileOwner = r.getAiubId().equals(u.getAiubId()) && !u.getIsDonor();
+        tableHeaderLabel = new JLabel(isProfileOwner ? "Your Details:" : "Details:");
+        tableHeaderLabel.setBounds(100, 100, 400, 100);
+        tableHeaderLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        tableHeaderLabel.setOpaque(true);
+        tableHeaderLabel.setForeground(Color.BLACK);
 
-        // user type label
-        userTypeLabel = new JLabel(
-                "<html><b>Type: </b><span color=\"black\" style=\"background:white\">Recipient</span></html>");
-        userTypeLabel.setBounds(100, 200, 1000, 50);
-        userTypeLabel.setForeground(Color.WHITE);
-        userTypeLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // create data for the table
+        Object[][] data = {
+                { "  Name", "  " + r.getName() },
+                { "  User Type", "  Recipient" },
+                { "  Blood Group", "  " + r.getBloodGroup() },
+                { "  AIUB ID", "  " + r.getAiubId() },
+                { "  Email", "  " + r.getEmail() },
+                { "  Phone", "  " + r.getContact() },
+                { "  Requests made", "  " + r.getTotalRequest() },
+                { "  Donations received", "  " + r.getTotalReceived() },
+                { "  Pending Requests", "  " + (r.getTotalRequest() - r.getTotalReceived()) },
+        };
+        String[] columnNames = { "", "" };
 
-        // blood label
-        bloodLabel = new JLabel(
-                "<html><b>Blood: </b><span color=\"black\" style=\"background:white\">" + r.getBloodGroup()
-                        + "</span></html>");
-        bloodLabel.setBounds(100, 250, 1000, 50);
-        bloodLabel.setForeground(Color.WHITE);
-        bloodLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // create a table model with the data
+        tableModel = new DefaultTableModel(data, columnNames);
 
-        // aiub id label
-        aiubIdLabel = new JLabel(
-                "<html><b>AIUB ID: </b><span color=\"black\" style=\"background:white\">" + r.getAiubId()
-                        + "</span></html>");
-        aiubIdLabel.setBounds(100, 300, 1000, 50);
-        aiubIdLabel.setForeground(Color.WHITE);
-        aiubIdLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // create a JTable with the model
+        table = new JTable(tableModel);
+        table.setBounds(100, 200, 1180, 450);
+        table.setFont(new Font("Arial", Font.BOLD, 22));
+        table.setForeground(Color.WHITE);
+        table.setBackground(new Color(4, 78, 161));
+        table.setRowHeight(50);
+        table.setEnabled(false);
 
-        // email label
-        emailLabel = new JLabel("<html><b>E-mail: </b><span color=\"black\" style=\"background:white\">" + r.getEmail()
-                + "</span></html>");
-        emailLabel.setBounds(100, 350, 1000, 50);
-        emailLabel.setForeground(Color.WHITE);
-        emailLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // phone label
-        phoneLabel = new JLabel("<html><b>Phone: </b><span color=\"black\" style=\"background:white\">" + r.getContact()
-                + "</span></html>");
-        phoneLabel.setBounds(100, 400, 1000, 50);
-        phoneLabel.setForeground(Color.WHITE);
-        phoneLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // total blood request label
-        totalRequestLabel = new JLabel(
-                "<html><b>Total Bloood Request: </b><span color=\"black\" style=\"background:white\">"
-                        + r.getTotalRequest()
-                        + "</span></html>");
-        totalRequestLabel.setBounds(100, 450, 1200, 50);
-        totalRequestLabel.setForeground(Color.WHITE);
-        totalRequestLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // total received label
-        totalReceivedLabel = new JLabel(
-                "<html><b>Received Blood: </b><span color=\"green\" style=\"background:white\">" + r.getTotalReceived()
-                        + "</span></html>");
-        totalReceivedLabel.setBounds(100, 500, 1000, 50);
-        totalReceivedLabel.setForeground(Color.WHITE);
-        totalReceivedLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // pending label
-        int pending = r.getTotalRequest() - r.getTotalReceived();
-        pendingRequest = new JLabel(
-                "<html><b>Pending Request: </b><span color=\"red\" style=\"background:white\">" + pending
-                        + "</span></html>");
-        pendingRequest.setBounds(100, 550, 1000, 50);
-        pendingRequest.setForeground(Color.WHITE);
-        pendingRequest.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // adding to profile
-        frame.add(nameLabel);
-        frame.add(userTypeLabel);
-        frame.add(bloodLabel);
-        frame.add(aiubIdLabel);
-        frame.add(emailLabel);
-        frame.add(phoneLabel);
-        frame.add(totalRequestLabel);
-        frame.add(totalReceivedLabel);
-        frame.add(pendingRequest);
-        frame.add(profileBg);
+        // adding
+        frame.add(tableHeaderLabel);
+        frame.add(table);
 
         // main panel
         mainPanel = new JPanel(new BorderLayout());

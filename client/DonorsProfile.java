@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
+import javax.swing.table.*;
 
 public class DonorsProfile {
     User u;
@@ -30,16 +31,9 @@ public class DonorsProfile {
     private JButton logoutButton;
 
     // profile
-    private JLabel profileBg;
-    private JLabel nameLabel;
-    private JLabel userTypeLabel;
-    private JLabel bloodLabel;
-    private JLabel aiubIdLabel;
-    private JLabel statusLabel;
-    private JLabel emailLabel;
-    private JLabel phoneLabel;
-    private JLabel lastDonateLabel;
-    private JLabel totalDonateLabel;
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JLabel tableHeaderLabel;
 
     public DonorsProfile(Donor d, User u) {
         this.u = u;
@@ -159,92 +153,45 @@ public class DonorsProfile {
         frame.add(logoutButton);
         frame.add(dropdownBox);
 
-        // profile bg
-        profileBg = new JLabel();
-        profileBg.setBounds(50, 120, 1260, 520);
-        profileBg.setOpaque(true);
-        profileBg.setBackground(new Color(4, 78, 161));
+        // profile info in table view
 
-        // name label
-        nameLabel = new JLabel(
-                "<html><b>Name: </b><span color=\"black\" style=\"background:white\">" + d.getName()
-                        + "</span></html>");
-        nameLabel.setBounds(100, 150, 1000, 50);
-        nameLabel.setForeground(Color.WHITE);
-        nameLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // table header
+        boolean isProfileOwner = d.getAiubId().equals(u.getAiubId()) && u.getIsDonor();
+        tableHeaderLabel = new JLabel(isProfileOwner ? "Your Details:" : "Details:");
+        tableHeaderLabel.setBounds(100, 100, 400, 100);
+        tableHeaderLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        tableHeaderLabel.setOpaque(true);
+        tableHeaderLabel.setForeground(Color.BLACK);
 
-        // user type label
-        userTypeLabel = new JLabel(
-                "<html><b>Type: </b><span color=\"black\" style=\"background:white\">Donor</span></html>");
-        userTypeLabel.setBounds(100, 200, 1000, 50);
-        userTypeLabel.setForeground(Color.WHITE);
-        userTypeLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // create data for the table
+        Object[][] data = {
+                { "  Name", "  " + d.getName() },
+                { "  User Type", "  Donor" },
+                { "  Blood Group", "  " + d.getBloodGroup() },
+                { "  AIUB ID", "  " + d.getAiubId() },
+                { "  Status", "  " + d.getStatus() },
+                { "  Email", "  " + d.getEmail() },
+                { "  Phone", "  " + d.getContact() },
+                { "  Last Donate Date", "  " + d.getLastDonateDate() },
+                { "  Total Donation", "  " + d.getTotalDonation() },
+        };
+        String[] columnNames = { "", "" };
 
-        // blood label
-        bloodLabel = new JLabel(
-                "<html><b>Blood: </b><span color=\"black\" style=\"background:white\">" + d.getBloodGroup()
-                        + "</span></html>");
-        bloodLabel.setBounds(100, 250, 1000, 50);
-        bloodLabel.setForeground(Color.WHITE);
-        bloodLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // create a table model with the data
+        tableModel = new DefaultTableModel(data, columnNames);
 
-        // aiub id label
-        aiubIdLabel = new JLabel(
-                "<html><b>AIUB ID: </b><span color=\"black\" style=\"background:white\">" + d.getAiubId()
-                        + "</span></html>");
-        aiubIdLabel.setBounds(100, 300, 1000, 50);
-        aiubIdLabel.setForeground(Color.WHITE);
-        aiubIdLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
+        // create a JTable with the model
+        table = new JTable(tableModel);
+        table.setBounds(100, 200, 1180, 450);
+        table.setFont(new Font("Arial", Font.BOLD, 22));
+        table.setForeground(Color.WHITE);
+        table.setBackground(new Color(4, 78, 161));
+        table.setRowHeight(50);
+        table.setEnabled(false);
 
-        // status label
-        statusLabel = new JLabel(
-                "<html><b>Status: </b><span color=\"black\" style=\"background:white\">" + d.getStatus()
-                        + "</span></html>");
-        statusLabel.setBounds(100, 350, 1000, 50);
-        statusLabel.setForeground(Color.WHITE);
-        statusLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // email label
-        emailLabel = new JLabel("<html><b>E-mail: </b><span color=\"black\" style=\"background:white\">" + d.getEmail()
-                + "</span></html>");
-        emailLabel.setBounds(100, 400, 1000, 50);
-        emailLabel.setForeground(Color.WHITE);
-        emailLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // phone label
-        phoneLabel = new JLabel("<html><b>Phone: </b><span color=\"black\" style=\"background:white\">" + d.getContact()
-                + "</span></html>");
-        phoneLabel.setBounds(100, 450, 1000, 50);
-        phoneLabel.setForeground(Color.WHITE);
-        phoneLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // last donate label
-        lastDonateLabel = new JLabel(
-                "<html><b>Last Donate: </b><span color=\"black\" style=\"background:white\">" + d.getLastDonateDate()
-                        + "</span></html>");
-        lastDonateLabel.setBounds(100, 500, 1000, 50);
-        lastDonateLabel.setForeground(Color.WHITE);
-        lastDonateLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // total donate label
-        totalDonateLabel = new JLabel(
-                "<html><b>Total Donate: </b><span color=\"black\" style=\"background:white\">" + d.getTotalDonation()
-                        + "</span></html>");
-        totalDonateLabel.setBounds(100, 550, 1000, 50);
-        totalDonateLabel.setForeground(Color.WHITE);
-        totalDonateLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-
-        // adding to profile
-        frame.add(nameLabel);
-        frame.add(userTypeLabel);
-        frame.add(bloodLabel);
-        frame.add(aiubIdLabel);
-        frame.add(statusLabel);
-        frame.add(emailLabel);
-        frame.add(phoneLabel);
-        frame.add(lastDonateLabel);
-        frame.add(totalDonateLabel);
-        frame.add(profileBg);
+        // adding
+        frame.add(tableHeaderLabel);
+        frame.add(table);
 
         // main panel
         mainPanel = new JPanel(new BorderLayout());
