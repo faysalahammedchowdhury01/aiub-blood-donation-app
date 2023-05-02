@@ -6,7 +6,7 @@
 
 - [How to run](#how-to-run)
 - [Features](#features)
-- [User Guide](#user-guide)
+- [User Guide](#user-guide-)
 - [Application Structure](#application-structure)
 
 
