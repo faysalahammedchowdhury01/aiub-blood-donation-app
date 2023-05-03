@@ -1,5 +1,6 @@
 package client.components;
 
+import client.assets.Color.MyColor;
 import server.classes.*;
 import javax.swing.*;
 import java.awt.*;
@@ -39,43 +40,46 @@ public class DonorsList {
                 (searchingBlood == null ? "" : searchingBlood) + (" Donors List - AIUB BLOOD DONATION CLUB"));
 
         // favIcon
-        favIcon = new ImageIcon("images/logo.png");
-        frame.setIconImage(favIcon.getImage());
+        try {
+            favIcon = new ImageIcon("client/assets/images/logo.png");
+            frame.setIconImage(favIcon.getImage());
+        } catch (Exception e) {
+        }
 
         // navbar panel
         navbarPanel = new JPanel();
         navbarPanel.setLayout(null);
         navbarPanel.setPreferredSize(new Dimension(1366, 80));
-        navbarPanel.setBackground(new Color(169, 29, 20));
+        navbarPanel.setBackground(MyColor.darkRed);
 
         // aiub and blood logo
         try {
-            image = ImageIO.read(new File("images/aiub_logo_sm.png"));
+            image = ImageIO.read(new File("client/assets/images/aiub_logo_sm.png"));
             aiubLogo = new JLabel(new ImageIcon(image));
             aiubLogo.setBounds(50, 15, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            navbarPanel.add(aiubLogo);
+        } catch (Exception e) {
         }
 
         try {
-            image = ImageIO.read(new File("images/logo_sm.png"));
+            image = ImageIO.read(new File("client/assets/images/logo_sm.png"));
             logo = new JLabel(new ImageIcon(image));
             logo.setBounds(100, 15, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            navbarPanel.add(logo);
+        } catch (Exception e) {
         }
 
         // aiub text
         aiubText = new JLabel("AIUB BLOOD DONATION CLUB");
         aiubText.setBounds(160, 15, 400, 50);
-        aiubText.setForeground(Color.WHITE);
+        aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
         // name label and dropdown
-        icon = new ImageIcon("images/dropdown.png");
+        icon = new ImageIcon("client/assets/images/dropdown.png");
         name = new JButton("Welcome, " + u.getName().split(" ")[0], icon);
         name.setBounds(1366 - 320, 15, 250, 50);
-        name.setForeground(Color.WHITE);
+        name.setForeground(MyColor.white);
         name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         name.setOpaque(false);
         name.setContentAreaFilled(false);
@@ -85,7 +89,7 @@ public class DonorsList {
         // dropdown box
         dropdownBox = new JLabel("");
         dropdownBox.setBounds(1366 - 300, 70, 250, 250);
-        dropdownBox.setBackground(Color.GRAY);
+        dropdownBox.setBackground(MyColor.green);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
@@ -93,8 +97,8 @@ public class DonorsList {
         // go home button
         goHomeButton = new JButton("Home");
         goHomeButton.setBounds(1366 - 280, 80, 210, 65);
-        goHomeButton.setBackground(Color.WHITE);
-        goHomeButton.setForeground(Color.BLACK);
+        goHomeButton.setBackground(MyColor.white);
+        goHomeButton.setForeground(MyColor.black);
         goHomeButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         goHomeButton.setBorderPainted(false);
         goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -103,8 +107,8 @@ public class DonorsList {
         // my donations button
         myDonationsButton = new JButton("My Donations");
         myDonationsButton.setBounds(1366 - 280, 160, 210, 65);
-        myDonationsButton.setBackground(Color.WHITE);
-        myDonationsButton.setForeground(Color.BLACK);
+        myDonationsButton.setBackground(MyColor.white);
+        myDonationsButton.setForeground(MyColor.black);
         myDonationsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         myDonationsButton.setBorderPainted(false);
         myDonationsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -113,8 +117,8 @@ public class DonorsList {
         // my requests button
         myRequestsButton = new JButton("My Requests");
         myRequestsButton.setBounds(1366 - 280, 160, 210, 65);
-        myRequestsButton.setBackground(Color.WHITE);
-        myRequestsButton.setForeground(Color.BLACK);
+        myRequestsButton.setBackground(MyColor.white);
+        myRequestsButton.setForeground(MyColor.black);
         myRequestsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         myRequestsButton.setBorderPainted(false);
         myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -123,8 +127,8 @@ public class DonorsList {
         // logout button
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(1366 - 280, 240, 210, 65);
-        logoutButton.setBackground(Color.WHITE);
-        logoutButton.setForeground(Color.BLACK);
+        logoutButton.setBackground(MyColor.white);
+        logoutButton.setForeground(MyColor.black);
         logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         logoutButton.setBorderPainted(false);
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -144,7 +148,7 @@ public class DonorsList {
         // donors panel
         donorsPanel = new JPanel();
         donorsPanel.setLayout(new BoxLayout(donorsPanel, BoxLayout.Y_AXIS));
-        donorsPanel.setBackground(Color.WHITE);
+        donorsPanel.setBackground(MyColor.white);
 
         // blood group panel
         bloodGroupPanel = new JPanel();
@@ -156,7 +160,7 @@ public class DonorsList {
         selectBloodText = new JLabel(
                 "<html><br><center style=\"margin-left: 65px;\">Select Blood Group:</center><br></html>");
         selectBloodText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-        selectBloodText.setForeground(new Color(45, 39, 39));
+        selectBloodText.setForeground(MyColor.black);
 
         String[] bloodGroups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
         bloodGroupBox = new JComboBox<>(bloodGroups);
@@ -185,10 +189,11 @@ public class DonorsList {
         if (!hasDonor) {
             noDonorText = new JLabel(
                     "Sorry, no " + "\"" + searchingBlood + "\""
-                            + " donor is available at this moment. Please try again later.");
-            noDonorText.setBounds(280, -140, 1000, 300);
+                            + " donor is available at this moment. Please try again later.",
+                    SwingConstants.CENTER);
+            noDonorText.setBounds(0, -140, 1366, 300);
             noDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            noDonorText.setForeground(Color.red);
+            noDonorText.setForeground(MyColor.black);
 
             noDonorPanel.add(noDonorText);
         }
@@ -205,7 +210,6 @@ public class DonorsList {
         scrollPane.getVerticalScrollBar().setBlockIncrement(200);
 
         // adding to frame
-        frame.setIconImage(favIcon.getImage());
         frame.add(scrollPane);
 
         // frame
@@ -308,20 +312,20 @@ public class DonorsList {
 
             // name
             name = new JLabel("Name: " + d.getName());
-            name.setForeground(Color.WHITE);
+            name.setForeground(MyColor.white);
             name.setFont(new Font("Arial", Font.BOLD, 22));
             name.setBounds(80, 30, 1000, 50);
 
             // blood group
             bloodGroup = new JLabel("Blood Group: " + d.getBloodGroup());
-            bloodGroup.setForeground(Color.WHITE);
+            bloodGroup.setForeground(MyColor.white);
             bloodGroup.setFont(new Font("Arial", Font.BOLD, 22));
             bloodGroup.setBounds(80, 80, 1000, 50);
 
             // view profile button
             viewProfileButton = new JButton("View Profile");
-            viewProfileButton.setForeground(Color.BLACK);
-            viewProfileButton.setBackground(Color.WHITE);
+            viewProfileButton.setForeground(MyColor.black);
+            viewProfileButton.setBackground(MyColor.white);
             viewProfileButton.setFont(new Font("Arial", Font.BOLD, 22));
             viewProfileButton.setBounds(1050, 50, 200, 50);
             viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -332,8 +336,8 @@ public class DonorsList {
             add(viewProfileButton);
 
             // panel
-            setBackground(new Color(4, 78, 161));
-            setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            setBackground(MyColor.darkBlue);
+            setBorder(BorderFactory.createLineBorder(MyColor.white));
             setPreferredSize(new Dimension(1366, 160));
 
             // action listeners

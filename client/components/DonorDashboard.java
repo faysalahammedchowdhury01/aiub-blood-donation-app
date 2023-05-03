@@ -1,5 +1,6 @@
 package client.components;
 
+import client.assets.Color.MyColor;
 import server.classes.*;
 import javax.swing.*;
 import java.awt.*;
@@ -36,43 +37,46 @@ public class DonorDashboard {
         frame = new JFrame("Dashboard - AIUB BLOOD DONATION CLUB");
 
         // favIcon
-        favIcon = new ImageIcon("images/logo.png");
-        frame.setIconImage(favIcon.getImage());
+        try {
+            favIcon = new ImageIcon("client/assets/images/logo.png");
+            frame.setIconImage(favIcon.getImage());
+        } catch (Exception e) {
+        }
 
         // navbar panel
         navbarPanel = new JPanel();
         navbarPanel.setLayout(null);
         navbarPanel.setPreferredSize(new Dimension(1366, 80));
-        navbarPanel.setBackground(new Color(169, 29, 20));
+        navbarPanel.setBackground(MyColor.darkRed);
 
         // aiub and blood logo
         try {
-            image = ImageIO.read(new File("images/aiub_logo_sm.png"));
+            image = ImageIO.read(new File("client/assets/images/aiub_logo_sm.png"));
             aiubLogo = new JLabel(new ImageIcon(image));
             aiubLogo.setBounds(50, 15, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            navbarPanel.add(aiubLogo);
+        } catch (Exception e) {
         }
 
         try {
-            image = ImageIO.read(new File("images/logo_sm.png"));
+            image = ImageIO.read(new File("client/assets/images/logo_sm.png"));
             logo = new JLabel(new ImageIcon(image));
             logo.setBounds(100, 15, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            navbarPanel.add(logo);
+        } catch (Exception e) {
         }
 
         // aiub text
         aiubText = new JLabel("AIUB BLOOD DONATION CLUB");
         aiubText.setBounds(160, 15, 400, 50);
-        aiubText.setForeground(Color.WHITE);
+        aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
         // name label and dropdown
-        icon = new ImageIcon("images/dropdown.png");
+        icon = new ImageIcon("client/assets/images/dropdown.png");
         name = new JButton("Welcome, " + d.getName().split(" ")[0], icon);
         name.setBounds(1366 - 320, 15, 250, 50);
-        name.setForeground(Color.WHITE);
+        name.setForeground(MyColor.white);
         name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         name.setOpaque(false);
         name.setContentAreaFilled(false);
@@ -82,7 +86,7 @@ public class DonorDashboard {
         // dropdown box
         dropdownBox = new JLabel("");
         dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(Color.GRAY);
+        dropdownBox.setBackground(MyColor.green);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
@@ -90,8 +94,8 @@ public class DonorDashboard {
         // view profile button
         viewProfileButton = new JButton("View Profile");
         viewProfileButton.setBounds(1366 - 280, 80, 210, 65);
-        viewProfileButton.setBackground(Color.WHITE);
-        viewProfileButton.setForeground(Color.BLACK);
+        viewProfileButton.setBackground(MyColor.white);
+        viewProfileButton.setForeground(MyColor.black);
         viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         viewProfileButton.setBorderPainted(false);
         viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -100,8 +104,8 @@ public class DonorDashboard {
         // my donations button
         myDonationsButton = new JButton("My Donations");
         myDonationsButton.setBounds(1366 - 280, 160, 210, 65);
-        myDonationsButton.setBackground(Color.WHITE);
-        myDonationsButton.setForeground(Color.BLACK);
+        myDonationsButton.setBackground(MyColor.white);
+        myDonationsButton.setForeground(MyColor.black);
         myDonationsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         myDonationsButton.setBorderPainted(false);
         myDonationsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -110,8 +114,8 @@ public class DonorDashboard {
         // donors list button
         donorsListButton = new JButton("Donors List");
         donorsListButton.setBounds(1366 - 280, 240, 210, 65);
-        donorsListButton.setBackground(Color.WHITE);
-        donorsListButton.setForeground(Color.BLACK);
+        donorsListButton.setBackground(MyColor.white);
+        donorsListButton.setForeground(MyColor.black);
         donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         donorsListButton.setBorderPainted(false);
         donorsListButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -120,16 +124,14 @@ public class DonorDashboard {
         // logout button
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(1366 - 280, 320, 210, 65);
-        logoutButton.setBackground(Color.WHITE);
-        logoutButton.setForeground(Color.BLACK);
+        logoutButton.setBackground(MyColor.white);
+        logoutButton.setForeground(MyColor.black);
         logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         logoutButton.setBorderPainted(false);
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         logoutButton.setVisible(false);
 
         // navbar adding
-        navbarPanel.add(aiubLogo);
-        navbarPanel.add(logo);
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
         frame.add(viewProfileButton);
@@ -141,7 +143,7 @@ public class DonorDashboard {
         // post panel
         postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
-        postPanel.setBackground(Color.WHITE);
+        postPanel.setBackground(MyColor.white);
 
         // unavailable button here to handle exception
         unavailableButton = new JButton("Be Available");
@@ -150,9 +152,9 @@ public class DonorDashboard {
         if (d.getStatus().equals("Available")) {
             // available post text
             availablePostText = new JLabel(
-                    "<html><br><p style=\"margin-left: 65px;\">Choose from available donations to save lives. Thank you for donating!</p><br></html>");
-            availablePostText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            availablePostText.setForeground(new Color(45, 39, 39));
+                    "<html><br><p style=\"margin-left: 65px;\">Choose from available donations to save lives.</p><br></html>");
+            availablePostText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+            availablePostText.setForeground(MyColor.black);
 
             postPanel.add(availablePostText);
 
@@ -170,10 +172,11 @@ public class DonorDashboard {
                 postPanel.setLayout(null);
 
                 noRequestText = new JLabel(
-                        "<html><center>No blood request available at the moment.<br> Please check again later.</center></html>");
-                noRequestText.setBounds(430, -50, 1366, 200);
+                        "No blood request available at the moment.Please check again later.",
+                        SwingConstants.CENTER);
+                noRequestText.setBounds(0, -50, 1366, 200);
                 noRequestText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-                noRequestText.setForeground(Color.RED);
+                noRequestText.setForeground(MyColor.black);
 
                 postPanel.add(noRequestText);
             }
@@ -181,17 +184,18 @@ public class DonorDashboard {
             postPanel.setLayout(null);
 
             unavailableText = new JLabel(
-                    "<html><center>Unfortunately, you are unable to donate blood at this time.<br> Make yourself available to donate.</center></html>");
-            unavailableText.setBounds(320, -50, 1366, 200);
+                    "Unfortunately, you are unable to donate blood at this time.Make yourself available to donate.",
+                    SwingConstants.CENTER);
+            unavailableText.setBounds(0, -50, 1366, 200);
             unavailableText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            unavailableText.setForeground(new Color(45, 39, 39));
-            unavailableText.setBackground(Color.RED);
+            unavailableText.setForeground(MyColor.black);
+            unavailableText.setBackground(MyColor.white);
 
             unavailableButton = new JButton("Be Available");
             unavailableButton.setBounds(530, 100, 300, 50);
             unavailableButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
-            unavailableButton.setBackground(new Color(26, 127, 100));
-            unavailableButton.setForeground(Color.WHITE);
+            unavailableButton.setBackground(MyColor.green);
+            unavailableButton.setForeground(MyColor.white);
             unavailableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             postPanel.add(unavailableText);
@@ -210,7 +214,6 @@ public class DonorDashboard {
         scrollPane.getVerticalScrollBar().setBlockIncrement(200);
 
         // adding to frame
-        frame.setIconImage(favIcon.getImage());
         frame.add(scrollPane);
 
         // frame
@@ -319,18 +322,18 @@ public class DonorDashboard {
                     "Be a hero today: Donate " + post.getRequiredBloodGroup() + " blood to help "
                             + post.getAuthor().getName().split(" ")[0] + " [" + post.getAuthor().getAiubId() + "]");
             postText.setBounds(80, 60, 1200, 50);
-            postText.setForeground(Color.WHITE);
+            postText.setForeground(MyColor.white);
             postText.setFont(new Font("Arial", Font.BOLD, 30));
 
             // date label and field
             dateLabel = new JLabel("Date: ");
             dateLabel.setBounds(80, 130, 100, 50);
-            dateLabel.setForeground(Color.WHITE);
+            dateLabel.setForeground(MyColor.white);
             dateLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             dateField = new JTextField("");
             dateField.setBounds(80, 170, 590, 50);
-            dateField.setForeground(Color.BLACK);
+            dateField.setForeground(MyColor.black);
             dateField.setFont(new Font("Arial", Font.PLAIN, 18));
             dateField.setText(post.getDate());
             dateField.setEditable(false);
@@ -338,12 +341,12 @@ public class DonorDashboard {
             // time label and field
             timeLabel = new JLabel("Time: ");
             timeLabel.setBounds(695, 130, 100, 50);
-            timeLabel.setForeground(Color.WHITE);
+            timeLabel.setForeground(MyColor.white);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             timeField = new JTextField("");
             timeField.setBounds(695, 170, 590, 50);
-            timeField.setForeground(Color.BLACK);
+            timeField.setForeground(MyColor.black);
             timeField.setFont(new Font("Arial", Font.PLAIN, 18));
             timeField.setText(post.getTime());
             timeField.setEditable(false);
@@ -351,12 +354,12 @@ public class DonorDashboard {
             // location label and field
             locationLabel = new JLabel("Location: ");
             locationLabel.setBounds(80, 220, 100, 50);
-            locationLabel.setForeground(Color.WHITE);
+            locationLabel.setForeground(MyColor.white);
             locationLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             locationField = new JTextField("");
             locationField.setBounds(80, 260, 590, 50);
-            locationField.setForeground(Color.BLACK);
+            locationField.setForeground(MyColor.black);
             locationField.setFont(new Font("Arial", Font.PLAIN, 18));
             locationField.setText(post.getLocation());
             locationField.setEditable(false);
@@ -364,12 +367,12 @@ public class DonorDashboard {
             // time label and field
             bloodGroupLabel = new JLabel("Blood Group: ");
             bloodGroupLabel.setBounds(695, 220, 300, 50);
-            bloodGroupLabel.setForeground(Color.WHITE);
+            bloodGroupLabel.setForeground(MyColor.white);
             bloodGroupLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             bloodGroupField = new JTextField("");
             bloodGroupField.setBounds(695, 260, 590, 50);
-            bloodGroupField.setForeground(Color.BLACK);
+            bloodGroupField.setForeground(MyColor.black);
             bloodGroupField.setFont(new Font("Arial", Font.PLAIN, 18));
             bloodGroupField.setText(post.getRequiredBloodGroup());
             bloodGroupField.setEditable(false);
@@ -377,12 +380,12 @@ public class DonorDashboard {
             // description label and text area
             descriptionLabel = new JLabel("Description:");
             descriptionLabel.setBounds(80, 310, 300, 50);
-            descriptionLabel.setForeground(Color.WHITE);
+            descriptionLabel.setForeground(MyColor.white);
             descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             descriptionTextArea = new JTextArea("");
             descriptionTextArea.setBounds(80, 350, 1200, 100);
-            descriptionTextArea.setForeground(Color.BLACK);
+            descriptionTextArea.setForeground(MyColor.black);
             descriptionTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
             descriptionTextArea.setWrapStyleWord(true);
             descriptionTextArea.setLineWrap(true);
@@ -392,16 +395,16 @@ public class DonorDashboard {
             // view recipient button
             viewRecipientButton = new JButton("View Recipient");
             viewRecipientButton.setBounds(480, 490, 200, 50);
-            viewRecipientButton.setForeground(Color.WHITE);
-            viewRecipientButton.setBackground(new Color(169, 29, 20));
+            viewRecipientButton.setForeground(MyColor.white);
+            viewRecipientButton.setBackground(MyColor.darkRed);
             viewRecipientButton.setFont(new Font("Arial", Font.BOLD, 18));
             viewRecipientButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             // donate blood button
             donateBloodButton = new JButton("Donate Blood");
             donateBloodButton.setBounds(690, 490, 200, 50);
-            donateBloodButton.setForeground(Color.WHITE);
-            donateBloodButton.setBackground(new Color(169, 29, 20));
+            donateBloodButton.setForeground(MyColor.white);
+            donateBloodButton.setBackground(MyColor.green);
             donateBloodButton.setFont(new Font("Arial", Font.BOLD, 18));
             donateBloodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -421,8 +424,8 @@ public class DonorDashboard {
             add(donateBloodButton);
 
             // panel
-            setBackground(new Color(4, 78, 161));
-            setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            setBackground(MyColor.darkBlue);
+            setBorder(BorderFactory.createLineBorder(MyColor.white));
             setPreferredSize(new Dimension(1366, 610));
 
             // action listeners
@@ -440,13 +443,13 @@ public class DonorDashboard {
                 public void actionPerformed(ActionEvent e) {
                     if (d.donateBlood(post.getPostId())) {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='green'>Thank you for your life-saving donation! Your generosity and kindness will make a difference in someone's life. You're a hero in our eyes!</font></center></html>",
+                                "<html><center><font size='5' color='green'>Thank you for your life-saving donation! Your generosity and kindness will make a difference in someone's life. You're a hero in our eyes!</font></center></html>",
                                 "", JOptionPane.INFORMATION_MESSAGE);
                         frame.setVisible(false);
                         new DonorDashboard(d);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> Something went wrong with the blood donation. Please give it another go in a bit. Thank you for your life-saving kindness!</font></center></html>",
+                                "<html><center><font size='5' color='red'><b>Oops!</b> Something went wrong with the blood donation. Please give it another go in a bit. Thank you for your life-saving kindness!</font></center></html>",
                                 "", JOptionPane.ERROR_MESSAGE);
                     }
                 }

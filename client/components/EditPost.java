@@ -1,5 +1,6 @@
 package client.components;
 
+import client.assets.Color.MyColor;
 import server.classes.*;
 import javax.swing.*;
 import java.awt.*;
@@ -31,43 +32,46 @@ public class EditPost {
         frame = new JFrame("Edit Post - AIUB BLOOD DONATION CLUB");
 
         // favIcon
-        favIcon = new ImageIcon("images/logo.png");
-        frame.setIconImage(favIcon.getImage());
+        try {
+            favIcon = new ImageIcon("client/assets/images/logo.png");
+            frame.setIconImage(favIcon.getImage());
+        } catch (Exception e) {
+        }
 
         // navbar panel
         navbarPanel = new JPanel();
         navbarPanel.setLayout(null);
         navbarPanel.setPreferredSize(new Dimension(1366, 80));
-        navbarPanel.setBackground(new Color(169, 29, 20));
+        navbarPanel.setBackground(MyColor.darkRed);
 
         // aiub and blood logo
         try {
-            image = ImageIO.read(new File("images/aiub_logo_sm.png"));
+            image = ImageIO.read(new File("client/assets/images/aiub_logo_sm.png"));
             aiubLogo = new JLabel(new ImageIcon(image));
             aiubLogo.setBounds(50, 15, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            navbarPanel.add(aiubLogo);
+        } catch (Exception e) {
         }
 
         try {
-            image = ImageIO.read(new File("images/logo_sm.png"));
+            image = ImageIO.read(new File("client/assets/images/logo_sm.png"));
             logo = new JLabel(new ImageIcon(image));
             logo.setBounds(100, 15, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            navbarPanel.add(logo);
+        } catch (Exception e) {
         }
 
         // aiub text
         aiubText = new JLabel("AIUB BLOOD DONATION CLUB");
         aiubText.setBounds(160, 15, 400, 50);
-        aiubText.setForeground(Color.WHITE);
+        aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
         // name label and dropdown
-        icon = new ImageIcon("images/dropdown.png");
+        icon = new ImageIcon("client/assets/images/dropdown.png");
         name = new JButton("Welcome, " + r.getName().split(" ")[0], icon);
         name.setBounds(1366 - 320, 15, 250, 50);
-        name.setForeground(Color.WHITE);
+        name.setForeground(MyColor.white);
         name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         name.setOpaque(false);
         name.setContentAreaFilled(false);
@@ -77,7 +81,7 @@ public class EditPost {
         // dropdown box
         dropdownBox = new JLabel("");
         dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(Color.GRAY);
+        dropdownBox.setBackground(MyColor.green);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
@@ -85,8 +89,8 @@ public class EditPost {
         // go home button
         goHomeButton = new JButton("Home");
         goHomeButton.setBounds(1366 - 280, 80, 210, 65);
-        goHomeButton.setBackground(Color.WHITE);
-        goHomeButton.setForeground(Color.BLACK);
+        goHomeButton.setBackground(MyColor.white);
+        goHomeButton.setForeground(MyColor.black);
         goHomeButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         goHomeButton.setBorderPainted(false);
         goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -95,8 +99,8 @@ public class EditPost {
         // view profile button
         viewProfileButton = new JButton("View Profile");
         viewProfileButton.setBounds(1366 - 280, 160, 210, 65);
-        viewProfileButton.setBackground(Color.WHITE);
-        viewProfileButton.setForeground(Color.BLACK);
+        viewProfileButton.setBackground(MyColor.white);
+        viewProfileButton.setForeground(MyColor.black);
         viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         viewProfileButton.setBorderPainted(false);
         viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -105,8 +109,8 @@ public class EditPost {
         // donors list button
         donorsListButton = new JButton("Donors List");
         donorsListButton.setBounds(1366 - 280, 240, 210, 65);
-        donorsListButton.setBackground(Color.WHITE);
-        donorsListButton.setForeground(Color.BLACK);
+        donorsListButton.setBackground(MyColor.white);
+        donorsListButton.setForeground(MyColor.black);
         donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         donorsListButton.setBorderPainted(false);
         donorsListButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -115,16 +119,14 @@ public class EditPost {
         // logout button
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(1366 - 280, 320, 210, 65);
-        logoutButton.setBackground(Color.WHITE);
-        logoutButton.setForeground(Color.BLACK);
+        logoutButton.setBackground(MyColor.white);
+        logoutButton.setForeground(MyColor.black);
         logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         logoutButton.setBorderPainted(false);
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         logoutButton.setVisible(false);
 
         // navbar adding
-        navbarPanel.add(aiubLogo);
-        navbarPanel.add(logo);
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
         frame.add(goHomeButton);
@@ -136,7 +138,7 @@ public class EditPost {
         // post panel
         postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
-        postPanel.setBackground(Color.WHITE);
+        postPanel.setBackground(MyColor.white);
 
         // add posts
         PostGUI singlePost = new PostGUI(post, r);
@@ -154,7 +156,6 @@ public class EditPost {
         scrollPane.getVerticalScrollBar().setBlockIncrement(200);
 
         // adding to frame
-        frame.setIconImage(favIcon.getImage());
         frame.add(scrollPane);
 
         // frame
@@ -252,7 +253,7 @@ public class EditPost {
             // status text
             statusText = new JLabel("Status: ");
             statusText.setBounds(80, 60, 150, 50);
-            statusText.setForeground(Color.WHITE);
+            statusText.setForeground(MyColor.white);
             statusText.setFont(new Font("Arial", Font.BOLD, 30));
 
             String margin = post.getStatus().equals("open") ? "20px" : "7px";
@@ -261,54 +262,54 @@ public class EditPost {
                             + "</center></html>");
             statusNowText.setBounds(230, 60, 150, 50);
             statusNowText.setOpaque(true);
-            statusNowText.setBackground(Color.WHITE);
+            statusNowText.setBackground(MyColor.white);
             statusNowText.setFont(new Font("Arial", Font.BOLD, 30));
             if (post.getStatus().equals("open")) {
-                statusNowText.setForeground(Color.RED);
+                statusNowText.setForeground(MyColor.red);
             } else {
-                statusNowText.setForeground(new Color(55, 146, 55));
+                statusNowText.setForeground(MyColor.green);
             }
 
             // date label and field
             dateLabel = new JLabel("Date: ");
             dateLabel.setBounds(80, 130, 100, 50);
-            dateLabel.setForeground(Color.WHITE);
+            dateLabel.setForeground(MyColor.white);
             dateLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             dateField = new JTextField("");
             dateField.setBounds(80, 170, 590, 50);
-            dateField.setForeground(Color.BLACK);
+            dateField.setForeground(MyColor.black);
             dateField.setFont(new Font("Arial", Font.PLAIN, 18));
             dateField.setText(post.getDate());
 
             // time label and field
             timeLabel = new JLabel("Time: ");
             timeLabel.setBounds(695, 130, 100, 50);
-            timeLabel.setForeground(Color.WHITE);
+            timeLabel.setForeground(MyColor.white);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             timeField = new JTextField("");
             timeField.setBounds(695, 170, 590, 50);
-            timeField.setForeground(Color.BLACK);
+            timeField.setForeground(MyColor.black);
             timeField.setFont(new Font("Arial", Font.PLAIN, 18));
             timeField.setText(post.getTime());
 
             // location label and field
             locationLabel = new JLabel("Location: ");
             locationLabel.setBounds(80, 220, 100, 50);
-            locationLabel.setForeground(Color.WHITE);
+            locationLabel.setForeground(MyColor.white);
             locationLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             locationField = new JTextField("");
             locationField.setBounds(80, 260, 590, 50);
-            locationField.setForeground(Color.BLACK);
+            locationField.setForeground(MyColor.black);
             locationField.setFont(new Font("Arial", Font.PLAIN, 18));
             locationField.setText(post.getLocation());
 
             // time label and field
             bloodGroupLabel = new JLabel("Blood Group: ");
             bloodGroupLabel.setBounds(695, 220, 300, 50);
-            bloodGroupLabel.setForeground(Color.WHITE);
+            bloodGroupLabel.setForeground(MyColor.white);
             bloodGroupLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             String[] bloodGroups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
@@ -319,12 +320,12 @@ public class EditPost {
             // description label and text area
             descriptionLabel = new JLabel("Description:");
             descriptionLabel.setBounds(80, 310, 300, 50);
-            descriptionLabel.setForeground(Color.WHITE);
+            descriptionLabel.setForeground(MyColor.white);
             descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             descriptionTextArea = new JTextArea("");
             descriptionTextArea.setBounds(80, 350, 1200, 100);
-            descriptionTextArea.setForeground(Color.BLACK);
+            descriptionTextArea.setForeground(MyColor.black);
             descriptionTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
             descriptionTextArea.setWrapStyleWord(true);
             descriptionTextArea.setLineWrap(true);
@@ -333,8 +334,8 @@ public class EditPost {
             // save button
             saveButton = new JButton("Save");
             saveButton.setBounds(570, 490, 200, 50);
-            saveButton.setForeground(Color.WHITE);
-            saveButton.setBackground(new Color(24, 165, 88));
+            saveButton.setForeground(MyColor.white);
+            saveButton.setBackground(MyColor.green);
             saveButton.setFont(new Font("Arial", Font.BOLD, 18));
             saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -354,8 +355,8 @@ public class EditPost {
             add(saveButton);
 
             // panel
-            setBackground(new Color(4, 78, 161));
-            setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            setBackground(MyColor.darkBlue);
+            setBorder(BorderFactory.createLineBorder(MyColor.white));
             setPreferredSize(new Dimension(1366, 610));
 
             // action listeners
@@ -372,22 +373,22 @@ public class EditPost {
 
                     if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup.isEmpty()) {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
-                                "", JOptionPane.ERROR_MESSAGE);
+                                "<html><center><font size='5' color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                                "", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
                     // go for edit post
                     if (post.editPost(r.getAiubId(), date, time, location, bloodGroup, description)) {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='green'>Your changes have been saved successfully!</font></center></html>",
+                                "<html><center><font size='5' color='green'>Your changes have been saved successfully!</font></center></html>",
                                 "", JOptionPane.INFORMATION_MESSAGE);
                         frame.setVisible(false);
                         new MyRequests(r);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> Sorry, we could not update your post at this time. Please try again later!</font></center></html>",
-                                "", JOptionPane.ERROR_MESSAGE);
+                                "<html><center><font size='5' color='red'><b>Oops!</b> Sorry, we could not update your post at this time. Please try again later!</font></center></html>",
+                                "", JOptionPane.INFORMATION_MESSAGE);
                         frame.setVisible(false);
                         new MyRequests(r);
                     }

@@ -1,8 +1,8 @@
 package client.components;
 
+import client.assets.Color.MyColor;
 import server.classes.*;
 import javax.swing.*;
-import client.assets.Color.MyColor;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -46,7 +46,6 @@ public class Signup {
         // favIcon
         try {
             favIcon = new ImageIcon("client/assets/images/logo.png");
-            frame.setIconImage(favIcon.getImage());
             frame.setIconImage(favIcon.getImage());
         } catch (Exception e) {
 

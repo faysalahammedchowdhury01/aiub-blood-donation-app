@@ -9,4 +9,5 @@ public class MyColor {
     public static Color white = Color.WHITE;
     public static Color black = new Color(45, 39, 39);
     public static Color green = new Color(24, 165, 88);
+    public static Color darkBlue = new Color(4, 78, 161);
 }
