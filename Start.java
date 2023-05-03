@@ -27,8 +27,8 @@ public class Start {
                 // "01819183345", "1234", "A+");
                 // Donor d6 = Donor.signup("22-14d9045-3", "Fahim", "fahim@gmail.com",
                 // "01819183345", "1234", "A+");
-                Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
-                                "01610137675", "1111", "A-");
+                // Recipient r = Recipient.signup("22-49046-3", "Faysal", "faysal@gmail.com",
+                // "01610137675", "1111", "A-");
 
                 // System.out.println("Donors: ");
                 // System.out.println(d);
@@ -111,6 +111,6 @@ public class Start {
                 // new RecipientsProfile(r, d);
                 // new RecipientsProfile(r, r);
                 // new EditPost(Post.posts.get(0), r);
-                new DonorsList(r, null);
+                // new DonorsList(r, null);
         }
 }
