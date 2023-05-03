@@ -1,4 +1,4 @@
-package client;
+package client.components;
 
 import server.classes.*;
 import javax.swing.*;
@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import javax.swing.table.*;
 
-public class RecipientsProfile {
+public class DonorsProfile {
     User u;
     private boolean isShowDropdown;
 
@@ -35,9 +35,9 @@ public class RecipientsProfile {
     private JTable table;
     private JLabel tableHeaderLabel;
 
-    public RecipientsProfile(Recipient r, User u) {
+    public DonorsProfile(Donor d, User u) {
         this.u = u;
-        frame = new JFrame("Profile - " + r.getName() + " [" + r.getAiubId() + "]" + " - AIUB BLOOD DONATION CLUB");
+        frame = new JFrame("Profile - " + d.getName() + " [" + d.getAiubId() + "]" + " - AIUB BLOOD DONATION CLUB");
 
         // favIcon
         favIcon = new ImageIcon("images/logo.png");
@@ -156,7 +156,7 @@ public class RecipientsProfile {
         // profile info in table view
 
         // table header
-        boolean isProfileOwner = r.getAiubId().equals(u.getAiubId()) && !u.getIsDonor();
+        boolean isProfileOwner = d.getAiubId().equals(u.getAiubId()) && u.getIsDonor();
         tableHeaderLabel = new JLabel(isProfileOwner ? "Your Details:" : "Details:");
         tableHeaderLabel.setBounds(100, 100, 400, 100);
         tableHeaderLabel.setFont(new Font("Arial", Font.BOLD, 30));
@@ -165,15 +165,15 @@ public class RecipientsProfile {
 
         // create data for the table
         Object[][] data = {
-                { "  Name", "  " + r.getName() },
-                { "  User Type", "  Recipient" },
-                { "  Blood Group", "  " + r.getBloodGroup() },
-                { "  AIUB ID", "  " + r.getAiubId() },
-                { "  Email", "  " + r.getEmail() },
-                { "  Phone", "  " + r.getContact() },
-                { "  Requests made", "  " + r.getTotalRequest() },
-                { "  Donations received", "  " + r.getTotalReceived() },
-                { "  Pending Requests", "  " + (r.getTotalRequest() - r.getTotalReceived()) },
+                { "  Name", "  " + d.getName() },
+                { "  User Type", "  Donor" },
+                { "  Blood Group", "  " + d.getBloodGroup() },
+                { "  AIUB ID", "  " + d.getAiubId() },
+                { "  Status", "  " + d.getStatus() },
+                { "  Email", "  " + d.getEmail() },
+                { "  Phone", "  " + d.getContact() },
+                { "  Last Donate Date", "  " + d.getLastDonateDate() },
+                { "  Total Donation", "  " + d.getTotalDonation() },
         };
         String[] columnNames = { "", "" };
 

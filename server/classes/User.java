@@ -1,6 +1,7 @@
 package server.classes;
 
 import java.util.*;
+import java.util.regex.*;
 
 public abstract class User {
     public static List<Donor> donors;
@@ -84,5 +85,37 @@ public abstract class User {
 
     public void setIsDonor(boolean isDonor) {
         this.isDonor = isDonor;
+    }
+
+    // check a string is numeric or not
+    public static boolean isNumeric(String str) {
+        try {
+            int number = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    // check valid email or not
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
+    }
+
+    // check valid aiub id or not
+    public static boolean isValidAiubId(String aiubId) {
+        String[] aiubIdDivide = aiubId.split("-");
+        if (aiubIdDivide.length != 3 || !isNumeric(aiubIdDivide[0]) || !isNumeric(aiubIdDivide[1])
+                || !isNumeric(aiubIdDivide[2]) || aiubIdDivide[0].length() != 2 || aiubIdDivide[1].length() != 5
+                || aiubIdDivide[2].length() != 1) {
+            return false;
+        }
+
+        return true;
     }
 }

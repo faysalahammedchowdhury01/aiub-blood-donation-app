@@ -1,4 +1,4 @@
-package client;
+package client.components;
 
 import server.classes.*;
 import javax.swing.*;

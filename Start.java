@@ -8,7 +8,7 @@
  */
 
 import server.classes.*;
-import client.*;
+import client.components.*;
 
 public class Start {
         public static void main(String[] args) {
@@ -97,8 +97,8 @@ public class Start {
                 // System.out.println("Last:" + d.getLastDonateDate());
 
                 // Client
-                new Login();
-                // new Signup();
+                // new Login();
+                new Signup();
                 // new RecipientDashboard(r);
                 // new DonorDashboard(d);
                 // new MyRequests(r);

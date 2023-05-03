@@ -1,7 +1,8 @@
-package client;
+package client.components;
 
 import server.classes.*;
 import javax.swing.*;
+import client.assets.Color.MyColor;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -10,6 +11,7 @@ import java.io.*;
 
 public class Signup {
     JFrame frame;
+    private JPanel loginPanel;
     private BufferedImage image;
     private ImageIcon favIcon;
     private JLabel bgColor;
@@ -42,61 +44,67 @@ public class Signup {
         frame = new JFrame("Sign Up - AIUB BLOOD DONATION CLUB");
 
         // favIcon
-        favIcon = new ImageIcon("images/logo.png");
-        frame.setIconImage(favIcon.getImage());
+        try {
+            favIcon = new ImageIcon("assets/images/logo.png");
+            frame.setIconImage(favIcon.getImage());
+            frame.setIconImage(favIcon.getImage());
+        } catch (Exception e) {
+
+        }
 
         // frame background
         bgColor = new JLabel("");
         bgColor.setOpaque(true);
         bgColor.setBounds(0, 0, 1366, 768);
-        bgColor.setBackground(Color.WHITE);
+        bgColor.setBackground(MyColor.white);
 
         // aiub and blood logo
         try {
-            image = ImageIO.read(new File("images/aiub_logo.png"));
+            image = ImageIO.read(new File("../assets/images/aiub_logo.png"));
             aiubLogo = new JLabel(new ImageIcon(image));
             aiubLogo.setBounds(130, 200, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            frame.add(aiubLogo);
+        } catch (Exception e) {
         }
 
         try {
-            image = ImageIO.read(new File("images/logo.png"));
+            image = ImageIO.read(new File("assets/images/logo.png"));
             logo = new JLabel(new ImageIcon(image));
             logo.setBounds(310, 190, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            frame.add(logo);
+        } catch (Exception e) {
         }
 
         // aiub text
-        aiubText = new JLabel("AIUB BLOOD DONATION CLUB");
-        aiubText.setBounds(90, 320, 500, 300);
+        aiubText = new JLabel("AIUB BLOOD DONATION CLUB",
+                SwingConstants.CENTER);
+        aiubText.setBounds(0, 320, 680, 300);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
-        aiubText.setForeground(new Color(45, 39, 39));
+        aiubText.setForeground(MyColor.black);
 
         // tagline text
-        taglineText = new JLabel("Donate Blood, Save Life.");
-        taglineText.setBounds(130, 370, 500, 300);
+        taglineText = new JLabel("Donate Blood, Save Life.", SwingConstants.CENTER);
+        taglineText.setBounds(0, 370, 680, 300);
         taglineText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
-        taglineText.setForeground(new Color(210, 39, 25));
+        taglineText.setForeground(MyColor.red);
 
         // signup container bg
         signupContainerBg = new JLabel("");
         signupContainerBg.setOpaque(true);
         signupContainerBg.setBounds(680, 0, 770, 768);
-        signupContainerBg.setBackground(new Color(169, 29, 20));
+        signupContainerBg.setBackground(MyColor.darkRed);
 
         // signup text
         signupText = new JLabel("Registration");
         signupText.setBounds(770, 80, 500, 50);
         signupText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-        signupText.setForeground(Color.WHITE);
+        signupText.setForeground(MyColor.white);
 
         // AIUB ID field and label
         aiubIdLabel = new JLabel("AIUB ID: ");
         aiubIdLabel.setBounds(770, 170, 100, 30);
         aiubIdLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        aiubIdLabel.setForeground(Color.WHITE);
+        aiubIdLabel.setForeground(MyColor.white);
 
         aiubIdField = new JTextField("");
         aiubIdField.setBounds(930, 165, 340, 40);
@@ -106,7 +114,7 @@ public class Signup {
         nameLabel = new JLabel("Name: ");
         nameLabel.setBounds(770, 220, 100, 30);
         nameLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setForeground(MyColor.white);
 
         nameField = new JTextField("");
         nameField.setBounds(930, 215, 340, 40);
@@ -116,7 +124,7 @@ public class Signup {
         emailLabel = new JLabel("E-mail: ");
         emailLabel.setBounds(770, 270, 100, 30);
         emailLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        emailLabel.setForeground(Color.WHITE);
+        emailLabel.setForeground(MyColor.white);
 
         emailField = new JTextField("");
         emailField.setBounds(930, 265, 340, 40);
@@ -126,7 +134,7 @@ public class Signup {
         phoneLabel = new JLabel("Phone: ");
         phoneLabel.setBounds(770, 320, 100, 30);
         phoneLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        phoneLabel.setForeground(Color.WHITE);
+        phoneLabel.setForeground(MyColor.white);
 
         phoneField = new JTextField("");
         phoneField.setBounds(930, 315, 340, 40);
@@ -136,7 +144,7 @@ public class Signup {
         passwordLabel = new JLabel("Password: ");
         passwordLabel.setBounds(770, 370, 200, 30);
         passwordLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        passwordLabel.setForeground(Color.WHITE);
+        passwordLabel.setForeground(MyColor.white);
 
         passwordField = new JPasswordField("");
         passwordField.setBounds(930, 365, 340, 40);
@@ -146,7 +154,7 @@ public class Signup {
         confirmPasswordLabel = new JLabel("Re-Password: ");
         confirmPasswordLabel.setBounds(770, 420, 200, 30);
         confirmPasswordLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        confirmPasswordLabel.setForeground(Color.WHITE);
+        confirmPasswordLabel.setForeground(MyColor.white);
 
         confirmPasswordField = new JPasswordField("");
         confirmPasswordField.setBounds(930, 415, 340, 40);
@@ -156,7 +164,7 @@ public class Signup {
         bloodGroupLabel = new JLabel("Blood Group: ");
         bloodGroupLabel.setBounds(770, 470, 200, 30);
         bloodGroupLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 22));
-        bloodGroupLabel.setForeground(Color.WHITE);
+        bloodGroupLabel.setForeground(MyColor.white);
 
         String[] bloodGroups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
         bloodGroupBox = new JComboBox<>(bloodGroups);
@@ -166,10 +174,8 @@ public class Signup {
         // is donor login
         isDonorLogin = new JCheckBox("Would you like to be a Donor?");
         isDonorLogin.setBounds(770, 520, 500, 30);
-        isDonorLogin.setBackground(new Color(255, 109, 96));
-        isDonorLogin.setForeground(Color.WHITE);
+        isDonorLogin.setForeground(MyColor.white);
         isDonorLogin.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
-        isDonorLogin.setOpaque(false);
         isDonorLogin.setContentAreaFilled(false);
         isDonorLogin.setBorderPainted(false);
         isDonorLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -177,27 +183,34 @@ public class Signup {
         // signup button
         signupButton = new JButton("Sign Up");
         signupButton.setBounds(770, 580, 500, 50);
-        signupButton.setBackground(new Color(24, 165, 88));
-        signupButton.setForeground(Color.WHITE);
+        signupButton.setBackground(MyColor.green);
+        signupButton.setForeground(MyColor.white);
         signupButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
         signupButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // login text and button
+        // login panel
+        loginPanel = new JPanel();
+        loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -10, 0));
+        loginPanel.setBounds(680, 650, 1366 - 680, 50);
+        loginPanel.setBackground(MyColor.darkRed);
+
         loginText = new JLabel("Already have an account?");
-        loginText.setBounds(910, 640, 200, 30);
-        loginText.setForeground(Color.WHITE);
+        loginText.setForeground(MyColor.white);
+        loginText.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
 
         loginButton = new JButton("Login");
-        loginButton.setBounds(1065, 640, 100, 30);
-        loginButton.setForeground(new Color(247, 208, 96));
+        loginButton.setForeground(MyColor.yellow);
         loginButton.setOpaque(false);
         loginButton.setContentAreaFilled(false);
         loginButton.setBorderPainted(false);
         loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        loginButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
+
+        // login panel adding
+        loginPanel.add(loginText);
+        loginPanel.add(loginButton);
 
         // adding
-        frame.add(aiubLogo);
-        frame.add(logo);
         frame.add(aiubText);
         frame.add(taglineText);
         frame.add(signupText);
@@ -217,13 +230,11 @@ public class Signup {
         frame.add(bloodGroupBox);
         frame.add(isDonorLogin);
         frame.add(signupButton);
-        frame.add(loginText);
-        frame.add(loginButton);
+        frame.add(loginPanel);
         frame.add(signupContainerBg);
         frame.add(bgColor);
 
         // frame
-        frame.setIconImage(favIcon.getImage());
         frame.setSize(1366, 768);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
@@ -252,16 +263,32 @@ public class Signup {
                 if (aiubId.isEmpty() || name.isEmpty() || email.isEmpty() || phone.isEmpty() || passwordString.isEmpty()
                         || confirmPasswordString.isEmpty() || bloodGroup.isEmpty()) {
                     JOptionPane.showMessageDialog(null,
-                            "<html><center><font color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
-                            "", JOptionPane.ERROR_MESSAGE);
+                            "<html><center><font size='5' color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // valid aiub id
+                if (!User.isValidAiubId(aiubId)) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font size='5' color='red'><b>Oops!</b> Invalid AIUB ID. Please try again with a valid AIUB ID.</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // valid email
+                if (!User.isValidEmail(email)) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font size='5' color='red'><b>Oops!</b> Invalid Email. Please try again with a valid email.</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
                 // password and confirm password matching
                 if (!passwordString.equals(confirmPasswordString)) {
                     JOptionPane.showMessageDialog(null,
-                            "<html><center><font color='red'><b>Oops!</b> Password and confirm password don't match. Please try again.</font></center></html>",
-                            "", JOptionPane.ERROR_MESSAGE);
+                            "<html><center><font size='5' color='red'><b>Oops!</b> Password and confirm password don't match. Please try again.</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
@@ -273,8 +300,8 @@ public class Signup {
                         new DonorDashboard(d);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
-                                "", JOptionPane.ERROR_MESSAGE);
+                                "<html><center><font size='5' color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
+                                "", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
                     Recipient r = Recipient.signup(aiubId, name, email, phone, confirmPasswordString,
@@ -284,8 +311,8 @@ public class Signup {
                         new RecipientDashboard(r);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
-                                "", JOptionPane.ERROR_MESSAGE);
+                                "<html><center><font size='WARNING_MESSAGE' color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
+                                "", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
