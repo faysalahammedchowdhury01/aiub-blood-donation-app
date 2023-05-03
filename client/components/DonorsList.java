@@ -173,7 +173,8 @@ public class DonorsList {
         String selectedBlood = searchingBlood;
         boolean hasDonor = false;
         for (Donor d : User.donors) {
-            if (d.getStatus().equals("Available") && selectedBlood == null || selectedBlood.equals(d.getBloodGroup())) {
+            if ((d != null) && d.getStatus().equals("Available") && selectedBlood == null
+                    || selectedBlood.equals(d.getBloodGroup())) {
                 SingleDonorGUI singleDonor = new SingleDonorGUI(d, u);
                 donorsPanel.add(singleDonor);
                 hasDonor = true;
