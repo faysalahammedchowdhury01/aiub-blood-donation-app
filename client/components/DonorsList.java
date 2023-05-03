@@ -188,9 +188,8 @@ public class DonorsList {
 
         if (!hasDonor) {
             noDonorText = new JLabel(
-                    "Sorry, no " + "\"" + searchingBlood != null ? searchingBlood
-                            : "" + "\""
-                                    + " donor is available at this moment. Please try again later.",
+                    "Sorry, no " + (searchingBlood == null ? "" : "\"" + searchingBlood + "\"")
+                            + " donor is available at this moment. Please try again later.",
                     SwingConstants.CENTER);
             noDonorText.setBounds(0, -140, 1366, 300);
             noDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
