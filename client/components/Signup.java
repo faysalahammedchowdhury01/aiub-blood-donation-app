@@ -11,7 +11,7 @@ import java.io.*;
 
 public class Signup {
     JFrame frame;
-    private JPanel loginPanel;
+    private JPanel logoPanel, loginPanel;
     private BufferedImage image;
     private ImageIcon favIcon;
     private JLabel bgColor;
@@ -45,7 +45,7 @@ public class Signup {
 
         // favIcon
         try {
-            favIcon = new ImageIcon("assets/images/logo.png");
+            favIcon = new ImageIcon("client/assets/images/logo.png");
             frame.setIconImage(favIcon.getImage());
             frame.setIconImage(favIcon.getImage());
         } catch (Exception e) {
@@ -58,20 +58,24 @@ public class Signup {
         bgColor.setBounds(0, 0, 1366, 768);
         bgColor.setBackground(MyColor.white);
 
+        // logo panel
+        logoPanel = new JPanel();
+        logoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -10, 0));
+        logoPanel.setBounds(0, 200, 680, 250);
+        logoPanel.setBackground(MyColor.white);
+
         // aiub and blood logo
         try {
-            image = ImageIO.read(new File("../assets/images/aiub_logo.png"));
+            image = ImageIO.read(new File("client/assets/images/aiub_logo.png"));
             aiubLogo = new JLabel(new ImageIcon(image));
-            aiubLogo.setBounds(130, 200, image.getWidth(), image.getHeight());
-            frame.add(aiubLogo);
+            logoPanel.add(aiubLogo);
         } catch (Exception e) {
         }
 
         try {
-            image = ImageIO.read(new File("assets/images/logo.png"));
+            image = ImageIO.read(new File("client/assets/images/logo.png"));
             logo = new JLabel(new ImageIcon(image));
-            logo.setBounds(310, 190, image.getWidth(), image.getHeight());
-            frame.add(logo);
+            logoPanel.add(logo);
         } catch (Exception e) {
         }
 
@@ -211,6 +215,7 @@ public class Signup {
         loginPanel.add(loginButton);
 
         // adding
+        frame.add(logoPanel);
         frame.add(aiubText);
         frame.add(taglineText);
         frame.add(signupText);

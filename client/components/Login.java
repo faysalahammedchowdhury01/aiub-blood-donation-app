@@ -11,7 +11,7 @@ import java.io.*;
 
 public class Login {
     JFrame frame;
-    private JPanel signUpPanel;
+    private JPanel logoPanel, signUpPanel;
     private BufferedImage image;
     private ImageIcon favIcon;
     private JLabel bgColor;
@@ -35,8 +35,12 @@ public class Login {
         frame = new JFrame("Login - AIUB BLOOD DONATION CLUB");
 
         // favIcon
-        favIcon = new ImageIcon("images/logo.png");
-        frame.setIconImage(favIcon.getImage());
+        try {
+            favIcon = new ImageIcon("client/assets/images/logo.png");
+            frame.setIconImage(favIcon.getImage());
+            frame.setIconImage(favIcon.getImage());
+        } catch (Exception e) {
+        }
 
         // frame background
         bgColor = new JLabel("");
@@ -44,21 +48,25 @@ public class Login {
         bgColor.setBounds(0, 0, 1366, 768);
         bgColor.setBackground(MyColor.white);
 
+        // logo panel
+        logoPanel = new JPanel();
+        logoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -10, 0));
+        logoPanel.setBounds(0, 200, 680, 250);
+        logoPanel.setBackground(MyColor.white);
+
         // aiub and blood logo
         try {
-            image = ImageIO.read(new File("images/aiub_logo.png"));
+            image = ImageIO.read(new File("client/assets/images/aiub_logo.png"));
             aiubLogo = new JLabel(new ImageIcon(image));
-            aiubLogo.setBounds(130, 200, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            logoPanel.add(aiubLogo);
+        } catch (Exception e) {
         }
 
         try {
-            image = ImageIO.read(new File("images/logo.png"));
+            image = ImageIO.read(new File("client/assets/images/logo.png"));
             logo = new JLabel(new ImageIcon(image));
-            logo.setBounds(310, 190, image.getWidth(), image.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
+            logoPanel.add(logo);
+        } catch (Exception e) {
         }
 
         // aiub text
@@ -155,8 +163,7 @@ public class Login {
         signUpPanel.add(signupButton);
 
         // adding
-        frame.add(aiubLogo);
-        frame.add(logo);
+        frame.add(logoPanel);
         frame.add(aiubText);
         frame.add(taglineText);
         frame.add(loginText);
