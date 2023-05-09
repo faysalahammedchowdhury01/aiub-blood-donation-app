@@ -199,8 +199,9 @@ public class Recipient extends User implements RecipientOperations {
                 if (postData[0].equals(postId)) {
                     Post post = new Post(postData[0], postData[1], postData[2], postData[3], postData[4], postData[5],
                             postData[6], postData[7]);
-                    post.deletePost(this.getAiubId());
-                    deleted = true;
+                    if (post.deletePost(this.getAiubId())) {
+                        deleted = true;
+                    }
                     break;
                 }
             }
