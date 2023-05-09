@@ -185,6 +185,39 @@ public class Recipient extends User implements RecipientOperations {
 
     }
 
+    // delete post (if success return true)
+    public boolean deletePost(String postId) {
+        boolean deleted = false;
+        // check post exist or not
+        try {
+            File newFile = new File("data/posts.csv");
+            Scanner sc = new Scanner(newFile);
+
+            while (sc.hasNext()) {
+                String singlePost = sc.nextLine();
+                String postData[] = singlePost.split(",");
+                if (postData[0].equals(postId)) {
+                    Post post = new Post(postData[0], postData[1], postData[2], postData[3], postData[4], postData[5],
+                            postData[6], postData[7]);
+                    post.deletePost(this.getAiubId());
+                    deleted = true;
+                    break;
+                }
+            }
+
+        } catch (IOException io) {
+            return false;
+        }
+
+        // decrease total requests
+        if (deleted) {
+            this.setTotalRequest(this.getTotalRequest() - 1);
+            return true;
+        }
+
+        return false;
+    }
+
     // login (return object if success)
     public static Recipient login(String aiubId, String password) {
         // check recipient exist or not

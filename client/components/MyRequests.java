@@ -464,7 +464,7 @@ public class MyRequests {
                             JOptionPane.QUESTION_MESSAGE);
                     if (result == JOptionPane.YES_OPTION) {
                         // selected
-                        if (post.deletePost(r.getAiubId())) {
+                        if (r.deletePost(post.getPostId())) {
                             JOptionPane.showMessageDialog(null,
                                     "<html><center><font size='5' color='green'>The post has been successfully deleted.</font></center></html>",
                                     "", JOptionPane.INFORMATION_MESSAGE);

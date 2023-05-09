@@ -295,12 +295,7 @@ public class Post implements PostOperations {
                 File newFile = new File("data/posts.csv");
                 Scanner sc = new Scanner(newFile);
 
-                boolean header = true;
                 while (sc.hasNext()) {
-                    if (header) {
-                        header = false;
-                        continue;
-                    }
                     String post = sc.nextLine();
                     allPosts.add(post);
                 }
@@ -328,12 +323,12 @@ public class Post implements PostOperations {
                 }
 
                 file.close();
-                return true;
             } catch (IOException io) {
                 return false;
             }
             // decrease total request of "Recipient"
-
+            Recipient r = getAuthor(this.authorId);
+            return r.setTotalRequest(r.getTotalRequest() - 1);
         }
 
         return false;
