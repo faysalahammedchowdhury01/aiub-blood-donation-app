@@ -160,12 +160,10 @@ public class DonorDashboard {
 
             // add posts
             boolean hasPost = false;
-            for (Post post : Post.posts) {
-                if (post.getRequiredBloodGroup().equals(d.getBloodGroup()) && post.getStatus().equals("open")) {
-                    PostGUI singlePost = new PostGUI(post, d);
-                    postPanel.add(singlePost);
-                    hasPost = true;
-                }
+            for (Post post : d.getPosts()) {
+                PostGUI singlePost = new PostGUI(post, d);
+                postPanel.add(singlePost);
+                hasPost = true;
             }
 
             if (!hasPost) {
@@ -320,7 +318,8 @@ public class DonorDashboard {
             // post text
             postText = new JLabel(
                     "Be a hero today: Donate " + post.getRequiredBloodGroup() + " blood to help "
-                            + post.getAuthor().getName().split(" ")[0] + " [" + post.getAuthor().getAiubId() + "]");
+                            + Post.getAuthor(post.getAuthorId()).getName().split(" ")[0] + " ["
+                            + Post.getAuthor(post.getAuthorId()).getAiubId() + "]");
             postText.setBounds(80, 60, 1200, 50);
             postText.setForeground(MyColor.white);
             postText.setFont(new Font("Arial", Font.BOLD, 30));
@@ -434,7 +433,7 @@ public class DonorDashboard {
             viewRecipientButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frame.setVisible(false);
-                    new RecipientsProfile(post.getAuthor(), d);
+                    new RecipientsProfile(Post.getAuthor(post.getAuthorId()), d);
                 }
             });
 

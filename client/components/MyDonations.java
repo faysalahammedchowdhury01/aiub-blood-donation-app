@@ -153,12 +153,10 @@ public class MyDonations {
 
         // add posts
         boolean hasPost = false;
-        for (Post post : Post.posts) {
-            if (post.getDonor() == d) {
-                PostGUI singlePost = new PostGUI(post, d);
-                postPanel.add(singlePost);
-                hasPost = true;
-            }
+        for (Post post : d.getMyDonations()) {
+            PostGUI singlePost = new PostGUI(post, d);
+            postPanel.add(singlePost);
+            hasPost = true;
         }
 
         if (!hasPost) {
@@ -416,7 +414,7 @@ public class MyDonations {
             viewRecipientButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frame.setVisible(false);
-                    new RecipientsProfile(post.getAuthor(), d);
+                    new RecipientsProfile(Post.getAuthor(post.getAuthorId()), d);
                 }
             });
         }

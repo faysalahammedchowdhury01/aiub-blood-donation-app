@@ -154,12 +154,10 @@ public class MyRequests {
 
         // add posts
         boolean hasPost = false;
-        for (Post post : Post.posts) {
-            if (post.getAuthor().getAiubId().equals(r.getAiubId())) {
-                PostGUI singlePost = new PostGUI(post, r);
-                postPanel.add(singlePost);
-                hasPost = true;
-            }
+        for (Post post : r.getPosts()) {
+            PostGUI singlePost = new PostGUI(post, r);
+            postPanel.add(singlePost);
+            hasPost = true;
         }
 
         // request blood button here to handle exception
@@ -485,7 +483,7 @@ public class MyRequests {
             contactDonorButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frame.setVisible(false);
-                    new DonorsProfile(post.getDonor(), r);
+                    new DonorsProfile(Post.getDonor(post.getDonorId()), r);
                 }
             });
         }

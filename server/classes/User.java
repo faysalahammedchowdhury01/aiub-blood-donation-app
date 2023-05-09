@@ -1,11 +1,10 @@
 package server.classes;
 
-import java.util.*;
 import java.util.regex.*;
+import java.io.*;
+import java.util.*;
 
 public abstract class User {
-    public static List<Donor> donors;
-    public static List<Recipient> recipients;
     private String aiubId;
     private String name;
     private String email;
@@ -13,11 +12,6 @@ public abstract class User {
     private String password;
     private String bloodGroup;
     private boolean isDonor;
-
-    static {
-        donors = new ArrayList<>();
-        recipients = new ArrayList<>();
-    }
 
     // constructors
     public User() {
@@ -85,6 +79,29 @@ public abstract class User {
 
     public void setIsDonor(boolean isDonor) {
         this.isDonor = isDonor;
+    }
+
+    public static List<Donor> getDonors(String selectedBlood) {
+        List<Donor> donors = new ArrayList<>();
+        try {
+            File newFile = new File("data/donors.csv");
+            Scanner sc = new Scanner(newFile);
+            while (sc.hasNext()) {
+                String singleDonor = sc.nextLine();
+                String donorData[] = singleDonor.split(",");
+                System.out.println("Name: " + donorData[0]);
+                Donor donor = new Donor(donorData[0], donorData[1], donorData[2], donorData[3], donorData[4],
+                        donorData[5]);
+                if ((selectedBlood == null || selectedBlood.equals(donor.getBloodGroup()))) {
+                    donors.add(donor);
+                }
+            }
+
+        } catch (IOException io) {
+            return null;
+        }
+
+        return donors;
     }
 
     // check a string is numeric or not

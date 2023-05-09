@@ -172,13 +172,10 @@ public class DonorsList {
         // add donor
         String selectedBlood = searchingBlood;
         boolean hasDonor = false;
-        for (Donor d : User.donors) {
-            if (d.getStatus().equals("Available")
-                    && (selectedBlood == null || selectedBlood.equals(d.getBloodGroup()))) {
-                SingleDonorGUI singleDonor = new SingleDonorGUI(d, u);
-                donorsPanel.add(singleDonor);
-                hasDonor = true;
-            }
+        for (Donor d : User.getDonors(selectedBlood)) {
+            SingleDonorGUI singleDonor = new SingleDonorGUI(d, u);
+            donorsPanel.add(singleDonor);
+            hasDonor = true;
         }
 
         // no donor panel

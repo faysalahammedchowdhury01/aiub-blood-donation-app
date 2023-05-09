@@ -41,6 +41,7 @@ public class RecipientDashboard {
     private JButton requestBloodButton;
 
     public RecipientDashboard(Recipient r) {
+        System.out.println(r);
         frame = new JFrame("Dashboard - AIUB BLOOD DONATION CLUB");
 
         // favIcon

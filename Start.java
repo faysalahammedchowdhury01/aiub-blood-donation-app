@@ -99,13 +99,32 @@ public class Start {
                 // System.out.println("Status:" + d.getStatus());
                 // System.out.println("Last:" + d.getLastDonateDate());
 
+                // file system
+                Donor d = Donor.signup("22-49045-3", "Rakib", "Rakib@gmail.com",
+                                "01610137675",
+                                "1111", "A-");
+
+                Recipient r = Recipient.signup("22-49046a-3", "Faysal",
+                                "faysalahammedchowdhury01@gmail.com",
+                                "01610137675",
+                                "1111", "A+");
+
+                // r.createPost("12:00PM", "12-April-2023", "Dhaka", "A-", "urgent");
+                // r.createPost("12:00PM", "12-April-2023", "Dhaka", "A-", "urgent");
+                System.out.println(d.donateBlood("4d0955d3-2c0b-4f50-bcd7-043b09e22bd6"));
+                // Post post = new Post("55", "22-49046-3", "open", null, null, null, "A+",
+                // null);
+                // post.editPost("22-49046-3", null, null, null, "A+", null);
+                // System.out.println(d.donateBlood("55"));
+                // post.deletePost("22-49046-3");
+
                 // Client
-                new Login();
+                // new Login();
                 // new Signup();
                 // new RecipientDashboard(r);
                 // new DonorDashboard(d);
                 // new MyRequests(r);
-                // new MyDonations(d);
+                new MyDonations(d);
                 // new DonorsProfile(d, r);
                 // new DonorsProfile(d, d);
                 // new RecipientsProfile(r, d);
