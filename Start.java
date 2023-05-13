@@ -121,7 +121,7 @@ public class Start {
                 // Client
                 new Login();
                 // new Signup();
-                // new RecipientDashboard(r);
+                // new RecipientDashboard(Recipient.login("22-49046-3", "1234"));
                 // new DonorDashboard(Donor.login("22-49046-4", "1234"));
                 // new MyRequests(r);
                 // new MyDonations(d);

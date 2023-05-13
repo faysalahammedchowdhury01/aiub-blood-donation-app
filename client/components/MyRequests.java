@@ -154,7 +154,7 @@ public class MyRequests {
 
         // add posts
         boolean hasPost = false;
-        for (Post post : r.getPosts()) {
+        for (Post post : r.getMyRequests()) {
             PostGUI singlePost = new PostGUI(post, r);
             postPanel.add(singlePost);
             hasPost = true;

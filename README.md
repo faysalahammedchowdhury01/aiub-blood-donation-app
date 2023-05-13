@@ -37,54 +37,78 @@ To download the file, you can either choose to download it manually or follow th
 <br>
 <br>
 
-# Features💡
+# **💡Features**
 
-1. The application connects donors and recipients and caters to two types of users: donors and recipients.
-2. A user can have two different types of accounts - donor and recipient.
-3. Recipients can create a post requesting blood, while donors can donate blood in response to a post.
-4. Posts contain necessary details such as location, date, time, and the required blood group.
-5. Users can view their donation and recipient history.
-6. Posts can be open or closed.
-7. All posts of a recipient are visible only to that recipient, while open posts are only visible to the owner and donors with a matching blood group.
-8. Open posts can be edited for flexibility.
-9. Donors can donate blood for a post, and when they do, the post will be closed.
-10. Available donors can be viewed by everyone on the platform.
-11. The profile of any donor is visible to everyone on the platform.
-12. Recipients can see the donor of a post.
-13. Donors can see the recipient of a post.
-14. The platform is user-friendly and easy to use.
-15. The application provides a reliable and efficient platform for blood donation and recipient requests.
+- **Two types of users:**
+    - Donors
+    - Recipients
+- **Each user can have at most two accounts:**
+    - One donor account
+    - One recipient account
+- **Recipient features:**
+    - After logging in, recipients can see their dashboard.
+    - On the dashboard, recipients can see an interface for requesting blood.
+    - After making a request, recipients can see their all requests on the "My Requests" page.
+    - If a donor has already donated to a request, recipients can see a "Contact Donor" button that redirects them to the donor's profile.
+    - Recipients can also find donors by using the "Find Donor" page.
+    - Recipients cannot edit or delete any post in which a donor has donated.
+    - Every recipient has a profile containing their name, email, total requests made, total received, total pending requests, and more
+- **Donor features:**
+    - After logging in, donors can see their dashboard.
+    - On the dashboard, available donation options are displayed. Donors can only see posts, where the blood group requested, matches their own blood group and they are available.
+    - In every post, donors can see a "Recipient" button, which redirects them to the post recipient's profile. Donors can then donate blood to that recipient.
+    - After donating blood, donors can see all their donations on the "My Donations" page.
+    - Donors can also find a donor for a specific blood request on the "Find Donor" page. This is useful for donors who may also need blood sometimes.
+    - Donors cannot see any posts if their status is unavailable.
+    - Every donor has a profile containing their AIUB ID, name, email, total donations, status, and more
+- **Other features:**
+    - **Account creation:**
+        - AIUB ID and email must be valid.
+        - Password and Confirm Password must be the same.
+        - If an existing user tries to sign up, they will be logged in instead if their AIUB ID and password match.
 
 <br>
 <br>
 
 # **User Guide** 📄
 
-Welcome to our blood donation application! This application allows users to either request blood or donate blood. Let's take a look at how you can use this application.
+Welcome to AIUB Blood Donation Club, an application designed to connect donors and recipients for blood donations. In this user guide, we'll take you through the features of the app and how to use them.
 
-### **Register/Login**
+## **Getting Started**
 
-To start using the application, you need to create an account. If you are a first-time user, please register by providing your details such as your AIUB ID, name, email, password, and blood group. If you have already registered, simply log in using your AIUB ID and password.
+To use the application, you need to create an account. If you're a first-time user, click the "Register" button and provide your details such as your name, email, password, AIUB ID, and blood group. If you have already registered, simply log in using your AIUB ID and password.
 
 ### **Home**
 
 After logging in, you will be directed to the home page. From here, you can access all the features of the application.
 
-### **Request Blood**
+### **Request Blood -** Dashboard(Recipient)
 
-If you need blood, you can create a post by clicking on the "Request Blood" button. In the post, you need to provide details such as location, date, time, and blood group. Once you create a post, it will appear on your profile, and only you and available donors can view it. You can edit the post or delete it before **closed** if you want.
+If you need blood, you can create a post by clicking on the "Request Blood" button. In the post, you need to provide details such as location, date, time, and blood group. Once you create a post, it will appear on your profile, and only you and available donors can view it. You can edit the post or delete it before it is closed if you want.
 
 ### **Donate Blood**
 
 If you are a donor, you can view all the available posts on the newsfeed. You can view the details of the post, such as location, date, time, and blood group. If you are eligible to donate blood, you can apply to donate by clicking on the "Donate Blood" button. Once you apply to donate blood, your name will appear in the list of donors for that post, and only the recipient and donors with matching blood groups can view the post.
 
-### **Newsfeed**
+### Dashboard(Donor)
 
 The newsfeed displays all the available open posts for donation. Open posts are visible to the owner of the post and donors with matching blood groups. You can view the details of the post, such as location, date, time, blood group, and the number of required bags. Closed posts are not visible on the newsfeed.
 
-### **Profile**
+### **Find Donor**
 
-Your profile displays your personal information, donation history, and posts created by you. You can view your received and donated blood history, edit or delete your posts, and view the list of donors who have donated blood for your posts.
+If you cannot find a donor for your request, you can use the "Find Donor" page to search for donors. You can search for donors based on their blood group. This feature is available for both (Donor and Recipient).
+
+### **Contact Donor**
+
+If a donor has already donated to your request, you can see a "Contact Donor" button that redirects you to the donor's profile. From there, you can contact the donor to thank them or request further help.
+
+### **My Requests**
+
+After making a request, recipients can see all their requests on the "My Requests" page. You can view the details of your requests, such as the number of bags required, the date and time of the request, and the status of the request (open or closed).
+
+### **My Donations**
+
+After donating blood, donors can see all their donations on the "My Donations" page. You can view the details of your donations, such as the recipient's name, the number of bags donated, the date and time of the donation, and the status of the donation (accepted or rejected).
 
 ### **Logout**
 
@@ -93,7 +117,7 @@ Once you are done using the application, you can log out by clicking on the "Log
 <br>
 <br>
 
-# Application Structure
+# Application Structure:
 
 ### Back-end **Classes:**
 
@@ -107,29 +131,28 @@ Once you are done using the application, you can log out by clicking on the "Log
         - Blood Group
         - Is Donor
     - Methods
-        - Getter()
+        - Getter(s)
         - Setters()
+        - Get Donors()
 - **Recipient(User):**
     - Data
-        - Total Request
-        - Total Received
     - Methods
-        - Getters()
-        - Setters()
         - Create Post()
+        - Delete Post()
+        - Get My Requests()
         - Login()
-        - Signup()
+        - Sign Up()
 - **Donor(User):**
     - Data
         - Status
         - Last Donate Date
-        - Total Donation
     - Methods
         - Getters()
         - Setters()
-        - Login()
-        - Signup()
         - Donate Blood()
+        - Get My Donations()
+        - Login()
+        - Sign Up()
 - **Post:**
     - Data
         - Post ID
@@ -139,19 +162,19 @@ Once you are done using the application, you can log out by clicking on the "Log
         - Time
         - Location
         - Required Blood Group
-        - Donor
+        - Donors AIUB ID
         - Description
     - Methods
         - Getters()
         - Setters()
-        - Add Donor()
-        - Edit Post()
+        - Create Post()
         - Delete Post()
+        - Add Donor()
         
 <br>
 <br>
 
-# Java GUI Components
+### Java GUI Components:
 
 - Signup
 - Login

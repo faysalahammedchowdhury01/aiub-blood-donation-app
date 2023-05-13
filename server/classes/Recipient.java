@@ -54,7 +54,7 @@ public class Recipient extends User implements RecipientOperations {
         return totalReceived;
     }
 
-    public List<Post> getPosts() {
+    public List<Post> getMyRequests() {
         List<Post> myPosts = new ArrayList<>();
         try {
             File newFile = new File("data/posts.csv");
