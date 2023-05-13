@@ -42,6 +42,9 @@ public class Post implements PostOperations {
             while (sc.hasNext()) {
                 String post = sc.nextLine();
                 String postData[] = post.split(",");
+                if (postData.length == 0) {
+                    continue;
+                }
                 if (this.postId.equals(postData[0])) {
                     this.donorId = postData[8];
                     found = true;
@@ -138,6 +141,9 @@ public class Post implements PostOperations {
 
             while (sc.hasNext()) {
                 String recipient = sc.nextLine();
+                if (recipient.isEmpty()) {
+                    continue;
+                }
                 allRecipients.add(recipient);
             }
 
@@ -169,6 +175,9 @@ public class Post implements PostOperations {
 
             while (sc.hasNext()) {
                 String donor = sc.nextLine();
+                if (donor.isEmpty()) {
+                    continue;
+                }
                 allDonors.add(donor);
             }
 
@@ -202,6 +211,9 @@ public class Post implements PostOperations {
 
             while (sc.hasNext()) {
                 String post = sc.nextLine();
+                if (post.isEmpty()) {
+                    continue;
+                }
                 allPosts.add(post);
             }
 
@@ -297,6 +309,9 @@ public class Post implements PostOperations {
 
                 while (sc.hasNext()) {
                     String post = sc.nextLine();
+                    if (post.isEmpty()) {
+                        continue;
+                    }
                     allPosts.add(post);
                 }
 

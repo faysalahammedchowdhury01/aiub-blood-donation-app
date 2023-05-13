@@ -26,6 +26,9 @@ public class Recipient extends User implements RecipientOperations {
             while (sc.hasNext()) {
                 String recipient = sc.nextLine();
                 String recipientData[] = recipient.split(",");
+                if (recipientData.length == 0) {
+                    continue;
+                }
                 if (aiubId.equals(recipientData[0])) {
                     this.totalRequest = Integer.parseInt(recipientData[7]);
                     this.totalReceived = Integer.parseInt(recipientData[8]);
@@ -60,6 +63,9 @@ public class Recipient extends User implements RecipientOperations {
             while (sc.hasNext()) {
                 String singlePost = sc.nextLine();
                 String postData[] = singlePost.split(",");
+                if (postData.length == 0) {
+                    continue;
+                }
                 Post post = new Post(postData[0], postData[1], postData[2], postData[3], postData[4], postData[5],
                         postData[6], postData[7]);
                 if (post.getAuthorId().equals(this.getAiubId())) {
@@ -103,6 +109,9 @@ public class Recipient extends User implements RecipientOperations {
 
             while (sc.hasNext()) {
                 String recipient = sc.nextLine();
+                if (recipient.isEmpty()) {
+                    continue;
+                }
                 allRecipients.add(recipient);
             }
 
@@ -157,6 +166,9 @@ public class Recipient extends User implements RecipientOperations {
 
             while (sc.hasNext()) {
                 String post = sc.nextLine();
+                if (post.isEmpty()) {
+                    continue;
+                }
                 allPosts.add(post);
             }
         } catch (IOException io) {
@@ -196,6 +208,9 @@ public class Recipient extends User implements RecipientOperations {
             while (sc.hasNext()) {
                 String singlePost = sc.nextLine();
                 String postData[] = singlePost.split(",");
+                if (postData.length == 0) {
+                    continue;
+                }
                 if (postData[0].equals(postId)) {
                     Post post = new Post(postData[0], postData[1], postData[2], postData[3], postData[4], postData[5],
                             postData[6], postData[7]);
@@ -229,6 +244,9 @@ public class Recipient extends User implements RecipientOperations {
 
             while (sc.hasNext()) {
                 String recipient = sc.nextLine();
+                if (recipient.isEmpty()) {
+                    continue;
+                }
                 allRecipients.add(recipient);
             }
 
@@ -260,6 +278,9 @@ public class Recipient extends User implements RecipientOperations {
 
             while (sc.hasNext()) {
                 String recipient = sc.nextLine();
+                if (recipient.isEmpty()) {
+                    continue;
+                }
                 allRecipients.add(recipient);
             }
 
@@ -290,6 +311,9 @@ public class Recipient extends User implements RecipientOperations {
 
             while (sc.hasNext()) {
                 String recipient = sc.nextLine();
+                if (recipient.isEmpty()) {
+                    continue;
+                }
                 allRecipients.add(recipient);
             }
         } catch (IOException io) {

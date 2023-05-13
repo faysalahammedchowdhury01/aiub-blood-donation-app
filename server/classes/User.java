@@ -89,6 +89,9 @@ public abstract class User {
             while (sc.hasNext()) {
                 String singleDonor = sc.nextLine();
                 String donorData[] = singleDonor.split(",");
+                if (donorData.length == 0) {
+                    continue;
+                }
                 System.out.println("Name: " + donorData[0]);
                 Donor donor = new Donor(donorData[0], donorData[1], donorData[2], donorData[3], donorData[4],
                         donorData[5]);

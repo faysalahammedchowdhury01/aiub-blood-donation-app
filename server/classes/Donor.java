@@ -27,6 +27,9 @@ public class Donor extends User implements DonorOperations {
             while (sc.hasNext()) {
                 String donor = sc.nextLine();
                 String donorData[] = donor.split(",");
+                if (donorData.length == 0) {
+                    continue;
+                }
                 if (aiubId.equals(donorData[0])) {
                     this.status = donorData[7];
                     this.lastDonateDate = donorData[8];
@@ -90,6 +93,9 @@ public class Donor extends User implements DonorOperations {
             while (sc.hasNext()) {
                 String singlePost = sc.nextLine();
                 String postData[] = singlePost.split(",");
+                if (postData.length == 0) {
+                    continue;
+                }
                 Post post = new Post(postData[0], postData[1], postData[2], postData[3], postData[4], postData[5],
                         postData[6], postData[7]);
                 if (post.getRequiredBloodGroup().equals(this.getBloodGroup()) && post.getStatus().equals("open")) {
@@ -113,6 +119,9 @@ public class Donor extends User implements DonorOperations {
             while (sc.hasNext()) {
                 String singlePost = sc.nextLine();
                 String postData[] = singlePost.split(",");
+                if (postData.length == 0) {
+                    continue;
+                }
                 Post post = new Post(postData[0], postData[1], postData[2], postData[3], postData[4], postData[5],
                         postData[6], postData[7]);
                 if (post.getDonorId().equals(this.getAiubId())) {
@@ -143,6 +152,9 @@ public class Donor extends User implements DonorOperations {
 
             while (sc.hasNext()) {
                 String donor = sc.nextLine();
+                if (donor.isEmpty()) {
+                    continue;
+                }
                 allDonors.add(donor);
             }
 
@@ -195,6 +207,9 @@ public class Donor extends User implements DonorOperations {
 
             while (sc.hasNext()) {
                 String singlePost = sc.nextLine();
+                if (singlePost.isEmpty()) {
+                    continue;
+                }
                 allPosts.add(singlePost);
             }
 
@@ -237,6 +252,9 @@ public class Donor extends User implements DonorOperations {
 
             while (sc.hasNext()) {
                 String donor = sc.nextLine();
+                if (donor.isEmpty()) {
+                    continue;
+                }
                 allDonors.add(donor);
             }
 
@@ -267,6 +285,9 @@ public class Donor extends User implements DonorOperations {
 
             while (sc.hasNext()) {
                 String donor = sc.nextLine();
+                if (donor.isEmpty()) {
+                    continue;
+                }
                 allDonors.add(donor);
             }
 
@@ -297,6 +318,9 @@ public class Donor extends User implements DonorOperations {
 
             while (sc.hasNext()) {
                 String donor = sc.nextLine();
+                if (donor.isEmpty()) {
+                    continue;
+                }
                 allDonors.add(donor);
             }
         } catch (IOException io) {

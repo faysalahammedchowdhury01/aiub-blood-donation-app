@@ -89,7 +89,7 @@ public class DonorsList {
         // dropdown box
         dropdownBox = new JLabel("");
         dropdownBox.setBounds(1366 - 300, 70, 250, 250);
-        dropdownBox.setBackground(MyColor.green);
+        dropdownBox.setBackground(MyColor.yellow);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;

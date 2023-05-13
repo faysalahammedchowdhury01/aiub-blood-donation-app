@@ -28,7 +28,7 @@ public class DonorsProfile {
     private JButton goHomeButton;
     private JButton myDonationsButton;
     private JButton myRequestsButton;
-    private JButton donorsListButton;
+    private JButton findDonorButton;
     private JButton logoutButton;
 
     // profile
@@ -90,7 +90,7 @@ public class DonorsProfile {
         // dropdown box
         dropdownBox = new JLabel("");
         dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(MyColor.green);
+        dropdownBox.setBackground(MyColor.yellow);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
@@ -125,15 +125,15 @@ public class DonorsProfile {
         myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         myRequestsButton.setVisible(false);
 
-        // donors list button
-        donorsListButton = new JButton("Donors List");
-        donorsListButton.setBounds(1366 - 280, 240, 210, 65);
-        donorsListButton.setBackground(MyColor.white);
-        donorsListButton.setForeground(MyColor.black);
-        donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        donorsListButton.setBorderPainted(false);
-        donorsListButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        donorsListButton.setVisible(false);
+        // find donor button
+        findDonorButton = new JButton("Find Donor");
+        findDonorButton.setBounds(1366 - 280, 240, 210, 65);
+        findDonorButton.setBackground(MyColor.white);
+        findDonorButton.setForeground(MyColor.black);
+        findDonorButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        findDonorButton.setBorderPainted(false);
+        findDonorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        findDonorButton.setVisible(false);
 
         // logout button
         logoutButton = new JButton("Logout");
@@ -151,7 +151,7 @@ public class DonorsProfile {
         frame.add(goHomeButton);
         frame.add(myDonationsButton);
         frame.add(myRequestsButton);
-        frame.add(donorsListButton);
+        frame.add(findDonorButton);
         frame.add(logoutButton);
         frame.add(dropdownBox);
 
@@ -254,8 +254,8 @@ public class DonorsProfile {
             }
         });
 
-        // donors list action
-        donorsListButton.addActionListener(new ActionListener() {
+        // find donor action
+        findDonorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new DonorsList(u, null);
@@ -276,7 +276,7 @@ public class DonorsProfile {
         isShowDropdown = true;
         dropdownBox.setVisible(true);
         goHomeButton.setVisible(true);
-        donorsListButton.setVisible(true);
+        findDonorButton.setVisible(true);
         logoutButton.setVisible(true);
         if (u.getIsDonor()) {
             myDonationsButton.setVisible(true);
@@ -290,7 +290,7 @@ public class DonorsProfile {
         isShowDropdown = false;
         dropdownBox.setVisible(false);
         goHomeButton.setVisible(false);
-        donorsListButton.setVisible(false);
+        findDonorButton.setVisible(false);
         logoutButton.setVisible(false);
         myDonationsButton.setVisible(false);
         myRequestsButton.setVisible(false);

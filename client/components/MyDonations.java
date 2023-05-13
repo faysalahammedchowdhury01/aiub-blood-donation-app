@@ -25,7 +25,7 @@ public class MyDonations {
     private JLabel dropdownBox;
     private JButton goHomeButton;
     private JButton viewProfileButton;
-    private JButton donorsListButton;
+    private JButton findDonorButton;
     private JButton logoutButton;
 
     private JLabel availablePostText;
@@ -84,7 +84,7 @@ public class MyDonations {
         // dropdown box
         dropdownBox = new JLabel("");
         dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(MyColor.green);
+        dropdownBox.setBackground(MyColor.yellow);
         dropdownBox.setOpaque(true);
         dropdownBox.setVisible(false);
         isShowDropdown = false;
@@ -109,15 +109,15 @@ public class MyDonations {
         viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         viewProfileButton.setVisible(false);
 
-        // donors list button
-        donorsListButton = new JButton("Donors List");
-        donorsListButton.setBounds(1366 - 280, 240, 210, 65);
-        donorsListButton.setBackground(MyColor.white);
-        donorsListButton.setForeground(MyColor.black);
-        donorsListButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        donorsListButton.setBorderPainted(false);
-        donorsListButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        donorsListButton.setVisible(false);
+        // find donor button
+        findDonorButton = new JButton("Find Donor");
+        findDonorButton.setBounds(1366 - 280, 240, 210, 65);
+        findDonorButton.setBackground(MyColor.white);
+        findDonorButton.setForeground(MyColor.black);
+        findDonorButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        findDonorButton.setBorderPainted(false);
+        findDonorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        findDonorButton.setVisible(false);
 
         // logout button
         logoutButton = new JButton("Logout");
@@ -134,7 +134,7 @@ public class MyDonations {
         navbarPanel.add(name);
         frame.add(goHomeButton);
         frame.add(viewProfileButton);
-        frame.add(donorsListButton);
+        frame.add(findDonorButton);
         frame.add(logoutButton);
         frame.add(dropdownBox);
 
@@ -222,8 +222,8 @@ public class MyDonations {
             }
         });
 
-        // donors list action
-        donorsListButton.addActionListener(new ActionListener() {
+        // find donor action
+        findDonorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new DonorsList(d, null);
@@ -245,7 +245,7 @@ public class MyDonations {
         dropdownBox.setVisible(true);
         goHomeButton.setVisible(true);
         viewProfileButton.setVisible(true);
-        donorsListButton.setVisible(true);
+        findDonorButton.setVisible(true);
         logoutButton.setVisible(true);
     }
 
@@ -255,7 +255,7 @@ public class MyDonations {
         dropdownBox.setVisible(false);
         goHomeButton.setVisible(false);
         viewProfileButton.setVisible(false);
-        donorsListButton.setVisible(false);
+        findDonorButton.setVisible(false);
         logoutButton.setVisible(false);
     }
 
