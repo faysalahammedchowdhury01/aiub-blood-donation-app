@@ -309,7 +309,7 @@ public class RecipientDashboard {
                 String bloodGroup = (String) bloodGroupBox.getSelectedItem();
                 String description = descriptionTextArea.getText().trim();
 
-                if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup.isEmpty()) {
+                if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup == null) {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font size='5' color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
                             "", JOptionPane.WARNING_MESSAGE);

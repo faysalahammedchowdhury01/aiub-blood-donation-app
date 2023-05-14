@@ -1,12 +1,3 @@
-/* 
- * Title: AIUB BLOOD DONATION CLUB
- * Authors:
- * 1. CHOWDHURY, FAYSAL AHAMMED [22-49046-3]
- * 2. Faysal Ahammed Chowdhury [22-49046-3]
- * 3. Faysal Ahammed Chowdhury [22-49046-3]
- * 4. RAHI, MD RAYHANUL HAQUE [22-47876-2]
- */
-
 import server.classes.*;
 import client.components.*;
 
