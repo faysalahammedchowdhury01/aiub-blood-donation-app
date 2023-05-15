@@ -194,7 +194,7 @@ public class ResetPassword {
                     if (Donor.resetPassword(aiubId, confirmPasswordString)) {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font size='5' color='green'>Your password has been successfully updated! Login with confidence using your new credentials.</font></center></html>",
-                                "", JOptionPane.WARNING_MESSAGE);
+                                "", JOptionPane.PLAIN_MESSAGE);
                         frame.setVisible(false);
                         new Login();
                     } else {
@@ -206,7 +206,7 @@ public class ResetPassword {
                     if (Recipient.resetPassword(aiubId, confirmPasswordString)) {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font size='5' color='green'>Your password has been successfully updated! Login with confidence using your new credentials.</font></center></html>",
-                                "", JOptionPane.WARNING_MESSAGE);
+                                "", JOptionPane.PLAIN_MESSAGE);
                         frame.setVisible(false);
                         new Login();
                     } else {

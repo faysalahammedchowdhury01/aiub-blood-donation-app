@@ -167,7 +167,7 @@ public class MyRequests {
             postPanel.setLayout(null);
 
             noRequestText = new JLabel(
-                    "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our website and help save lives. <br>Thank you for your support!</center></html>",
+                    "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our application and help save lives. <br>Thank you for your support!</center></html>",
                     SwingConstants.CENTER);
             noRequestText.setBounds(0, -20, 1366, 200);
             noRequestText.setOpaque(true);
@@ -467,7 +467,7 @@ public class MyRequests {
                         if (r.deletePost(post.getPostId())) {
                             JOptionPane.showMessageDialog(null,
                                     "<html><center><font size='5' color='green'>The post has been successfully deleted.</font></center></html>",
-                                    "", JOptionPane.INFORMATION_MESSAGE);
+                                    "", JOptionPane.PLAIN_MESSAGE);
                             frame.setVisible(false);
                             new MyRequests(r);
                         } else {

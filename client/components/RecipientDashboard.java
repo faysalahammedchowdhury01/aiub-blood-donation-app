@@ -309,9 +309,19 @@ public class RecipientDashboard {
                 String bloodGroup = (String) bloodGroupBox.getSelectedItem();
                 String description = descriptionTextArea.getText().trim();
 
+                // validation
                 if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup == null) {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font size='5' color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // dont use comma
+                if (time.indexOf(',') != -1 || date.indexOf(',') != -1 || location.indexOf(',') != -1
+                        || description.indexOf(',') != -1) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font size='5' color='red'>Please avoid using commas in any fields. Thanks!</font></center></html>",
                             "", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -320,14 +330,10 @@ public class RecipientDashboard {
                 if (r.createPost(time, date, location, bloodGroup, description)) {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font size='5' color='green'>Your blood request has been posted! We'll do our best to find a match and notify you as soon as possible. <br> Thank you for your life-saving request and patience! You can see your request status at \"My Requests\".</font></center></html>",
-                            "", JOptionPane.WARNING_MESSAGE);
+                            "", JOptionPane.PLAIN_MESSAGE);
 
-                    // clear
-                    dateField.setText("");
-                    timeField.setText("");
-                    locationField.setText("");
-                    bloodGroupBox.setSelectedIndex(-1);
-                    descriptionTextArea.setText("");
+                    frame.setVisible(false);
+                    new MyRequests(r);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "<html><center><font size='5' color='red'><b>Oops!</b> It seems like we had trouble posting your request. Please try again in a few moments. Thank you for your life-saving efforts!</font></center></html>",

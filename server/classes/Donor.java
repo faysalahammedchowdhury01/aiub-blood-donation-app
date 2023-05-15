@@ -277,28 +277,7 @@ public class Donor extends User implements DonorOperations {
     public static Donor signup(String aiubId, String name, String email, String contact, String password,
             String bloodGroup) {
         // check already exist or not
-        List<String> allDonors = new ArrayList<String>();
-        try {
-            File newFile = new File("data/donors.csv");
-            Scanner sc = new Scanner(newFile);
-
-            while (sc.hasNext()) {
-                String donor = sc.nextLine();
-                if (donor.isEmpty()) {
-                    continue;
-                }
-                allDonors.add(donor);
-            }
-
-            // 0 -> index aiub id, 4 -> index password
-            for (String donor : allDonors) {
-                String donorData[] = donor.split(",");
-                if (donorData[0].equals(aiubId) && donorData[4].equals(password)) {
-                    // user found
-                    return new Donor(aiubId, name, email, contact, password, bloodGroup);
-                }
-            }
-        } catch (IOException io) {
+        if (Donor.isDonorExist(aiubId)) {
             return null;
         }
 

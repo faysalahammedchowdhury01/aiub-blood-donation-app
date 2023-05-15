@@ -271,28 +271,7 @@ public class Recipient extends User implements RecipientOperations {
     public static Recipient signup(String aiubId, String name, String email, String contact, String password,
             String bloodGroup) {
         // check already exist or not
-        List<String> allRecipients = new ArrayList<String>();
-        try {
-            File newFile = new File("data/recipients.csv");
-            Scanner sc = new Scanner(newFile);
-
-            while (sc.hasNext()) {
-                String recipient = sc.nextLine();
-                if (recipient.isEmpty()) {
-                    continue;
-                }
-                allRecipients.add(recipient);
-            }
-
-            // 0 -> index aiub id, 4 -> index password
-            for (String recipient : allRecipients) {
-                String recipientsData[] = recipient.split(",");
-                if (recipientsData[0].equals(aiubId) && recipientsData[4].equals(password)) {
-                    // user found
-                    return new Recipient(aiubId, name, email, contact, password, bloodGroup);
-                }
-            }
-        } catch (IOException io) {
+        if (Recipient.isRecipientExist(aiubId)) {
             return null;
         }
 

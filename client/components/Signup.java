@@ -272,6 +272,15 @@ public class Signup {
                     return;
                 }
 
+                // dont use comma
+                if (aiubId.indexOf(',') != -1 || name.indexOf(',') != -1 || email.indexOf(',') != -1
+                        || phone.indexOf(',') != -1 || passwordString.indexOf(',') != -1) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font size='5' color='red'>Please avoid using commas in any fields. Thanks!</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 // valid aiub id
                 if (!User.isValidAiubId(aiubId)) {
                     JOptionPane.showMessageDialog(null,
@@ -304,7 +313,7 @@ public class Signup {
                         new DonorDashboard(d);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font size='5' color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
+                                "<html><center><font size='5' color='red'>User already exist!</font></center></html>",
                                 "", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
@@ -315,7 +324,7 @@ public class Signup {
                         new RecipientDashboard(r);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html><center><font size='WARNING_MESSAGE' color='red'><b>Oops!</b> User already exist but Try again with correct password. Thanks!</font></center></html>",
+                                "<html><center><font size='5' color='red'>User already exist!</font></center></html>",
                                 "", JOptionPane.WARNING_MESSAGE);
                     }
                 }

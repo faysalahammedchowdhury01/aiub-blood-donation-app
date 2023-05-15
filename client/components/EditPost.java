@@ -371,9 +371,19 @@ public class EditPost {
                     String bloodGroup = (String) bloodGroupBox.getSelectedItem();
                     String description = descriptionTextArea.getText().trim();
 
+                    // validation
                     if (time.isEmpty() || date.isEmpty() || location.isEmpty() || bloodGroup == null) {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font size='5' color='red'><b>Oops!</b> It seems like some required information is missing. Please fill in all the fields to proceed. Thanks!</font></center></html>",
+                                "", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    // dont use comma
+                    if (time.indexOf(',') != -1 || date.indexOf(',') != -1 || location.indexOf(',') != -1
+                            || description.indexOf(',') != -1) {
+                        JOptionPane.showMessageDialog(null,
+                                "<html><center><font size='5' color='red'>Please avoid using commas in any fields. Thanks!</font></center></html>",
                                 "", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
@@ -382,7 +392,7 @@ public class EditPost {
                     if (post.editPost(r.getAiubId(), date, time, location, bloodGroup, description)) {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font size='5' color='green'>Your changes have been saved successfully!</font></center></html>",
-                                "", JOptionPane.INFORMATION_MESSAGE);
+                                "", JOptionPane.PLAIN_MESSAGE);
                         frame.setVisible(false);
                         new MyRequests(r);
                     } else {

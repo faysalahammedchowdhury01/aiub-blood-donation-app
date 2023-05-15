@@ -443,7 +443,7 @@ public class DonorDashboard {
                     if (d.donateBlood(post.getPostId())) {
                         JOptionPane.showMessageDialog(null,
                                 "<html><center><font size='5' color='green'>Thank you for your life-saving donation! Your generosity and kindness will make a difference in someone's life. You're a hero in our eyes!</font></center></html>",
-                                "", JOptionPane.INFORMATION_MESSAGE);
+                                "", JOptionPane.PLAIN_MESSAGE);
                         frame.setVisible(false);
                         new DonorDashboard(d);
                     } else {
