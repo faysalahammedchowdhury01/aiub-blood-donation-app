@@ -81,32 +81,6 @@ public abstract class User {
         this.isDonor = isDonor;
     }
 
-    public static List<Donor> getDonors(String selectedBlood) {
-        List<Donor> donors = new ArrayList<>();
-        try {
-            File newFile = new File("data/donors.csv");
-            Scanner sc = new Scanner(newFile);
-            while (sc.hasNext()) {
-                String singleDonor = sc.nextLine();
-                String donorData[] = singleDonor.split(",");
-                if (donorData.length == 0) {
-                    continue;
-                }
-                System.out.println("Name: " + donorData[0]);
-                Donor donor = new Donor(donorData[0], donorData[1], donorData[2], donorData[3], donorData[4],
-                        donorData[5]);
-                if ((selectedBlood == null || selectedBlood.equals(donor.getBloodGroup()))) {
-                    donors.add(donor);
-                }
-            }
-
-        } catch (IOException io) {
-            return null;
-        }
-
-        return donors;
-    }
-
     // check a string is numeric or not
     public static boolean isNumeric(String str) {
         try {

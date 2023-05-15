@@ -112,6 +112,8 @@ public class Start {
                 // Client
                 new Login();
                 // new Signup();
+                // new ForgotPassword();
+                // new ResetPassword("22-49046-3", true);
                 // new RecipientDashboard(Recipient.login("22-49046-3", "1234"));
                 // new DonorDashboard(Donor.login("22-49046-4", "1234"));
                 // new MyRequests(r);

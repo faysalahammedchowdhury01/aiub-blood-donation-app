@@ -229,6 +229,14 @@ public class Login {
             }
         });
 
+        // forgot password action
+        forgotPasswordButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new ForgotPassword();
+            }
+        });
+
         // sign up action
         signupButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

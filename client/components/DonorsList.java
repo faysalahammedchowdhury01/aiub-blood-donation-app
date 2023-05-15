@@ -172,7 +172,7 @@ public class DonorsList {
         // add donor
         String selectedBlood = searchingBlood;
         boolean hasDonor = false;
-        for (Donor d : User.getDonors(selectedBlood)) {
+        for (Donor d : Donor.getDonors(selectedBlood)) {
             SingleDonorGUI singleDonor = new SingleDonorGUI(d, u);
             donorsPanel.add(singleDonor);
             hasDonor = true;

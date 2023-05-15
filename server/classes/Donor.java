@@ -129,7 +129,6 @@ public class Donor extends User implements DonorOperations {
                     myPosts.add(post);
                 } else {
                     System.out.println(post.getDonorId());
-
                 }
             }
 
@@ -345,5 +344,115 @@ public class Donor extends User implements DonorOperations {
         } catch (IOException io) {
             return false;
         }
+    }
+
+    // return true if donor exist
+    public static boolean isDonorExist(String aiubId) {
+        try {
+            File newFile = new File("data/donors.csv");
+            Scanner sc = new Scanner(newFile);
+            while (sc.hasNext()) {
+                String singleDonor = sc.nextLine();
+                String donorData[] = singleDonor.split(",");
+                if (donorData.length == 0) {
+                    continue;
+                }
+                if (donorData[0].equals(aiubId)) {
+                    return true;
+                }
+            }
+
+        } catch (IOException io) {
+            return false;
+        }
+
+        return false;
+    }
+
+    // reset password (return object if success)
+    public static boolean resetPassword(String aiubId, String password) {
+        boolean found = false;
+        // check donor exist or not
+        int idx = 0;
+        List<String> allDonors = new ArrayList<String>();
+        try {
+            File newFile = new File("data/donors.csv");
+            Scanner sc = new Scanner(newFile);
+
+            while (sc.hasNext()) {
+                String donor = sc.nextLine();
+                if (donor.isEmpty()) {
+                    continue;
+                }
+                allDonors.add(donor);
+            }
+
+            for (String donor : allDonors) {
+                String donorData[] = donor.split(",");
+                if (donorData[0].equals(aiubId)) {
+                    found = true;
+                    break;
+                }
+                idx++;
+            }
+        } catch (IOException io) {
+            return false;
+        }
+
+        if (!found) {
+            return false;
+        }
+
+        // updated data
+        String donorData[] = allDonors.get(idx).split(",");
+        String updatedData = donorData[0] + "," + donorData[1] + "," + donorData[2] + "," + donorData[3] + ","
+                + password + "," + donorData[5] + "," + donorData[6] + "," + donorData[7] + ","
+                + donorData[8] + "," + donorData[9];
+
+        // set all donor again
+        try {
+            FileWriter file = new FileWriter("data/donors.csv");
+            // insert all previous donors
+            for (int i = 0; i < allDonors.size(); i++) {
+                String donor = allDonors.get(i);
+                if (i == idx) {
+                    donor = updatedData;
+                }
+                file.write(donor + "\n");
+            }
+
+            file.close();
+            return true;
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
+            return false;
+        }
+    }
+
+    // get all donors
+    public static List<Donor> getDonors(String selectedBlood) {
+        List<Donor> donors = new ArrayList<>();
+        try {
+            File newFile = new File("data/donors.csv");
+            Scanner sc = new Scanner(newFile);
+            while (sc.hasNext()) {
+                String singleDonor = sc.nextLine();
+                String donorData[] = singleDonor.split(",");
+                if (donorData.length == 0) {
+                    continue;
+                }
+                System.out.println("Name: " + donorData[0]);
+                Donor donor = new Donor(donorData[0], donorData[1], donorData[2], donorData[3], donorData[4],
+                        donorData[5]);
+                if ((selectedBlood == null || selectedBlood.equals(donor.getBloodGroup()))) {
+                    donors.add(donor);
+                }
+            }
+
+        } catch (IOException io) {
+            return null;
+        }
+
+        return donors;
     }
 }

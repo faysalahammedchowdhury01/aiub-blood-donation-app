@@ -339,4 +339,87 @@ public class Recipient extends User implements RecipientOperations {
             return false;
         }
     }
+
+    // return true if recipient exist
+    public static boolean isRecipientExist(String aiubId) {
+        try {
+            File newFile = new File("data/recipients.csv");
+            Scanner sc = new Scanner(newFile);
+            while (sc.hasNext()) {
+                String singleRecipient = sc.nextLine();
+                String recipientData[] = singleRecipient.split(",");
+                if (recipientData.length == 0) {
+                    continue;
+                }
+                if (recipientData[0].equals(aiubId)) {
+                    return true;
+                }
+            }
+
+        } catch (IOException io) {
+            return false;
+        }
+
+        return false;
+    }
+
+    // reset password (return object if success)
+    public static boolean resetPassword(String aiubId, String password) {
+        boolean found = false;
+        // check donor exist or not
+        int idx = 0;
+        List<String> allRecipients = new ArrayList<String>();
+        try {
+            File newFile = new File("data/recipients.csv");
+            Scanner sc = new Scanner(newFile);
+
+            while (sc.hasNext()) {
+                String recipient = sc.nextLine();
+                if (recipient.isEmpty()) {
+                    continue;
+                }
+                allRecipients.add(recipient);
+            }
+
+            for (String recipient : allRecipients) {
+                String recipientData[] = recipient.split(",");
+                if (recipientData[0].equals(aiubId)) {
+                    found = true;
+                    break;
+                }
+                idx++;
+            }
+        } catch (IOException io) {
+            return false;
+        }
+
+        if (!found) {
+            return false;
+        }
+
+        // updated data
+        String recipientData[] = allRecipients.get(idx).split(",");
+        String updatedData = recipientData[0] + "," + recipientData[1] + "," + recipientData[2] + "," + recipientData[3]
+                + "," + password + "," + recipientData[5] + "," + recipientData[6] + "," + recipientData[7] + ","
+                + recipientData[8];
+
+        // set all donor again
+        try {
+            FileWriter file = new FileWriter("data/recipients.csv");
+            // insert all previous donors
+            for (int i = 0; i < allRecipients.size(); i++) {
+                String recipient = allRecipients.get(i);
+                if (i == idx) {
+                    recipient = updatedData;
+                }
+                file.write(recipient + "\n");
+            }
+
+            file.close();
+            return true;
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
+            return false;
+        }
+    }
 }

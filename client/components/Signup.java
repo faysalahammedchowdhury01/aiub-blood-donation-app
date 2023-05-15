@@ -257,9 +257,9 @@ public class Signup {
                 String email = emailField.getText().trim();
                 String phone = phoneField.getText().trim();
                 char[] password = passwordField.getPassword();
-                String passwordString = new String(password);
+                String passwordString = new String(password).trim();
                 password = confirmPasswordField.getPassword();
-                String confirmPasswordString = new String(password);
+                String confirmPasswordString = new String(password).trim();
                 String bloodGroup = (String) bloodGroupBox.getSelectedItem();
                 boolean isDonor = isDonorLogin.isSelected();
 
