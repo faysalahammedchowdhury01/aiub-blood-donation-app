@@ -297,6 +297,14 @@ public class Signup {
                     return;
                 }
 
+                // valid phone
+                if (!User.isNumeric(phone) || phone.length() != 11) {
+                    JOptionPane.showMessageDialog(null,
+                            "<html><center><font size='5' color='red'><b>Oops!</b> Invalid Phone number. Phone Number must be 11 digit.</font></center></html>",
+                            "", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 // password and confirm password matching
                 if (!passwordString.equals(confirmPasswordString)) {
                     JOptionPane.showMessageDialog(null,

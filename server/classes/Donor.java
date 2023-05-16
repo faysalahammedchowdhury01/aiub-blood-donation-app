@@ -423,7 +423,8 @@ public class Donor extends User implements DonorOperations {
                 System.out.println("Name: " + donorData[0]);
                 Donor donor = new Donor(donorData[0], donorData[1], donorData[2], donorData[3], donorData[4],
                         donorData[5]);
-                if ((selectedBlood == null || selectedBlood.equals(donor.getBloodGroup()))) {
+                if (donor.status.equals("Available")
+                        && (selectedBlood == null || selectedBlood.equals(donor.getBloodGroup()))) {
                     donors.add(donor);
                 }
             }
