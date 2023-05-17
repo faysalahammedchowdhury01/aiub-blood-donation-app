@@ -114,7 +114,7 @@ public class MyRequests {
             noRequestText = new JLabel(
                     "<html><center>Looks like you haven't made any blood requests yet.<br/> Don't worry, you can make a request anytime on our application and help save lives. <br>Thank you for your support!</center></html>",
                     SwingConstants.CENTER);
-            noRequestText.setBounds(0, -20, 1366, 200);
+            noRequestText.setBounds(0, -20, 1116, 200);
             noRequestText.setOpaque(true);
             noRequestText.setForeground(MyColor.black);
             noRequestText.setBackground(MyColor.white);
@@ -122,7 +122,7 @@ public class MyRequests {
 
             // request blood button
             requestBloodButton = new JButton("Request Blood");
-            requestBloodButton.setBounds(580, 200, 200, 50);
+            requestBloodButton.setBounds(450, 200, 200, 50);
             requestBloodButton.setForeground(MyColor.white);
             requestBloodButton.setBackground(MyColor.green);
             requestBloodButton.setFont(new Font("Arial", Font.BOLD, 18));

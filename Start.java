@@ -109,10 +109,6 @@ public class Start {
                 // System.out.println(d.donateBlood("55"));
                 // post.deletePost("22-49046-3");
 
-                Donor d = Donor.login("22-49046-3", "1111");
-                Recipient r = Recipient.login("22-49046-3", "1111");
-                Post p = new Post("1", "22-49046-3", "open", "hobe", "hobe", "test", "A+", "test");
-
                 // Client
                 new Login();
                 // new Signup();
