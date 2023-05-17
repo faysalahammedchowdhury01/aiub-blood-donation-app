@@ -109,7 +109,7 @@ public class MyDonations {
             noDonationText = new JLabel(
                     "<html><center>Hey there, you haven't started donating blood yet.<br> Consider donating today and help save lives!</center></html>",
                     SwingConstants.CENTER);
-            noDonationText.setBounds(0, -80, 1366, 300);
+            noDonationText.setBounds(0, -80, 1116, 300);
             noDonationText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             noDonationText.setForeground(MyColor.black);
 
