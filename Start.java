@@ -95,7 +95,7 @@ public class Start {
                 // "01610137675",
                 // "1111", "A-");
 
-                // Recipient r = Recipient.signup("22-49046a-3", "Faysal",
+                // Recipient r = Recipient.signup("22-49046-3", "Faysal",
                 // "faysalahammedchowdhury01@gmail.com",
                 // "01610137675",
                 // "1111", "A+");
@@ -109,20 +109,24 @@ public class Start {
                 // System.out.println(d.donateBlood("55"));
                 // post.deletePost("22-49046-3");
 
+                Donor d = Donor.login("22-49046-3", "1111");
+                Recipient r = Recipient.login("22-49046-3", "1111");
+                Post p = new Post("1", "22-49046-3", "open", "hobe", "hobe", "test", "A+", "test");
+
                 // Client
-                new Login();
+                // new Login();
                 // new Signup();
                 // new ForgotPassword();
                 // new ResetPassword("22-49046-3", true);
-                // new RecipientDashboard(Recipient.login("22-49046-3", "1234"));
-                // new DonorDashboard(Donor.login("22-49046-4", "1234"));
-                // new MyRequests(r);
-                // new MyDonations(d);
+                // new RecipientDashboard(Recipient.login("22-49046-3", "1111"));
+                // new DonorDashboard(Donor.login("22-49046-3", "1111"));
+                // new MyRequests(Recipient.login("22-49046-3", "1111"));
+                // new MyDonations(Donor.login("22-49046-3", "1111"));
                 // new DonorsProfile(d, r);
                 // new DonorsProfile(d, d);
                 // new RecipientsProfile(r, d);
                 // new RecipientsProfile(r, r);
-                // new EditPost(Post.posts.get(0), r);
+                // new EditPost(p, r);
                 // new DonorsList(r, null);
         }
 }

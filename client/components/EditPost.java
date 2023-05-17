@@ -10,23 +10,16 @@ import javax.imageio.ImageIO;
 import java.io.*;
 
 public class EditPost {
-    private boolean isShowDropdown;
-
     JFrame frame;
     private JPanel mainPanel, navbarPanel, postPanel;
     private JScrollPane scrollPane;
-    private ImageIcon favIcon, icon;
+    private ImageIcon favIcon;
     // navbar
     private BufferedImage image;
     private JLabel aiubLogo;
     private JLabel logo;
     private JLabel aiubText;
     private JButton name;
-    private JLabel dropdownBox;
-    private JButton goHomeButton;
-    private JButton viewProfileButton;
-    private JButton findDonorButton;
-    private JButton logoutButton;
 
     public EditPost(Post post, Recipient r) {
         frame = new JFrame("Edit Post - AIUB BLOOD DONATION CLUB");
@@ -67,9 +60,8 @@ public class EditPost {
         aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
-        // name label and dropdown
-        icon = new ImageIcon("client/assets/images/dropdown.png");
-        name = new JButton("Welcome, " + r.getName().split(" ")[0], icon);
+        // name label
+        name = new JButton("Welcome, " + r.getName().split(" ")[0]);
         name.setBounds(1366 - 320, 15, 250, 50);
         name.setForeground(MyColor.white);
         name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
@@ -78,62 +70,9 @@ public class EditPost {
         name.setBorderPainted(false);
         name.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // dropdown box
-        dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(MyColor.yellow);
-        dropdownBox.setOpaque(true);
-        dropdownBox.setVisible(false);
-        isShowDropdown = false;
-
-        // go home button
-        goHomeButton = new JButton("Home");
-        goHomeButton.setBounds(1366 - 280, 80, 210, 65);
-        goHomeButton.setBackground(MyColor.white);
-        goHomeButton.setForeground(MyColor.black);
-        goHomeButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        goHomeButton.setBorderPainted(false);
-        goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        goHomeButton.setVisible(false);
-
-        // view profile button
-        viewProfileButton = new JButton("View Profile");
-        viewProfileButton.setBounds(1366 - 280, 160, 210, 65);
-        viewProfileButton.setBackground(MyColor.white);
-        viewProfileButton.setForeground(MyColor.black);
-        viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        viewProfileButton.setBorderPainted(false);
-        viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        viewProfileButton.setVisible(false);
-
-        // find donor button
-        findDonorButton = new JButton("Find Donor");
-        findDonorButton.setBounds(1366 - 280, 240, 210, 65);
-        findDonorButton.setBackground(MyColor.white);
-        findDonorButton.setForeground(MyColor.black);
-        findDonorButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        findDonorButton.setBorderPainted(false);
-        findDonorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        findDonorButton.setVisible(false);
-
-        // logout button
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 320, 210, 65);
-        logoutButton.setBackground(MyColor.white);
-        logoutButton.setForeground(MyColor.black);
-        logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        logoutButton.setBorderPainted(false);
-        logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        logoutButton.setVisible(false);
-
-        // navbar adding
+        // navpanel
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
-        frame.add(goHomeButton);
-        frame.add(viewProfileButton);
-        frame.add(findDonorButton);
-        frame.add(logoutButton);
-        frame.add(dropdownBox);
 
         // post panel
         postPanel = new JPanel();
@@ -166,69 +105,6 @@ public class EditPost {
         frame.setVisible(true);
 
         // action listeners
-
-        // dropdown action
-        name.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (isShowDropdown) {
-                    hideDropdown();
-                } else {
-                    showDropdown();
-                }
-            }
-        });
-
-        // go home action
-        goHomeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new RecipientDashboard(r);
-            }
-        });
-
-        // view profile action
-        viewProfileButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new RecipientsProfile(r, r);
-            }
-        });
-
-        // find donor action
-        findDonorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new DonorsList(r, null);
-            }
-        });
-
-        // logout action
-        logoutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new Login();
-            }
-        });
-    }
-
-    // show dropwdown
-    private void showDropdown() {
-        isShowDropdown = true;
-        dropdownBox.setVisible(true);
-        goHomeButton.setVisible(true);
-        viewProfileButton.setVisible(true);
-        findDonorButton.setVisible(true);
-        logoutButton.setVisible(true);
-    }
-
-    // hide dropdown
-    private void hideDropdown() {
-        isShowDropdown = false;
-        dropdownBox.setVisible(false);
-        goHomeButton.setVisible(false);
-        viewProfileButton.setVisible(false);
-        findDonorButton.setVisible(false);
-        logoutButton.setVisible(false);
     }
 
     // post gui component
@@ -246,6 +122,7 @@ public class EditPost {
         private JLabel descriptionLabel;
         private JTextArea descriptionTextArea;
         private JButton saveButton;
+        private JButton cancelButton;
 
         public PostGUI(Post post, Recipient r) {
             setLayout(null);
@@ -324,7 +201,7 @@ public class EditPost {
             descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             descriptionTextArea = new JTextArea("");
-            descriptionTextArea.setBounds(80, 350, 1200, 100);
+            descriptionTextArea.setBounds(80, 350, 1205, 100);
             descriptionTextArea.setForeground(MyColor.black);
             descriptionTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
             descriptionTextArea.setWrapStyleWord(true);
@@ -333,11 +210,19 @@ public class EditPost {
 
             // save button
             saveButton = new JButton("Save");
-            saveButton.setBounds(570, 490, 200, 50);
+            saveButton.setBounds(475, 490, 200, 50);
             saveButton.setForeground(MyColor.white);
             saveButton.setBackground(MyColor.green);
             saveButton.setFont(new Font("Arial", Font.BOLD, 18));
             saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            // cancel button
+            cancelButton = new JButton("Cancel");
+            cancelButton.setBounds(700, 490, 200, 50);
+            cancelButton.setForeground(MyColor.white);
+            cancelButton.setBackground(MyColor.darkRed);
+            cancelButton.setFont(new Font("Arial", Font.BOLD, 18));
+            cancelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             // adding
             add(statusText);
@@ -353,6 +238,7 @@ public class EditPost {
             add(descriptionLabel);
             add(descriptionTextArea);
             add(saveButton);
+            add(cancelButton);
 
             // panel
             setBackground(MyColor.darkBlue);
@@ -402,6 +288,14 @@ public class EditPost {
                         frame.setVisible(false);
                         new MyRequests(r);
                     }
+                }
+            });
+
+            // cancel button action
+            cancelButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    frame.setVisible(false);
+                    new MyRequests(r);
                 }
             });
         }

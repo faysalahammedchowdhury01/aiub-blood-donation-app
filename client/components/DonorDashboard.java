@@ -10,10 +10,9 @@ import javax.imageio.ImageIO;
 import java.io.*;
 
 public class DonorDashboard {
-    private boolean isShowDropdown;
-
     JFrame frame;
     private JPanel mainPanel, navbarPanel, postPanel;
+    private Sidebar sidebarPanel;
     private JScrollPane scrollPane;
     private ImageIcon favIcon, icon;
     // navbar
@@ -22,11 +21,6 @@ public class DonorDashboard {
     private JLabel logo;
     private JLabel aiubText;
     private JButton name;
-    private JLabel dropdownBox;
-    private JButton viewProfileButton;
-    private JButton myDonationsButton;
-    private JButton findDonorButton;
-    private JButton logoutButton;
 
     private JLabel availablePostText;
     private JLabel noRequestText;
@@ -72,8 +66,8 @@ public class DonorDashboard {
         aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
-        // name label and dropdown
-        icon = new ImageIcon("client/assets/images/dropdown.png");
+        // name label
+        icon = new ImageIcon("client/assets/images/right-arrow.png");
         name = new JButton("Welcome, " + d.getName().split(" ")[0], icon);
         name.setBounds(1366 - 320, 15, 250, 50);
         name.setForeground(MyColor.white);
@@ -83,62 +77,9 @@ public class DonorDashboard {
         name.setBorderPainted(false);
         name.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // dropdown box
-        dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(MyColor.yellow);
-        dropdownBox.setOpaque(true);
-        dropdownBox.setVisible(false);
-        isShowDropdown = false;
-
-        // view profile button
-        viewProfileButton = new JButton("View Profile");
-        viewProfileButton.setBounds(1366 - 280, 80, 210, 65);
-        viewProfileButton.setBackground(MyColor.white);
-        viewProfileButton.setForeground(MyColor.black);
-        viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        viewProfileButton.setBorderPainted(false);
-        viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        viewProfileButton.setVisible(false);
-
-        // my donations button
-        myDonationsButton = new JButton("My Donations");
-        myDonationsButton.setBounds(1366 - 280, 160, 210, 65);
-        myDonationsButton.setBackground(MyColor.white);
-        myDonationsButton.setForeground(MyColor.black);
-        myDonationsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        myDonationsButton.setBorderPainted(false);
-        myDonationsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        myDonationsButton.setVisible(false);
-
-        // find donor button
-        findDonorButton = new JButton("Find Donor");
-        findDonorButton.setBounds(1366 - 280, 240, 210, 65);
-        findDonorButton.setBackground(MyColor.white);
-        findDonorButton.setForeground(MyColor.black);
-        findDonorButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        findDonorButton.setBorderPainted(false);
-        findDonorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        findDonorButton.setVisible(false);
-
-        // logout button
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 320, 210, 65);
-        logoutButton.setBackground(MyColor.white);
-        logoutButton.setForeground(MyColor.black);
-        logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        logoutButton.setBorderPainted(false);
-        logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        logoutButton.setVisible(false);
-
         // navbar adding
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
-        frame.add(viewProfileButton);
-        frame.add(myDonationsButton);
-        frame.add(findDonorButton);
-        frame.add(logoutButton);
-        frame.add(dropdownBox);
 
         // post panel
         postPanel = new JPanel();
@@ -170,9 +111,9 @@ public class DonorDashboard {
                 postPanel.setLayout(null);
 
                 noRequestText = new JLabel(
-                        "No blood request available at the moment.Please check again later.",
-                        SwingConstants.CENTER);
-                noRequestText.setBounds(0, -50, 1366, 200);
+                        "No blood request available at the moment.Please check again later.");
+                noRequestText.setHorizontalAlignment(SwingConstants.CENTER);
+                noRequestText.setBounds(0, -50, 1116, 200);
                 noRequestText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
                 noRequestText.setForeground(MyColor.black);
 
@@ -182,15 +123,15 @@ public class DonorDashboard {
             postPanel.setLayout(null);
 
             unavailableText = new JLabel(
-                    "Unfortunately, you are unable to donate blood at this time.Make yourself available to donate.",
-                    SwingConstants.CENTER);
-            unavailableText.setBounds(0, -50, 1366, 200);
+                    "<html><center>Unfortunately, you are unable to donate blood at this time. <br> Make yourself available to donate.</center></html>");
+            unavailableText.setHorizontalAlignment(SwingConstants.CENTER);
+            unavailableText.setBounds(0, -50, 1116, 200);
             unavailableText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             unavailableText.setForeground(MyColor.black);
             unavailableText.setBackground(MyColor.white);
 
             unavailableButton = new JButton("Be Available");
-            unavailableButton.setBounds(530, 100, 300, 50);
+            unavailableButton.setBounds(410, 100, 300, 50);
             unavailableButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             unavailableButton.setBackground(MyColor.green);
             unavailableButton.setForeground(MyColor.white);
@@ -200,10 +141,15 @@ public class DonorDashboard {
             postPanel.add(unavailableButton);
         }
 
+        // sidebar panel
+        sidebarPanel = new Sidebar(d, frame);
+        sidebarPanel.setPreferredSize(new Dimension(250, frame.getHeight()));
+
         // main panel
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(navbarPanel, BorderLayout.NORTH);
         mainPanel.add(postPanel, BorderLayout.CENTER);
+        mainPanel.add(sidebarPanel, BorderLayout.WEST);
 
         // scroll pane
         scrollPane = new JScrollPane(mainPanel);
@@ -223,46 +169,11 @@ public class DonorDashboard {
 
         // action listeners
 
-        // dropdown action
+        // visit profile action
         name.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (isShowDropdown) {
-                    hideDropdown();
-                } else {
-                    showDropdown();
-                }
-            }
-        });
-
-        // view profile action
-        viewProfileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new DonorsProfile(d, d);
-            }
-        });
-
-        // my donations action
-        myDonationsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new MyDonations(d);
-            }
-        });
-
-        // find donor action
-        findDonorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new DonorsList(d, null);
-            }
-        });
-
-        // logout action
-        logoutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new Login();
             }
         });
 
@@ -274,26 +185,6 @@ public class DonorDashboard {
                 new DonorDashboard(d);
             }
         });
-    }
-
-    // show dropwdown
-    private void showDropdown() {
-        isShowDropdown = true;
-        dropdownBox.setVisible(true);
-        viewProfileButton.setVisible(true);
-        myDonationsButton.setVisible(true);
-        findDonorButton.setVisible(true);
-        logoutButton.setVisible(true);
-    }
-
-    // hide dropdown
-    private void hideDropdown() {
-        isShowDropdown = false;
-        dropdownBox.setVisible(false);
-        viewProfileButton.setVisible(false);
-        myDonationsButton.setVisible(false);
-        findDonorButton.setVisible(false);
-        logoutButton.setVisible(false);
     }
 
     // post gui component
@@ -317,7 +208,7 @@ public class DonorDashboard {
 
             // post text
             postText = new JLabel(
-                    "Be a hero today: Donate " + post.getRequiredBloodGroup() + " blood to help "
+                    "Donate " + post.getRequiredBloodGroup() + " blood to help "
                             + Post.getAuthor(post.getAuthorId()).getName().split(" ")[0] + " ["
                             + Post.getAuthor(post.getAuthorId()).getAiubId() + "]");
             postText.setBounds(80, 60, 1200, 50);
@@ -331,7 +222,7 @@ public class DonorDashboard {
             dateLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             dateField = new JTextField("");
-            dateField.setBounds(80, 170, 590, 50);
+            dateField.setBounds(80, 170, 450, 50);
             dateField.setForeground(MyColor.black);
             dateField.setFont(new Font("Arial", Font.PLAIN, 18));
             dateField.setText(post.getDate());
@@ -339,12 +230,12 @@ public class DonorDashboard {
 
             // time label and field
             timeLabel = new JLabel("Time: ");
-            timeLabel.setBounds(695, 130, 100, 50);
+            timeLabel.setBounds(555, 130, 100, 50);
             timeLabel.setForeground(MyColor.white);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             timeField = new JTextField("");
-            timeField.setBounds(695, 170, 590, 50);
+            timeField.setBounds(555, 170, 450, 50);
             timeField.setForeground(MyColor.black);
             timeField.setFont(new Font("Arial", Font.PLAIN, 18));
             timeField.setText(post.getTime());
@@ -357,7 +248,7 @@ public class DonorDashboard {
             locationLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             locationField = new JTextField("");
-            locationField.setBounds(80, 260, 590, 50);
+            locationField.setBounds(80, 260, 450, 50);
             locationField.setForeground(MyColor.black);
             locationField.setFont(new Font("Arial", Font.PLAIN, 18));
             locationField.setText(post.getLocation());
@@ -365,12 +256,12 @@ public class DonorDashboard {
 
             // time label and field
             bloodGroupLabel = new JLabel("Blood Group: ");
-            bloodGroupLabel.setBounds(695, 220, 300, 50);
+            bloodGroupLabel.setBounds(555, 220, 300, 50);
             bloodGroupLabel.setForeground(MyColor.white);
             bloodGroupLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             bloodGroupField = new JTextField("");
-            bloodGroupField.setBounds(695, 260, 590, 50);
+            bloodGroupField.setBounds(555, 260, 450, 50);
             bloodGroupField.setForeground(MyColor.black);
             bloodGroupField.setFont(new Font("Arial", Font.PLAIN, 18));
             bloodGroupField.setText(post.getRequiredBloodGroup());
@@ -383,7 +274,7 @@ public class DonorDashboard {
             descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             descriptionTextArea = new JTextArea("");
-            descriptionTextArea.setBounds(80, 350, 1200, 100);
+            descriptionTextArea.setBounds(80, 350, 925, 100);
             descriptionTextArea.setForeground(MyColor.black);
             descriptionTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
             descriptionTextArea.setWrapStyleWord(true);
@@ -393,7 +284,7 @@ public class DonorDashboard {
 
             // view recipient button
             viewRecipientButton = new JButton("View Recipient");
-            viewRecipientButton.setBounds(480, 490, 200, 50);
+            viewRecipientButton.setBounds(340, 490, 200, 50);
             viewRecipientButton.setForeground(MyColor.white);
             viewRecipientButton.setBackground(MyColor.darkRed);
             viewRecipientButton.setFont(new Font("Arial", Font.BOLD, 18));
@@ -401,7 +292,7 @@ public class DonorDashboard {
 
             // donate blood button
             donateBloodButton = new JButton("Donate Blood");
-            donateBloodButton.setBounds(690, 490, 200, 50);
+            donateBloodButton.setBounds(550, 490, 200, 50);
             donateBloodButton.setForeground(MyColor.white);
             donateBloodButton.setBackground(MyColor.green);
             donateBloodButton.setFont(new Font("Arial", Font.BOLD, 18));
@@ -425,7 +316,7 @@ public class DonorDashboard {
             // panel
             setBackground(MyColor.darkBlue);
             setBorder(BorderFactory.createLineBorder(MyColor.white));
-            setPreferredSize(new Dimension(1366, 610));
+            setPreferredSize(new Dimension(1116, 610));
 
             // action listeners
 

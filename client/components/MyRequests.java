@@ -10,10 +10,9 @@ import javax.imageio.ImageIO;
 import java.io.*;
 
 public class MyRequests {
-    private boolean isShowDropdown;
-
     JFrame frame;
     private JPanel mainPanel, navbarPanel, postPanel;
+    private Sidebar sidebarPanel;
     private JScrollPane scrollPane;
     private ImageIcon favIcon, icon;
     // navbar
@@ -22,11 +21,6 @@ public class MyRequests {
     private JLabel logo;
     private JLabel aiubText;
     private JButton name;
-    private JLabel dropdownBox;
-    private JButton goHomeButton;
-    private JButton viewProfileButton;
-    private JButton findDonorButton;
-    private JButton logoutButton;
 
     private JLabel availablePostText;
     private JLabel noRequestText;
@@ -71,8 +65,8 @@ public class MyRequests {
         aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
-        // name label and dropdown
-        icon = new ImageIcon("client/assets/images/dropdown.png");
+        // name label
+        icon = new ImageIcon("client/assets/images/right-arrow.png");
         name = new JButton("Welcome, " + r.getName().split(" ")[0], icon);
         name.setBounds(1366 - 320, 15, 250, 50);
         name.setForeground(MyColor.white);
@@ -82,62 +76,13 @@ public class MyRequests {
         name.setBorderPainted(false);
         name.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // dropdown box
-        dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 330);
-        dropdownBox.setBackground(MyColor.yellow);
-        dropdownBox.setOpaque(true);
-        dropdownBox.setVisible(false);
-        isShowDropdown = false;
-
-        // go home button
-        goHomeButton = new JButton("Home");
-        goHomeButton.setBounds(1366 - 280, 80, 210, 65);
-        goHomeButton.setBackground(MyColor.white);
-        goHomeButton.setForeground(MyColor.black);
-        goHomeButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        goHomeButton.setBorderPainted(false);
-        goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        goHomeButton.setVisible(false);
-
-        // view profile button
-        viewProfileButton = new JButton("View Profile");
-        viewProfileButton.setBounds(1366 - 280, 160, 210, 65);
-        viewProfileButton.setBackground(MyColor.white);
-        viewProfileButton.setForeground(MyColor.black);
-        viewProfileButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        viewProfileButton.setBorderPainted(false);
-        viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        viewProfileButton.setVisible(false);
-
-        // find donor button
-        findDonorButton = new JButton("Find Donor");
-        findDonorButton.setBounds(1366 - 280, 240, 210, 65);
-        findDonorButton.setBackground(MyColor.white);
-        findDonorButton.setForeground(MyColor.black);
-        findDonorButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        findDonorButton.setBorderPainted(false);
-        findDonorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        findDonorButton.setVisible(false);
-
-        // logout button
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 320, 210, 65);
-        logoutButton.setBackground(MyColor.white);
-        logoutButton.setForeground(MyColor.black);
-        logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        logoutButton.setBorderPainted(false);
-        logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        logoutButton.setVisible(false);
-
         // navbar adding
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
-        frame.add(goHomeButton);
-        frame.add(viewProfileButton);
-        frame.add(findDonorButton);
-        frame.add(logoutButton);
-        frame.add(dropdownBox);
+
+        // sidebar panel
+        sidebarPanel = new Sidebar(r, frame);
+        sidebarPanel.setPreferredSize(new Dimension(250, frame.getHeight()));
 
         // post panel
         postPanel = new JPanel();
@@ -191,6 +136,7 @@ public class MyRequests {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(navbarPanel, BorderLayout.NORTH);
         mainPanel.add(postPanel, BorderLayout.CENTER);
+        mainPanel.add(sidebarPanel, BorderLayout.WEST);
 
         // scroll pane
         scrollPane = new JScrollPane(mainPanel);
@@ -210,46 +156,11 @@ public class MyRequests {
 
         // action listeners
 
-        // dropdown action
+        // visit profile action
         name.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (isShowDropdown) {
-                    hideDropdown();
-                } else {
-                    showDropdown();
-                }
-            }
-        });
-
-        // go home action
-        goHomeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new RecipientDashboard(r);
-            }
-        });
-
-        // view profile action
-        viewProfileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new RecipientsProfile(r, r);
-            }
-        });
-
-        // find donor action
-        findDonorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new DonorsList(r, null);
-            }
-        });
-
-        // logout action
-        logoutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new Login();
             }
         });
 
@@ -260,26 +171,6 @@ public class MyRequests {
                 new RecipientDashboard(r);
             }
         });
-    }
-
-    // show dropwdown
-    private void showDropdown() {
-        isShowDropdown = true;
-        dropdownBox.setVisible(true);
-        goHomeButton.setVisible(true);
-        viewProfileButton.setVisible(true);
-        findDonorButton.setVisible(true);
-        logoutButton.setVisible(true);
-    }
-
-    // hide dropdown
-    private void hideDropdown() {
-        isShowDropdown = false;
-        dropdownBox.setVisible(false);
-        goHomeButton.setVisible(false);
-        viewProfileButton.setVisible(false);
-        findDonorButton.setVisible(false);
-        logoutButton.setVisible(false);
     }
 
     // post gui component
@@ -325,7 +216,7 @@ public class MyRequests {
 
             // edit button for "open" post
             editButton = new JButton("Edit");
-            editButton.setBounds(1050, 70, 80, 40);
+            editButton.setBounds(775, 70, 80, 40);
             editButton.setForeground(MyColor.black);
             editButton.setBackground(MyColor.yellow);
             editButton.setFont(new Font("Arial", Font.BOLD, 18));
@@ -336,7 +227,7 @@ public class MyRequests {
 
             // delete button for "open" post
             deleteButton = new JButton("Delete");
-            deleteButton.setBounds(1150, 70, 130, 40);
+            deleteButton.setBounds(875, 70, 130, 40);
             deleteButton.setForeground(MyColor.white);
             deleteButton.setBackground(MyColor.darkRed);
             deleteButton.setFont(new Font("Arial", Font.BOLD, 18));
@@ -352,7 +243,7 @@ public class MyRequests {
             dateLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             dateField = new JTextField("");
-            dateField.setBounds(80, 170, 590, 50);
+            dateField.setBounds(80, 170, 450, 50);
             dateField.setForeground(MyColor.black);
             dateField.setFont(new Font("Arial", Font.PLAIN, 18));
             dateField.setText(post.getDate());
@@ -360,12 +251,12 @@ public class MyRequests {
 
             // time label and field
             timeLabel = new JLabel("Time: ");
-            timeLabel.setBounds(695, 130, 100, 50);
+            timeLabel.setBounds(555, 130, 100, 50);
             timeLabel.setForeground(MyColor.white);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             timeField = new JTextField("");
-            timeField.setBounds(695, 170, 590, 50);
+            timeField.setBounds(555, 170, 450, 50);
             timeField.setForeground(MyColor.black);
             timeField.setFont(new Font("Arial", Font.PLAIN, 18));
             timeField.setText(post.getTime());
@@ -378,7 +269,7 @@ public class MyRequests {
             locationLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             locationField = new JTextField("");
-            locationField.setBounds(80, 260, 590, 50);
+            locationField.setBounds(80, 260, 450, 50);
             locationField.setForeground(MyColor.black);
             locationField.setFont(new Font("Arial", Font.PLAIN, 18));
             locationField.setText(post.getLocation());
@@ -386,12 +277,12 @@ public class MyRequests {
 
             // time label and field
             bloodGroupLabel = new JLabel("Blood Group: ");
-            bloodGroupLabel.setBounds(695, 220, 300, 50);
+            bloodGroupLabel.setBounds(555, 220, 300, 50);
             bloodGroupLabel.setForeground(MyColor.white);
             bloodGroupLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             bloodGroupField = new JTextField("");
-            bloodGroupField.setBounds(695, 260, 590, 50);
+            bloodGroupField.setBounds(555, 260, 450, 50);
             bloodGroupField.setForeground(MyColor.black);
             bloodGroupField.setFont(new Font("Arial", Font.PLAIN, 18));
             bloodGroupField.setText(post.getRequiredBloodGroup());
@@ -404,7 +295,7 @@ public class MyRequests {
             descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
             descriptionTextArea = new JTextArea("");
-            descriptionTextArea.setBounds(80, 350, 1200, 100);
+            descriptionTextArea.setBounds(80, 350, 925, 100);
             descriptionTextArea.setForeground(MyColor.black);
             descriptionTextArea.setFont(new Font("Arial", Font.PLAIN, 18));
             descriptionTextArea.setWrapStyleWord(true);
@@ -414,7 +305,7 @@ public class MyRequests {
 
             // contact donor button
             contactDonorButton = new JButton("Contact Donor");
-            contactDonorButton.setBounds(570, 490, 200, 50);
+            contactDonorButton.setBounds(440, 490, 200, 50);
             contactDonorButton.setForeground(MyColor.white);
             contactDonorButton.setBackground(MyColor.green);
             contactDonorButton.setFont(new Font("Arial", Font.BOLD, 18));

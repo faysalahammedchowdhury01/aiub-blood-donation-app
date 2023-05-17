@@ -11,10 +11,10 @@ import java.io.*;
 
 public class DonorsList {
     User u;
-    private boolean isShowDropdown;
 
     JFrame frame;
     private JPanel mainPanel, navbarPanel, donorsPanel, bloodGroupPanel, noDonorPanel;
+    private Sidebar sidebarPanel;
     private JScrollPane scrollPane;
     private ImageIcon favIcon, icon;
     // navbar
@@ -23,13 +23,8 @@ public class DonorsList {
     private JLabel logo;
     private JLabel aiubText;
     private JButton name;
-    private JLabel dropdownBox;
-    private JButton goHomeButton;
-    private JButton myDonationsButton;
-    private JButton myRequestsButton;
-    private JButton logoutButton;
 
-    // donor panel
+    // donor
     private JLabel selectBloodText;
     private JComboBox<String> bloodGroupBox;
     private JLabel noDonorText;
@@ -75,8 +70,8 @@ public class DonorsList {
         aiubText.setForeground(MyColor.white);
         aiubText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
 
-        // name label and dropdown
-        icon = new ImageIcon("client/assets/images/dropdown.png");
+        // name label
+        icon = new ImageIcon("client/assets/images/right-arrow.png");
         name = new JButton("Welcome, " + u.getName().split(" ")[0], icon);
         name.setBounds(1366 - 320, 15, 250, 50);
         name.setForeground(MyColor.white);
@@ -86,64 +81,15 @@ public class DonorsList {
         name.setBorderPainted(false);
         name.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // dropdown box
-        dropdownBox = new JLabel("");
-        dropdownBox.setBounds(1366 - 300, 70, 250, 250);
-        dropdownBox.setBackground(MyColor.yellow);
-        dropdownBox.setOpaque(true);
-        dropdownBox.setVisible(false);
-        isShowDropdown = false;
-
-        // go home button
-        goHomeButton = new JButton("Home");
-        goHomeButton.setBounds(1366 - 280, 80, 210, 65);
-        goHomeButton.setBackground(MyColor.white);
-        goHomeButton.setForeground(MyColor.black);
-        goHomeButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        goHomeButton.setBorderPainted(false);
-        goHomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        goHomeButton.setVisible(false);
-
-        // my donations button
-        myDonationsButton = new JButton("My Donations");
-        myDonationsButton.setBounds(1366 - 280, 160, 210, 65);
-        myDonationsButton.setBackground(MyColor.white);
-        myDonationsButton.setForeground(MyColor.black);
-        myDonationsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        myDonationsButton.setBorderPainted(false);
-        myDonationsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        myDonationsButton.setVisible(false);
-
-        // my requests button
-        myRequestsButton = new JButton("My Requests");
-        myRequestsButton.setBounds(1366 - 280, 160, 210, 65);
-        myRequestsButton.setBackground(MyColor.white);
-        myRequestsButton.setForeground(MyColor.black);
-        myRequestsButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        myRequestsButton.setBorderPainted(false);
-        myRequestsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        myRequestsButton.setVisible(false);
-
-        // logout button
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1366 - 280, 240, 210, 65);
-        logoutButton.setBackground(MyColor.white);
-        logoutButton.setForeground(MyColor.black);
-        logoutButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        logoutButton.setBorderPainted(false);
-        logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        logoutButton.setVisible(false);
-
         // navbar adding
         navbarPanel.add(aiubLogo);
         navbarPanel.add(logo);
         navbarPanel.add(aiubText);
         navbarPanel.add(name);
-        frame.add(goHomeButton);
-        frame.add(myDonationsButton);
-        frame.add(myRequestsButton);
-        frame.add(logoutButton);
-        frame.add(dropdownBox);
+
+        // sidebar panel
+        sidebarPanel = new Sidebar(u, frame);
+        sidebarPanel.setPreferredSize(new Dimension(250, frame.getHeight()));
 
         // donors panel
         donorsPanel = new JPanel();
@@ -153,7 +99,7 @@ public class DonorsList {
         // blood group panel
         bloodGroupPanel = new JPanel();
         bloodGroupPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bloodGroupPanel.setPreferredSize(new Dimension(1366, 110));
+        bloodGroupPanel.setPreferredSize(new Dimension(1116, 110));
         donorsPanel.add(bloodGroupPanel);
 
         // select blood text
@@ -181,15 +127,15 @@ public class DonorsList {
         // no donor panel
         noDonorPanel = new JPanel();
         noDonorPanel.setLayout(null);
-        noDonorPanel.setPreferredSize(new Dimension(1366, 110));
+        noDonorPanel.setPreferredSize(new Dimension(1116, 110));
         donorsPanel.add(noDonorPanel);
 
         if (!hasDonor) {
             noDonorText = new JLabel(
-                    "Sorry, no " + (searchingBlood == null ? "" : "\"" + searchingBlood + "\"")
-                            + " donor is available at this moment. Please try again later.",
+                    "<html><center>Sorry, no " + (searchingBlood == null ? "" : "\"" + searchingBlood + "\"")
+                            + " donor is available at this moment.<br>Please try again later.</center></html>",
                     SwingConstants.CENTER);
-            noDonorText.setBounds(0, -140, 1366, 300);
+            noDonorText.setBounds(0, -120, 1116, 300);
             noDonorText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
             noDonorText.setForeground(MyColor.black);
 
@@ -200,6 +146,7 @@ public class DonorsList {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(navbarPanel, BorderLayout.NORTH);
         mainPanel.add(donorsPanel, BorderLayout.CENTER);
+        mainPanel.add(sidebarPanel, BorderLayout.WEST);
 
         // scroll pane
         scrollPane = new JScrollPane(mainPanel);
@@ -219,50 +166,17 @@ public class DonorsList {
 
         // action listeners
 
-        // dropdown action
+        // visit profile action
         name.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (isShowDropdown) {
-                    hideDropdown();
-                } else {
-                    showDropdown();
-                }
-            }
-        });
-
-        // go home action
-        goHomeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 if (u.getIsDonor()) {
-                    new DonorDashboard(Donor.login(u.getAiubId(), u.getPassword()));
+                    Donor d = Donor.login(u.getAiubId(), u.getPassword());
+                    new DonorsProfile(d, u);
                 } else {
-                    new RecipientDashboard(Recipient.login(u.getAiubId(), u.getPassword()));
+                    Recipient r = Recipient.login(u.getAiubId(), u.getPassword());
+                    new RecipientsProfile(r, u);
                 }
-            }
-        });
-
-        // my requests action
-        myRequestsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new MyRequests(Recipient.login(u.getAiubId(), u.getPassword()));
-            }
-        });
-
-        // my donations action
-        myDonationsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new MyDonations(Donor.login(u.getAiubId(), u.getPassword()));
-            }
-        });
-
-        // logout action
-        logoutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new Login();
             }
         });
 
@@ -276,30 +190,7 @@ public class DonorsList {
         });
     }
 
-    // show dropwdown
-    private void showDropdown() {
-        isShowDropdown = true;
-        dropdownBox.setVisible(true);
-        goHomeButton.setVisible(true);
-        logoutButton.setVisible(true);
-        if (u.getIsDonor()) {
-            myDonationsButton.setVisible(true);
-        } else {
-            myRequestsButton.setVisible(true);
-        }
-    }
-
-    // hide dropdown
-    private void hideDropdown() {
-        isShowDropdown = false;
-        dropdownBox.setVisible(false);
-        goHomeButton.setVisible(false);
-        logoutButton.setVisible(false);
-        myDonationsButton.setVisible(false);
-        myRequestsButton.setVisible(false);
-    }
-
-    // post gui component
+    // single donor gui component
     private class SingleDonorGUI extends JPanel {
         private JLabel name;
         private JLabel bloodGroup;
@@ -322,10 +213,11 @@ public class DonorsList {
 
             // view profile button
             viewProfileButton = new JButton("View Profile");
+            viewProfileButton.setVerticalAlignment(SwingConstants.CENTER);
             viewProfileButton.setForeground(MyColor.black);
             viewProfileButton.setBackground(MyColor.white);
             viewProfileButton.setFont(new Font("Arial", Font.BOLD, 22));
-            viewProfileButton.setBounds(1050, 50, 200, 50);
+            viewProfileButton.setBounds(825, 50, 200, 50);
             viewProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             // adding
@@ -336,11 +228,11 @@ public class DonorsList {
             // panel
             setBackground(MyColor.darkBlue);
             setBorder(BorderFactory.createLineBorder(MyColor.white));
-            setPreferredSize(new Dimension(1366, 160));
+            setPreferredSize(new Dimension(1116, 160));
 
             // action listeners
 
-            // view peofile action
+            // view donors peofile action
             viewProfileButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frame.setVisible(false);
