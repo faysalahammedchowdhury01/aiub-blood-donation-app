@@ -114,7 +114,7 @@ public class Start {
                 Post p = new Post("1", "22-49046-3", "open", "hobe", "hobe", "test", "A+", "test");
 
                 // Client
-                // new Login();
+                new Login();
                 // new Signup();
                 // new ForgotPassword();
                 // new ResetPassword("22-49046-3", true);
